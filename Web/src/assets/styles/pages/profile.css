@@ -1,0 +1,71 @@
+.profile-header{
+    margin-bottom: 15px;
+}
+
+.profile-header-back{
+    color: #353535;
+    font-family: 'Nunito';
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    z-index: 3;
+    margin-top: -30px;
+}
+
+.profile-title{
+    width: 100%;
+    height: 80px;
+    color: #282F66;
+    font-size: 28px;
+    /* background-color: yellow; */
+}
+
+.profile-texts{
+    font-size: 24px;
+    color: #353535;
+    font-family: 'Nunito';
+    margin-bottom: 30px
+}
+
+.profile-info-list{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.profile-info-list h2{
+    font-size: 20px;
+    font-family: 'Nunito';
+    margin-bottom: 10px;
+}
+
+.profile-info-list p{
+    font-size: 20px;
+    font-family: 'Nunito';
+    margin-bottom: 5px;
+}
+
+.profile-info-edit{
+    font-size: 14px;
+    font-family: 'Nunito';
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+}
+
+.profile-info-edit h2{
+    margin-bottom: 10px;
+}
+
+.profile-info-edit button{
+    background-color: #2D3573;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

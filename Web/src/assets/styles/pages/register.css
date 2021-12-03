@@ -1,0 +1,126 @@
+/* Background */
+body{
+    overflow: hidden;
+}
+
+.register-background{
+    display: flex;
+    height: 100vh;
+}
+
+
+
+/* Formulário */
+.register-form-background{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.register-form-content{
+    width: 560px;
+    height: 580px;
+    display: flex;
+    /* margin-top: -25px; */
+    flex-direction: column;
+    /* background-color: red; */
+}
+
+.register-form-text{
+    width: 110%;
+    height: 150px;
+    font-family: 'Nunito';
+    margin-bottom: 40px;
+    user-select: none;
+    /* background-color: yellow; */
+}
+
+.register-form-text h1{
+    font-size: 60px;
+    color: #2D3573;
+}
+
+.register-form-text p{
+    font-size: 28px;
+    color: #353535;
+}
+
+.register-form-main{
+    width: 100%;
+    height: 250px;
+    /* background-color: green; */
+}
+
+.register-form-input input{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #2D3573;
+    color: #353535;
+    padding: 15px;
+    font-family: 'Nunito';
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.register-form-input-separated{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: red; */
+}
+
+.register-form-input-separated input{
+    width: 260px;
+}
+
+.register-form-input input::placeholder{
+    font-family: 'Nunito';
+    font-weight: 600;
+    color: #353535;
+}
+
+.register-form-main button{
+    background-color: #2D3573;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.register-form-btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 45%;
+}
+
+.register-form-btns a{
+    /* margin-left: 55px; */
+    color: #2D3573;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+
+/* Banner */
+.register-banner-background{
+    display: flex;
+    flex: 5;
+    position: absolute;
+    margin-left: 44.2vw;
+    z-index: -2;
+}
+
+.register-banner-content img{
+    width: 55.8vw;
+    image-rendering: pixelated;
+}

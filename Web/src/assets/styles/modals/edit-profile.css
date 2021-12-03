@@ -1,0 +1,78 @@
+.modal-profile-card-form-background{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.modal-profile-card-form{
+    width: 450px;
+    height: 100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-profile-card-form-text{
+    width: 100%;
+    height: 80px;
+    /* background-color: yellow; */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-profile-card-form-text h1{
+    color: #2D3573;
+    font-family: 'Nunito';
+    font-size: 36px;
+}
+
+.modal-profile-card-form-text p{
+    text-align: center;
+    font-family: 'Nunito';
+    font-size: 18px;
+    font-weight: bold;
+    color: #353535;
+}
+
+.modal-profile-card-form-input-background{
+    width: 350px;
+    /* background-color: blue; */
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-profile-card-form-input input{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #2D3573;
+    color: #353535;
+    padding: 15px;
+    font-family: 'Nunito';
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.modal-profile-card-form-input input::placeholder{
+    font-family: 'Nunito';
+    font-weight: 600;
+    color: #353535;
+}
+
+.modal-profile-card-form-input-background button{
+    background-color: #2D3573;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 24px;
+    align-self: center;
+}

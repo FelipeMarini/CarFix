@@ -1,0 +1,126 @@
+.services-header{
+    margin-bottom: 15px;
+}
+
+.services-header-back{
+    color: #353535;
+    font-family: 'Nunito';
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    z-index: 3;
+    margin-top: -30px;
+}
+
+.services-title{
+    width: 100%;
+    height: 80px;
+    color: #282F66;
+    font-size: 28px;
+    /* background-color: yellow; */
+}
+
+.services-name{
+    font-size: 24px;
+    color: #353535;
+    font-family: 'Nunito';
+}
+
+.services-texts{
+    font-size: 16px;
+    color: #353535;
+    font-family: 'Nunito';
+}
+
+.services-card-background{
+    width: 100%;
+    height: 79%;
+    /* background-color: red; */
+}
+
+.services-card-background-title{
+    font-size: 35px;
+    color: #353535;
+    font-family: 'Nunito';
+    margin-bottom: 10px;
+}
+
+.services-card-content-background{
+    width: 100%;
+    height: 80%;
+    padding-top: 5px;
+    overflow: auto;
+    /* background-color: yellow; */
+    /* cursor: pointer; */
+}
+
+.services-content-background{
+    width: 100%;
+    height: 150px;
+    background-color: #FDFCFF;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.services-content-text{
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20px;
+    /* background-color: red; */
+}
+
+.services-content-text h1{
+    color: #353535;
+    font-size: 28px;
+    font-family: 'Nunito';
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.services-content-text-descricao{
+    color: #353535;
+    font-size: 18px;
+    font-family: 'Nunito';
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.services-content-text{
+    color: #353535;
+    font-size: 14px;
+    font-family: 'Nunito';
+    font-weight: 600;
+}
+
+.services-content-btn{
+    width: 35%;
+    height: 63%;
+    margin-left: 10px;
+    margin-right: 20px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.services-content-btn{
+    color: #353535;
+    font-size: 18px;
+    font-family: 'Nunito';
+}
+
+.services-content-btn-valor{
+    color: #353535;
+    font-size: 18px;
+    font-family: 'Nunito';
+    font-weight: 700;
+}

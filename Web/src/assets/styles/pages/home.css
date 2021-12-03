@@ -1,0 +1,99 @@
+.home-title{
+    width: 100%;
+    height: 80px;
+    color: #282F66;
+    font-size: 28px;
+    /* background-color: yellow; */
+}
+
+.home-btn{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+    /* background-color: blue; */
+}
+
+.home-btn button{
+    background-color: #2D3573;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.home-card-background{
+    width: 100%;
+    height: 78%;
+    /* background-color: red; */
+    overflow: auto;
+}
+
+.home-content-background{
+    width: 100%;
+    height: 150px;
+    background-color: #FDFCFF;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.home-content-car-image{
+    width: 27%;
+    height: 100%;
+    padding: 0px 10px;
+    /* background-color: red; */
+}
+
+.home-content-car-image img{
+    width: 260px;
+}
+
+.home-content-text{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20px;
+    /* background-color: red; */
+}
+
+.home-content-text h1{
+    color: #353535;
+    font-size: 28px;
+    font-family: 'Nunito';
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.home-content-text p{
+    color: #353535;
+    font-size: 18px;
+    font-family: 'Nunito';
+    font-weight: 600;
+}
+
+.home-content-btn{
+    width: 38%;
+    height: 63%;
+    margin-left: 10px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.home-content-btn p{
+    color: #353535;
+    font-size: 18px;
+    font-family: 'Nunito';
+    font-weight: 600;
+}
