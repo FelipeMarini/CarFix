@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     fontFamily: "roboto-regular.ttf",
     fontSize: 20,
     color: "#282f66",
-    fontWeight: 300,
+    fontWeight: "300",
     marginTop: 30
   },
 
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: "roboto-regular.ttf",
     fontSize: 20,
     color: "#282f66",
-    fontWeight: 600,
+    fontWeight: "600",
     marginTop: 20
   },
 
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   textButton: {
     fontFamily: 'nunito-regular.ttf',
     fontSize: 20,
-    fontWeight: 400,
+    fontWeight: "400",
     color: '#fff',
     marginBottom: '1%'
   }

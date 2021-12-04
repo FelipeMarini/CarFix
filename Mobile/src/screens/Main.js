@@ -10,11 +10,8 @@ import MyVehicles from './MyVehicles'
 const bottomTab = createBottomTabNavigator()
 
 
-export default class Main extends Component {  // alinhar 3 ícones do bottom tab??
+export default class Main extends Component {
 
-  // pegar o ícone de budget no mesmo molde dos outros (branco)
-
-  // fazer lógica para não misturar os budgets
 
   render() {
 
@@ -28,19 +25,18 @@ export default class Main extends Component {  // alinhar 3 ícones do bottom ta
 
           initialRouteName='Meus Veículos'
 
-          tabBarOptions={{
-            showLabel: true,
-            showIcon: true,
-            activeBackgroundColor: '#282f66',
-            inactiveBackgroundColor: '#282f66',
-            activeTintColor: '#fff',
-            inactiveTintColor: '#fff',
-            style: {
-              height: 60
-            }
-          }}
-
           screenOptions={({ route }) => ({
+
+            "tabBarActiveTintColor": "#fff",
+            "tabBarInactiveTintColor": "#fff",
+            "tabBarActiveBackgroundColor": "#282f66",
+            "tabBarInactiveBackgroundColor": "#282f66",
+            "tabBarShowLabel": true,
+
+            "tabBarStyle":
+            {
+              height: 50
+            },
 
             headerShown: false,
 
@@ -105,7 +101,8 @@ const styles = StyleSheet.create({
   iconVehicle: {
     width: 45,
     height: 45,
-    marginTop: 5
+    marginTop: 5,
+    color: '#fff'
   }
 
 

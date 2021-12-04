@@ -83,16 +83,27 @@ namespace CarFix.Project.Controllers
         {
             try
             {
-
                 return Ok(_unitOfWork.ServiceRepository.ListAllServices());
-
             }
 
             catch (Exception error)
             {
                 return BadRequest(error);
             }
+        }
 
+        [Route("Worker/{id}")]
+        [HttpGet]
+        public IActionResult GetAllServicesPerWorker(Guid id)
+        {
+            try
+            {
+                return Ok(_unitOfWork.ServiceRepository.ListAllActiveServicesPerWorker(id));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+            }
         }
 
 
@@ -158,6 +169,43 @@ namespace CarFix.Project.Controllers
             }
         }
 
+        [Route("AssignWorker")]
+        [HttpPost]
+        public IActionResult AssignWorker(AssignWorkerDTO worker)
+        {
+            try
+            {
+                _unitOfWork.ServiceRepository.AssignWorker(worker);
+                _unitOfWork.Save();
+
+                return StatusCode(201);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+            }
+        }
+
+        [Route("ServiceStatus")]
+        [HttpPatch]
+        public IActionResult ServiceStatus(ChangeServiceStatusDTO serviceStatus)
+        {
+
+            try
+            {
+
+                _unitOfWork.ServiceRepository.ChangeServiceStatus(serviceStatus);
+                _unitOfWork.Save();
+
+                return StatusCode(201);
+
+            }
+
+            catch (Exception error)
+            {
+                return BadRequest(error);
+            }
+        }
 
         [Route("Answer")]
         [HttpPost]

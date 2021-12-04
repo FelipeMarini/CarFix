@@ -18,9 +18,7 @@ export default class EditServiceImage extends Component {
         this.state = {
 
             idDeleteImage: '',
-            listImages: [],
-            paths: []
-
+            listImages: []
         }
 
     }
@@ -153,58 +151,42 @@ export default class EditServiceImage extends Component {
 
                 <ScrollView>
 
-<<<<<<< HEAD
-                <View>
+                    <View>
 
-                    {
-                        this.state.listImages.map((image) => {
-                            
-                            return(
-                                
-                                <View style={styles.containerImg}> 
-                                    
-                                    <Image
-                                    style={styles.img}
-                                    source={{ uri: 'http://localhost:5000/Images/' + image.imagePath }} 
-                                    />
+                        {
+                            this.state.listImages.map((image) => {
 
-                                    <Pressable
-                                        style={styles.binButton}
-                                        onPress={() => this.DeleteImage(image.id)}
-                                        >
+                                return (
+
+                                    <View
+                                        style={styles.containerImg}
+                                        key={image.id}
+                                    >
+
                                         <Image
-                                            source={require('../../assets/images/bin.png')}
-                                            style={styles.binImg}
+                                            style={styles.img}
+                                            source={{ uri: 'https://localhost:5001/Images/' + image.imagePath }}
                                         />
-                                    </Pressable>
-                                
-                                </View>
-                            
-                            )
-                        
-                        })
-                    }
 
-                </View>
-                   
-=======
+                                        <Pressable
+                                            style={styles.binButton}
+                                            onPress={() => this.DeleteImage(image.id)}
+                                        >
+                                            <Image
+                                                source={require('../../assets/images/bin.png')}
+                                                style={styles.binImg}
+                                            />
+                                        </Pressable>
 
-                    {/* LISTA */}
+                                    </View>
 
-                    <View style={styles.mainBody}>
+                                )
 
-                        <FlatList
-                            contentContainerStyle={styles.mainBodyContent}
-                            data={this.state.paths}
-                            keyExtractor={item => item.index}
-                            renderItem={this.renderItem}
-                        //extraData={this.state}  para atualizar lista?
-                        />
+                            })
+                        }
 
                     </View>
 
-                    {/* FIM LISTA */}
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
 
 
                 </ScrollView>
@@ -218,44 +200,6 @@ export default class EditServiceImage extends Component {
     }
 
 
-<<<<<<< HEAD
-=======
-
-    renderItem = ({ item }) => (
-
-
-        <View style={styles.flatItemRow}>
-
-
-            <View style={styles.flatItemContainer}>
-
-
-                <Text>{item.imagePath}</Text>
-
-                <Image
-                    style={styles.img}
-                    source={{ uri: 'http://localhost:5000/Images/' }}
-                />
-
-                <Pressable
-                    style={styles.binButton}
-                    onPress={() => this.DeleteImage(item.id)}
-                >
-                    <Image
-                        source={require('../../assets/images/bin.png')}
-                        style={styles.binImg}
-                    />
-                </Pressable>
-
-            </View>
-
-
-        </View>
-
-    )
-
-
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
 }
 
 
@@ -364,15 +308,9 @@ const styles = StyleSheet.create({
     },
 
     img: {
-<<<<<<< HEAD
         width: 150,
         height: 150,
         marginTop: 15
-=======
-        backgroundColor: 'lightgreen',
-        width: 200,
-        height: 200
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
     }
 
 

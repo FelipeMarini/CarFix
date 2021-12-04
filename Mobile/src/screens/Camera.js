@@ -3,14 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native
 import { Camera } from 'expo-camera'
 import * as Permissions from 'expo-permissions'
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import * as ImagePicker from 'expo-image-picker'
 import api from '../services/api'
-
 
 export default class App extends Component {
 
-    // fazer com que a câmera não ocupe a tela toda para ter opção de haver mensagens de envio e o que fazer com a imagem
-    // fazer uma forma de atrelar a imagem com o serviço através do idServico na hora do post ServiceImage
+
+    // fazer com que a câmera não ocupe a tela toda?
 
     state = {
 
@@ -42,7 +40,9 @@ export default class App extends Component {
             const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
 
             if (status !== 'granted') {
-                alert('Sorry, we need camera roll permissions to make this work!')
+
+                ('Sorry, we need camera roll permissions to make this work!')
+
             }
 
         }

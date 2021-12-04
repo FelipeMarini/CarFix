@@ -44,6 +44,25 @@ namespace CarFix.Project.Repositories
 
         }
 
+        public void AssignWorker(AssignWorkerDTO worker)
+        {
+            Service selectedService = c_Context.Services.Find(worker.IdService);
+
+            if (worker.IdWorker != null)
+            {
+                selectedService.IdUser = worker.IdWorker;
+            }
+        }
+
+        public void ChangeServiceStatus(ChangeServiceStatusDTO serviceStatus)
+        {
+            Service selectedService = c_Context.Services.Find(serviceStatus.IdService);
+
+            if (serviceStatus.IdService != null)
+            {
+                selectedService.ServiceStatus = serviceStatus.ServiceStatus;
+            }
+        }
 
         public void Delete(Guid idService)
         {
@@ -71,6 +90,19 @@ namespace CarFix.Project.Repositories
                 .Include(x => x.ServiceType)
                 .Include(x => x.Budget)
                 .Include(x => x.ServiceImages)
+                .ToList();
+        }
+
+        public List<Service> ListAllActiveServicesPerWorker(Guid idWorker)
+        {
+            return c_Context.Services
+                .AsNoTracking()
+                .Include(x => x.Worker)
+                .Include(x => x.ServiceType)
+                .Include(x => x.Budget)
+                .Include(x => x.ServiceImages)
+                .Where(x => x.IdUser == idWorker)
+                .Where(x => x.ServiceStatus != Enum.EnServiceStatus.Finalizado)
                 .ToList();
         }
 

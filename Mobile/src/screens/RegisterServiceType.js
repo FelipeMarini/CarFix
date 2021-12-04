@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },

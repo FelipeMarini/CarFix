@@ -20,33 +20,29 @@ export default class EditVehicle extends Component {
             model: '',
             brand: '',
             year: '',
-<<<<<<< HEAD
-            color: '',
-            msgConfirmacao: '',
-            msgConfirmacao2: ''
+            color: ''
 
         }
 
     }
+
 
     GetIdUser = () => {
 
         try {
-            
-           
 
-        } 
-        
+
+
+        }
+
         catch (error) {
-        
+
             console.log(error)
-=======
-            color: ''
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
 
         }
 
     }
+
 
 
     DeleteVehicle = () => {
@@ -57,13 +53,9 @@ export default class EditVehicle extends Component {
 
             const answer = api.delete('/Vehicles/' + IdVehicle)
 
-<<<<<<< HEAD
-            this.setState({ msgConfirmacao2: 'Veículo excluído com sucesso' })
-=======
             alert('Veículo excluído com sucesso')
 
             this.props.navigation.navigate("Meu Perfil")
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
 
         }
 
@@ -83,28 +75,20 @@ export default class EditVehicle extends Component {
             const valueToken = await AsyncStorage.getItem('userToken')
 
             var idToken = jwtDecode(valueToken).jti
-      
+
             this.setState({ idUserLogged: idToken })
 
             console.log(this.state.idUserLogged)
 
             const IdVehicle = localStorage.getItem('IdVehicleService')
 
-            const valueToken = await AsyncStorage.getItem('userToken')
-
-            var idToken = jwtDecode(valueToken).jti
-
             if (this.state.idVehicle !== '' && this.state.model !== '' &&
                 this.state.brand !== '' && this.state.year !== ''
                 && this.state.color !== '' && this.state.plate !== '') {
 
-                const answer = await api.put('/Vehicles', {
+                const answer = await api.patch('/Vehicles', {
                     id: IdVehicle,
-<<<<<<< HEAD
-                    idUser: this.state.idUserLogged,
-=======
                     idUser: idToken,
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
                     licensePlate: this.state.plate,
                     modelName: this.state.model,
                     brandName: this.state.brand,
@@ -206,12 +190,6 @@ export default class EditVehicle extends Component {
                 </Pressable>
 
 
-<<<<<<< HEAD
-                <Text style={styles.msgSucesso}>{this.state.msgConfirmacao2}</Text>
-
-
-=======
->>>>>>> 22d519096d274e8f78db6d378d8c9dfa0050ffa7
                 <Pressable
                     style={styles.exitButton}
                     onPress={() => this.props.navigation.navigate('Meus Veículos')}
@@ -254,7 +232,7 @@ const styles = StyleSheet.create({
 
     subtitle: {
         fontFamily: "nunito-700.ttf",
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#121212",
         fontSize: 14,
         textAlign: 'justify',
@@ -282,7 +260,7 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         marginLeft: '20%',
-        marginBottom: 10
+        marginTop: 10
     },
 
     arrow: {
@@ -318,13 +296,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 14
+        marginTop: 30
     },
 
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 22,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     }

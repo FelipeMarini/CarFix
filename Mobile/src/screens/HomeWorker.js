@@ -89,12 +89,8 @@ const styles = StyleSheet.create({
         marginLeft: '8%'
     },
 
-    search: {
-
-    },
-
     cardBudget: {
-        background: '#fdfcff',
+        backgroundColor: '#fdfcff',
         borderRadius: 5,
         borderColor: 'black',
         borderWidth: 1,
@@ -147,10 +143,6 @@ const styles = StyleSheet.create({
     value: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 12
-    },
-
-    detailsLink: {
-
     },
 
     detailsText: {

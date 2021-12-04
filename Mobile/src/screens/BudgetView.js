@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     listTextButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 18,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     flatItemTitle: {
         fontFamily: 'roboto-regular.ttf',
         fontSize: 20,
-        fontWeight: 600,
+        fontWeight: "600",
         color: '#282f66',
         marginTop: 10,
         // backgroundColor: 'lightyellow'
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     flatItemInfo: {
         fontFamily: 'roboto-regular.ttf',
         fontSize: 16,
-        fontWeight: 550,
+        fontWeight: "500",
         color: '#000',
         lineHeight: 28,
         textAlign: 'justify',

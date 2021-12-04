@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: "nunito-700.ttf",
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#121212",
         textAlign: 'justify',
         marginLeft: '15%',
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 22,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     }

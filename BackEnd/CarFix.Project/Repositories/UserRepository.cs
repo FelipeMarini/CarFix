@@ -60,6 +60,16 @@ namespace CarFix.Project.Repositories
                 .ToList();
         }
 
+        public List<User> ListAllWorkers()
+        {
+            return c_Context.Users
+                .AsNoTracking()
+                .Include(x => x.Vehicles)
+                .Include(x => x.Services)
+                .Where(x => x.UserType == Enum.EnUserType.Funileiro)
+                .ToList();
+        }
+
         public void Register(User newUser)
         {
             newUser.Password = Password.Encrypt(newUser.Password);

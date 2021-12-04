@@ -9,7 +9,7 @@ import { style } from "dom-helpers"
 
 export default class RegisterService extends Component {
 
-    
+
     //se deleto os veículos do orçamento, os serviços e o orçamento acabam sendo deletados também
 
 
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: "nunito-700.ttf",
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#121212",
         textAlign: 'justify',
         textDecorationLine: 'underline',
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     subtitle2: {
         fontFamily: "nunito-700.ttf",
         fontSize: 22,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#282f66",
         textAlign: 'justify',
         marginLeft: '15%',
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
     description: {
         fontFamily: "nunito-700.ttf",
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#282f66",
         textAlign: 'center',
         marginLeft: '15%',
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },

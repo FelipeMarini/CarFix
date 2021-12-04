@@ -13,6 +13,7 @@ namespace CarFix.Project.Interfaces
         User? FindUser(Guid idUser);
         User? FindUserPerEmail(string email);
         // User FindWorkers(EnUserType userType);
+        List<User> ListAllWorkers();
         void Register(User newUser);
         void Update(User user);
         void Delete(Guid idUser);

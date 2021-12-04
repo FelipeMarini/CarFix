@@ -30,21 +30,30 @@ namespace CarFix.Project.Controllers
         [HttpGet]
         public IActionResult GetAllUsers()
         {
-
             try
             {
-
                 return Ok(_unitOfWork.UserRepository.ListAllUsers());
-
             }
 
             catch (Exception error)
             {
-
                 return BadRequest(error);
+            }
+        }
 
+        [Route("Workers")]
+        [HttpGet]
+        public IActionResult ListAllWorkers()
+        {
+            try
+            {
+                return Ok(_unitOfWork.UserRepository.ListAllWorkers());
             }
 
+            catch (Exception error)
+            {
+                return BadRequest(error);
+            }
         }
 
 
@@ -107,7 +116,7 @@ namespace CarFix.Project.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPatch]
         public IActionResult UpdateUser(User userUpdated)
         {
             try

@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         fontFamily: 'nunito-700.ttf',
         fontSize: 30,
         fontStyle: "normal",
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#282F66"
     }
 

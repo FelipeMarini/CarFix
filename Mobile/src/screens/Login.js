@@ -3,27 +3,20 @@ import { StyleSheet, View, Text, TextInput, Pressable } from "react-native"
 import api from '../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
-import Modal from 'react-native-modal'
+// import Modal from 'react-native-modal'
 
 
 
 export default class Login extends Component {  // elaborar telas do funileiro
 
 
-    // foco: habilitar câmera para enviar imagens 
-    //e integrar com whats para agendar visita depois de receber o orçamento do funileiro
-
+    //integrar com whats para agendar visita depois de receber o orçamento do funileiro
     // fazer método de recuperar senha e confirmar senha
-
     // aprender métodos de curtidas e contagem (Instadev)
-
-    // fazer a lógica "isLoading" para desabilitar os botões 
-    // quando faltar algum campo para ser preenchido
-
+    // fazer a lógica "isLoading" para desabilitar os botões quando faltar algum campo para ser preenchido
     // para deletar um usuário vou ter que deletar os veículos dele antes
-
     // testar para ver se a "borda laranja" do input some no dispositivo ao invés de web
-
+    // testar no cel e com o banco na nuvem da AWS
 
     constructor(props) {
 
@@ -131,14 +124,12 @@ export default class Login extends Component {  // elaborar telas do funileiro
                 </Pressable>
 
 
-                <Pressable
+                {/* <Pressable
                     style={styles.button}
                     onPress={() => this.setState({ visible: true })}
                 >
                     <Text style={styles.textButton}>Abrir</Text>
                 </Pressable>
-
-
 
                 <Modal
                     isVisible={this.state.visible}
@@ -156,10 +147,9 @@ export default class Login extends Component {  // elaborar telas do funileiro
                         </Pressable>
 
                     </View>
+                </Modal> */}
 
-                </Modal>
-
-                {/* <Pressable
+                <Pressable
                     onPress={() => this.props.navigation.navigate("RecoverPassword")}
                     style={styles.forgetPassBtn}
                 >
@@ -171,7 +161,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
                     style={styles.newAccountBTN}
                 >
                     <Text style={styles.criarUmaConta}>Criar uma conta</Text>
-                </Pressable> */}
+                </Pressable>
 
             </View>
 
@@ -198,7 +188,7 @@ const styles = StyleSheet.create({
 
     subtitle: {
         fontFamily: "nunito-700.ttf",
-        fontWeight: 500,
+        fontWeight: "500",
         color: "#121212",
         fontSize: 15,
         marginTop: 20,
@@ -235,7 +225,7 @@ const styles = StyleSheet.create({
     esqueciMinhaSenha: {
         fontFamily: "nunito-regular.ttf",
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "rgba(40,47,102,1)",
         textAlign: 'center'
     },
@@ -243,7 +233,7 @@ const styles = StyleSheet.create({
     criarUmaConta: {
         fontFamily: "nunito-regular.ttf",
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: "600",
         color: "rgba(40,47,102,1)",
         marginTop: 20,
         textAlign: 'center'
@@ -270,7 +260,7 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'nunito-regular.ttf',
         fontSize: 22,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },

@@ -68,7 +68,7 @@ export default class EditProfile extends Component {
         this.state.newUserName !== '' && this.state.newEmail !== ''
         && this.state.newPassword !== '' && this.state.newPhoneNumber !== '') {
 
-        const answer = await api.put('/Users', {
+        const answer = await api.patch('/Users', {
           id: this.state.idUserLogged,
           creationDate: this.state.newCreationDate,
           username: this.state.newUserName,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
 
   subtitle: {
     fontFamily: "nunito-700.ttf",
-    fontWeight: 600,
+    fontWeight: "600",
     color: "#121212",
     fontSize: 20,
     textAlign: 'center',
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
   textButton: {
     fontFamily: 'nunito-regular.ttf',
     fontSize: 22,
-    fontWeight: 400,
+    fontWeight: "400",
     color: '#fff',
     marginBottom: '1%'
   },
