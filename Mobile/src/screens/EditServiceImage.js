@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from "../services/api"
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
 
@@ -30,7 +30,7 @@ export default class EditServiceImage extends Component {
 
         try {
 
-            const IdService = localStorage.getItem('IdService')
+            const IdService = AsyncStorageLib.getItem('IdService')
 
             const answer = await api.get('/ServiceImages/Service/' + IdService)
 
@@ -67,7 +67,7 @@ export default class EditServiceImage extends Component {
 
         try {
 
-            await AsyncStorage.removeItem('userToken')
+            await AsyncStorageLib.removeItem('userToken')
 
             this.props.navigation.navigate('Login')
 
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 18,
@@ -235,9 +235,9 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
 
     mainBody: {
         flex: 4,
-        backgroundColor: 'lightblue'
+        // backgroundColor: 'lightblue'
     },
 
     mainBodyContent: {
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
         paddingLeft: 70,
         marginTop: 5,
         marginBottom: 18,
-        backgroundColor: 'lightgreen'
+        // backgroundColor: 'lightgreen'
     },
 
     flatItemRow: {
@@ -290,11 +290,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#282f66',
         marginTop: 50,
-        backgroundColor: 'lightpink'
+        // backgroundColor: 'lightpink'
     },
 
     flatItemContainer: {
-        backgroundColor: 'purple'
+        // backgroundColor: 'purple'
     },
 
     binButton: {

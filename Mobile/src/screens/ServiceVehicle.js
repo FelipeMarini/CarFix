@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, Pressable, FlatList, Image } from 'react-native'
+import { View, StyleSheet, Text, Pressable, FlatList, Image, AsyncStorage } from 'react-native'
 import api from '../services/api'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
 export default class ServiceVehicle extends Component {
@@ -29,7 +30,7 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = localStorage.getItem('IdVehicleService')
+            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
 
             console.log(IdCar)
 
@@ -56,7 +57,7 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = localStorage.getItem('IdVehicleService')
+            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
 
             const answerBudget = await api.get('/Budgets/Vehicle/' + IdCar)
 
@@ -83,11 +84,11 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = localStorage.getItem('IdVehicleService')
+            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
 
             console.log(IdCar)
 
-            this.setState(() => localStorage.setItem('IdVehicleRequest', IdCar))
+            this.setState(() => AsyncStorageLib.setItem('IdVehicleRequest', IdCar))
 
             this.props.navigation.navigate("RegisterService")
 
@@ -106,7 +107,7 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = localStorage.getItem('IdVehicleService')
+            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
 
             console.log(IdCar)
 
@@ -138,7 +139,7 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            this.setState(() => localStorage.setItem('IdService', id))
+            this.setState(() => AsyncStorageLib.setItem('IdService', id))
 
             this.props.navigation.navigate("Camera")
 
@@ -159,7 +160,7 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            this.setState(() => localStorage.setItem('IdService', id))
+            this.setState(() => AsyncStorageLib.setItem('IdService', id))
 
             this.props.navigation.navigate("EditServiceImage")
 
@@ -363,7 +364,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 18,
@@ -373,7 +374,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontSize: 18,
         fontWeight: "600",
         color: "#121212",
@@ -384,7 +385,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle1: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontSize: 18,
         fontWeight: "600",
         color: "#000",
@@ -407,7 +408,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
         color: '#fff',
@@ -427,7 +428,7 @@ const styles = StyleSheet.create({
     },
 
     listTextButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 18,
         fontWeight: "400",
         color: '#fff',
@@ -448,7 +449,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -492,7 +493,7 @@ const styles = StyleSheet.create({
     },
 
     flatItemTitle: {
-        fontFamily: 'roboto-regular.ttf',
+        fontFamily: 'Roboto',
         fontSize: 20,
         fontWeight: "600",
         color: '#282f66',
@@ -501,7 +502,7 @@ const styles = StyleSheet.create({
     },
 
     flatItemInfo: {
-        fontFamily: 'roboto-regular.ttf',
+        fontFamily: 'Roboto',
         fontSize: 16,
         fontWeight: "500",
         color: '#000',

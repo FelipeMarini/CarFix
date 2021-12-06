@@ -176,17 +176,18 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: "Nunito700",
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 25,
         marginLeft: '5%',
         marginRight: '5%',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: 60
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: "Nunito700",
         fontSize: 18,
         fontWeight: "600",
         color: "#121212",
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: 50,
-        fontFamily: "nunito-regular.ttf",
+        fontFamily: "Nunito",
         color: "#121212",
         borderWidth: 2,
         borderColor: "rgba(40,47,102,1)",
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -247,7 +248,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 22,
         fontWeight: "400",
         color: '#fff',

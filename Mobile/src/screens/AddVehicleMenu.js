@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { render } from "react-dom"
 import { StyleSheet, View, Text, Pressable, Image } from "react-native"
 
 
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 25,
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontWeight: "600",
         color: "#121212",
         fontSize: 15,
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
         color: '#fff',

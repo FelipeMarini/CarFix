@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
 
     title: {
         marginTop: 20,
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 32,
         fontStyle: "normal",
         fontWeight: "600",
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'roboto-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 14,
         fontWeight: "600",
         color: '#fff'
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     },
 
     exitTextButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 15,
         fontWeight: "600",
         color: '#000'

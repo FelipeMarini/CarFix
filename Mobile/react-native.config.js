@@ -5,6 +5,6 @@ module.exports = {
     android: {},
   },
 
-  assets: ["./assets/fonts/"]   // importar fontes não nativas
+  assets: ["./assets/fonts"]   // importar fontes não nativas
 
 }

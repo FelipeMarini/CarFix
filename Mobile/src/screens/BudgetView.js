@@ -1,3 +1,4 @@
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Pressable, Image, FlatList, ScrollView } from 'react-native'
 import api from '../services/api'
@@ -53,7 +54,7 @@ export default class BudgetView extends Component {
 
         try {
 
-            this.setState(() => localStorage.setItem('IdBudget', id))
+            this.setState(() => AsyncStorageLib.setItem('IdBudget', id))
 
             console.log(id)
 
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 18,
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
         color: '#fff',
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     },
 
     listTextButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 18,
         fontWeight: "400",
         color: '#fff',
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -282,7 +283,7 @@ const styles = StyleSheet.create({
     },
 
     flatItemTitle: {
-        fontFamily: 'roboto-regular.ttf',
+        fontFamily: 'Roboto',
         fontSize: 20,
         fontWeight: "600",
         color: '#282f66',
@@ -291,7 +292,7 @@ const styles = StyleSheet.create({
     },
 
     flatItemInfo: {
-        fontFamily: 'roboto-regular.ttf',
+        fontFamily: 'Roboto',
         fontSize: 16,
         fontWeight: "500",
         color: '#000',

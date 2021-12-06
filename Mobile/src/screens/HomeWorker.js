@@ -81,10 +81,10 @@ const styles = StyleSheet.create({
 
     title: {
         marginTop: 40,
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 34,
         fontStyle: "normal",
-        fontWeight: 600,
+        fontWeight: "600",
         color: "#282F66",
         marginLeft: '8%'
     },
@@ -114,39 +114,39 @@ const styles = StyleSheet.create({
     },
 
     titleCard: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 16
     },
 
 
     vehicle: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 12
     },
 
     plate: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 12
     },
 
     client: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 12
     },
 
 
     status: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 12
     },
 
     value: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 12
     },
 
     detailsText: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 14,
         color: '#282f66'
     },
@@ -164,9 +164,9 @@ const styles = StyleSheet.create({
     },
 
     exitTextButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 15,
-        fontWeight: 600,
+        fontWeight: "600",
         color: '#000',
         paddingTop: '40%',
         paddingLeft: '6%'

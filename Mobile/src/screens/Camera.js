@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera'
 import * as Permissions from 'expo-permissions'
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import api from '../services/api'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 export default class App extends Component {
 
@@ -25,7 +26,7 @@ export default class App extends Component {
 
         this.getPermissionAsync()
 
-        const IdService = localStorage.getItem('IdService')
+        const IdService = AsyncStorageLib.getItem('IdService')
 
         console.log(IdService)
 
@@ -89,7 +90,7 @@ export default class App extends Component {
 
         if (this.camera) {
 
-            const IdService = localStorage.getItem('IdService')
+            const IdService = AsyncStorageLib.getItem('IdService')
 
             console.log(IdService)
 

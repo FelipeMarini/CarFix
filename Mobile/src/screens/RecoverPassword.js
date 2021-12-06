@@ -6,6 +6,7 @@ import { StyleSheet, View, Text, TextInput, Pressable, Image } from "react-nativ
 export default class RecoverPassword extends Component {
 
 
+
   render() {
 
     return (
@@ -63,14 +64,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: "nunito-700.ttf",
+    fontFamily: "Nunito700",
     color: "rgba(40,47,102,1)",
     fontSize: 34,
     marginTop: 50
   },
 
   subtitle: {
-    fontFamily: "nunito-700.ttf",
+    fontFamily: 'Nunito700',
     color: "#121212",
     fontSize: 15,
     marginTop: 35,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     height: 50,
-    fontFamily: "nunito-regular.ttf",
+    fontFamily: 'Nunito',
     color: "#121212",
     borderWidth: 2,
     borderColor: "rgba(40,47,102,1)",
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   },
 
   textButton: {
-    fontFamily: 'nunito-regular.ttf',
+    fontFamily: 'Nunito',
     fontSize: 22,
     fontWeight: "400",
     color: '#fff',
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
   },
 
   exitText: {
-    fontFamily: 'nunito-700.ttf',
+    fontFamily: 'Nunito700',
     fontSize: 20,
     color: '#000',
     marginTop: 16

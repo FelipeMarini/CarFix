@@ -1,9 +1,8 @@
 import React, { Component } from "react"
-import { render } from "react-dom"
 import { StyleSheet, View, Text, TextInput, Pressable, Image } from "react-native"
 import api from "../../src/services/api"
 import jwtDecode from 'jwt-decode'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorageLib from "@react-native-async-storage/async-storage"
 
 
 export default class EditVehicle extends Component {
@@ -27,29 +26,11 @@ export default class EditVehicle extends Component {
     }
 
 
-    GetIdUser = () => {
-
-        try {
-
-
-
-        }
-
-        catch (error) {
-
-            console.log(error)
-
-        }
-
-    }
-
-
-
     DeleteVehicle = () => {
 
         try {
 
-            const IdVehicle = localStorage.getItem('IdVehicleService')
+            const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
 
             const answer = api.delete('/Vehicles/' + IdVehicle)
 
@@ -72,7 +53,7 @@ export default class EditVehicle extends Component {
 
         try {
 
-            const valueToken = await AsyncStorage.getItem('userToken')
+            const valueToken = await AsyncStorageLib.getItem('userToken')
 
             var idToken = jwtDecode(valueToken).jti
 
@@ -80,7 +61,7 @@ export default class EditVehicle extends Component {
 
             console.log(this.state.idUserLogged)
 
-            const IdVehicle = localStorage.getItem('IdVehicleService')
+            const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
 
             if (this.state.idVehicle !== '' && this.state.model !== '' &&
                 this.state.brand !== '' && this.state.year !== ''
@@ -115,7 +96,7 @@ export default class EditVehicle extends Component {
 
     componentDidMount = () => {
 
-        const IdVehicle = localStorage.getItem('IdVehicleService')
+        const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
 
         console.log(IdVehicle)
 
@@ -221,7 +202,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 10,
@@ -231,7 +212,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontWeight: "600",
         color: "#121212",
         fontSize: 14,
@@ -269,7 +250,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16
@@ -300,7 +281,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 22,
         fontWeight: "400",
         color: '#fff',

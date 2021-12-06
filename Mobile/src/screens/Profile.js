@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { StyleSheet, View, Text, Pressable, Image } from "react-native"
 import api from '../services/api'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
 
 
@@ -29,7 +29,7 @@ export default class Profile extends Component {
 
     try {
 
-      const valueToken = await AsyncStorage.getItem('userToken')
+      const valueToken = await AsyncStorageLib.getItem('userToken')
 
       var idToken = jwtDecode(valueToken).jti
 
@@ -60,7 +60,7 @@ export default class Profile extends Component {
 
     try {
 
-      await AsyncStorage.removeItem('userToken')
+      await AsyncStorageLib.removeItem('userToken')
 
       this.props.navigation.navigate('Login')
 
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: "nunito-700.ttf",
+    fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
     textAlign: 'center',
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontFamily: "roboto-regular.ttf",
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: "#282f66",
     fontWeight: "300",
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    fontFamily: "roboto-regular.ttf",
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: "#282f66",
     fontWeight: "600",
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
 
   exitText: {
-    fontFamily: 'nunito-700.ttf',
+    fontFamily: 'Nunito700',
     fontSize: 20,
     color: '#000',
     marginTop: 16
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
 
   textButton: {
-    fontFamily: 'nunito-regular.ttf',
+    fontFamily: 'Nunito',
     fontSize: 20,
     fontWeight: "400",
     color: '#fff',

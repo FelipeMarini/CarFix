@@ -1,10 +1,9 @@
 import React, { Component } from "react"
 import { StyleSheet, View, Text, Image, Pressable, TextInput } from "react-native"
 import { Picker } from '@react-native-picker/picker'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import jwtDecode from 'jwt-decode'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import api from '../../src/services/api'
-import { style } from "dom-helpers"
+// import { style } from "dom-helpers"
 
 
 export default class RegisterService extends Component {
@@ -58,7 +57,7 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdRequestVehicle = localStorage.getItem('IdVehicleRequest')
+            const IdRequestVehicle = AsyncStorageLib.getItem('IdVehicleRequest')
 
             console.log(IdRequestVehicle)
 
@@ -81,7 +80,7 @@ export default class RegisterService extends Component {
 
         try {
 
-            await AsyncStorage.removeItem('userToken')
+            await AsyncStorageLib.removeItem('userToken')
 
             this.props.navigation.navigate('Login')
 
@@ -100,7 +99,7 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdRequestVehicle = localStorage.getItem('IdVehicleRequest')
+            const IdRequestVehicle = AsyncStorageLib.getItem('IdVehicleRequest')
 
             const answer = await api.get('/Budgets/Vehicle/' + IdRequestVehicle)
 
@@ -265,7 +264,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         marginTop: 18,
@@ -275,7 +274,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontSize: 18,
         fontWeight: "600",
         color: "#121212",
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
     },
 
     subtitle2: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontSize: 22,
         fontWeight: "600",
         color: "#282f66",
@@ -298,7 +297,7 @@ const styles = StyleSheet.create({
     },
 
     description: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: 'Nunito700',
         fontSize: 18,
         fontWeight: "600",
         color: "#282f66",
@@ -336,7 +335,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
         color: '#fff',
@@ -366,7 +365,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#000',
         marginTop: 16

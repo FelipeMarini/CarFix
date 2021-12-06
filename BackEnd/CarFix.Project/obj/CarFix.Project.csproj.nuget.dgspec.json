@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj": {}
+    "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj": {
+    "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
+        "projectUniqueName": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
         "projectName": "CarFix.Project",
-        "projectPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
+        "projectPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
         "packagesPath": "C:\\Users\\Felipe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFix\\BackEnd\\CarFix.Project\\obj\\",
+        "outputPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

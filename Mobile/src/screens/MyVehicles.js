@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from "../services/api"
 import jwtDecode from 'jwt-decode'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
 export default class MyVehicles extends Component {
+
+
+  // conseguir atualizar a lista automaticamente quando cadastro um carro e volto para essa tela
 
 
 
@@ -29,7 +32,7 @@ export default class MyVehicles extends Component {
 
     try {
 
-      const valueToken = await AsyncStorage.getItem('userToken')
+      const valueToken = await AsyncStorageLib.getItem('userToken')
 
       var idToken = jwtDecode(valueToken).jti
 
@@ -58,7 +61,7 @@ export default class MyVehicles extends Component {
 
       console.log(id)
 
-      this.setState(() => localStorage.setItem('IdVehicleService', id))
+      this.setState(() => AsyncStorageLib.setItem('IdVehicleService', id))
 
       this.props.navigation.navigate("ServiceVehicle")
 
@@ -78,7 +81,7 @@ export default class MyVehicles extends Component {
 
       console.log(id)
 
-      this.setState(() => localStorage.setItem('IdVehicleService', id))
+      this.setState(() => AsyncStorageLib.setItem('IdVehicleService', id))
 
       this.props.navigation.navigate("EditVehicle")
 
@@ -99,7 +102,7 @@ export default class MyVehicles extends Component {
 
       console.log(id)
 
-      this.setState(() => localStorage.setItem('IdVehicleService', id))
+      this.setState(() => AsyncStorageLib.setItem('IdVehicleRequest', id))
 
       this.props.navigation.navigate("RegisterService")
 
@@ -242,7 +245,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: "nunito-700.ttf",
+    fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
     marginTop: 15,
@@ -264,7 +267,7 @@ const styles = StyleSheet.create({
   },
 
   textButton: {
-    fontFamily: 'nunito-regular.ttf',
+    fontFamily: 'Nunito',
     fontSize: 20,
     fontWeight: "400",
     color: '#fff',
@@ -284,7 +287,7 @@ const styles = StyleSheet.create({
   },
 
   listTextButton: {
-    fontFamily: 'nunito-regular.ttf',
+    fontFamily: 'Nunito',
     fontSize: 18,
     fontWeight: "400",
     color: '#fff',
@@ -328,7 +331,7 @@ const styles = StyleSheet.create({
   },
 
   flatItemTitle: {
-    fontFamily: 'roboto-regular.ttf',
+    fontFamily: 'Roboto',
     fontSize: 20,
     fontWeight: "600",
     color: '#282f66',
@@ -337,7 +340,7 @@ const styles = StyleSheet.create({
   },
 
   flatItemInfo: {
-    fontFamily: 'roboto-regular.ttf',
+    fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: "500",
     color: '#000',

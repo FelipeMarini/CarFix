@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#fff',
         width: '80%',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
 
     exitText: {
-        fontFamily: 'nunito-700.ttf',
+        fontFamily: 'Nunito700',
         fontSize: 20,
         color: '#fff',
         marginTop: 16
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
         color: '#fff',

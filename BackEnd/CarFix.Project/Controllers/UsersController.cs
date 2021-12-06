@@ -116,7 +116,7 @@ namespace CarFix.Project.Controllers
         }
 
 
-        [HttpPatch]
+        [HttpPut]
         public IActionResult UpdateUser(User userUpdated)
         {
             try

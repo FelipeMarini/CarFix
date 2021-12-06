@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native"
 import api from '../services/api'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
+import AsyncStorageLib from "@react-native-async-storage/async-storage"
+// import AppLoading from 'expo-app-loading'    //vou usar isso?
 // import Modal from 'react-native-modal'
 
 
@@ -35,8 +36,6 @@ export default class Login extends Component {  // elaborar telas do funileiro
 
     RealizeLogin = async () => {
 
-        // console.log('email: ' + this.state.email + ' / ' + 'senha: ' + this.state.password)
-
         try {
 
             const answer = await api.post('/Login', {
@@ -46,7 +45,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
 
             const token = answer.data.token
 
-            await AsyncStorage.setItem('userToken', token)
+            await AsyncStorageLib.setItem('userToken', token)
 
             this.props.navigation.navigate('Main')
 
@@ -158,10 +157,12 @@ export default class Login extends Component {  // elaborar telas do funileiro
 
                 <Pressable
                     onPress={() => this.props.navigation.navigate("CreateAccount")}
-                    style={styles.newAccountBTN}
+                    style={styles.forgetPassBtn}
                 >
-                    <Text style={styles.criarUmaConta}>Criar uma conta</Text>
+                    <Text style={styles.esqueciMinhaSenha}>Criar Conta</Text>
                 </Pressable>
+
+
 
             </View>
 
@@ -180,14 +181,14 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: "",
         color: "rgba(40,47,102,1)",
         fontSize: 34,
         textAlign: 'center'
     },
 
     subtitle: {
-        fontFamily: "nunito-700.ttf",
+        fontFamily: "",
         fontWeight: "500",
         color: "#121212",
         fontSize: 15,
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: 50,
-        fontFamily: "nunito-regular.ttf",
+        fontFamily: "",
         color: "#121212",
         borderWidth: 2,
         borderColor: "rgba(40,47,102,1)",
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderStyle: "solid",
         paddingLeft: 20,
-        marginTop: 35
+        marginTop: 25
     },
 
     forgetPassBtn: {
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
     },
 
     esqueciMinhaSenha: {
-        fontFamily: "nunito-regular.ttf",
+        fontFamily: "",
         fontSize: 18,
         fontWeight: "600",
         color: "rgba(40,47,102,1)",
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
     },
 
     criarUmaConta: {
-        fontFamily: "nunito-regular.ttf",
+        fontFamily: "",
         fontSize: 18,
         fontWeight: "600",
         color: "rgba(40,47,102,1)",
@@ -254,28 +255,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 40
+        marginTop: 30
     },
 
     textButton: {
-        fontFamily: 'nunito-regular.ttf',
+        fontFamily: "",
         fontSize: 22,
         fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },
 
-    modal: {
-
-    },
-
     modalView: {
         backgroundColor: 'lightgreen',
         height: 100
-    },
-
-    modalText: {
-
     }
 
 
