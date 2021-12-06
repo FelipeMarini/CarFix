@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, Pressable, FlatList, Image, AsyncStorage } from 'react-native'
+import { View, StyleSheet, Text, Pressable, FlatList, Image } from 'react-native'
 import api from '../services/api'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
@@ -9,6 +9,8 @@ export default class ServiceVehicle extends Component {
     // mostrar o status serviço aqui e fazer um filtro!
 
     // pode deletar o serviço? ou só mostra os serviços ativos?
+
+    // fazer modal para a descrição - UX/UI
 
 
     constructor(props) {
@@ -30,17 +32,17 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
 
-            console.log(IdCar)
+            // console.log(IdCar)
 
             const answer = await api.get('/Vehicles/VehicleId/' + IdCar)
 
-            console.log(answer.data)
+            // console.log(answer.data)
 
             this.setState({ Vehicle: answer.data })
 
-            console.log(this.state.Vehicle)
+            // console.log(this.state.Vehicle)
 
         }
 
@@ -57,17 +59,17 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
 
             const answerBudget = await api.get('/Budgets/Vehicle/' + IdCar)
 
             const dataBudget = answerBudget.data
 
-            console.log(dataBudget)
+            // console.log(dataBudget)
 
             this.setState({ Budget: dataBudget })
 
-            console.log(this.state.Budget)
+            // console.log(this.state.Budget)
 
         }
 
@@ -80,15 +82,13 @@ export default class ServiceVehicle extends Component {
     }
 
 
-    GetIdVehicle = () => {
+    GetIdVehicle = async () => {
 
         try {
 
-            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
 
-            console.log(IdCar)
-
-            this.setState(() => AsyncStorageLib.setItem('IdVehicleRequest', IdCar))
+            // console.log(IdCar)
 
             this.props.navigation.navigate("RegisterService")
 
@@ -107,7 +107,7 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = AsyncStorageLib.getItem('IdVehicleService')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
 
             console.log(IdCar)
 
@@ -133,13 +133,13 @@ export default class ServiceVehicle extends Component {
 
 
 
-    AddImage = (id) => {
+    AddImage = async (id) => {
 
         try {
 
             console.log(id)
 
-            this.setState(() => AsyncStorageLib.setItem('IdService', id))
+            await AsyncStorageLib.setItem('IdService', id)
 
             this.props.navigation.navigate("Camera")
 
@@ -154,13 +154,13 @@ export default class ServiceVehicle extends Component {
     }
 
 
-    ViewImages = (id) => {
+    ViewImages = async (id) => {
 
         try {
 
             console.log(id)
 
-            this.setState(() => AsyncStorageLib.setItem('IdService', id))
+            await AsyncStorageLib.setItem('IdService', id)
 
             this.props.navigation.navigate("EditServiceImage")
 
@@ -289,7 +289,7 @@ export default class ServiceVehicle extends Component {
                         data={this.state.listServices}
                         keyExtractor={item => item.id}
                         renderItem={this.renderItem}
-                        extraData={this.state}
+                    // extraData={this.state}
                     />
 
                 </View>

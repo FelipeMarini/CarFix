@@ -171,8 +171,9 @@ namespace CarFix.Project.Repositories
                    .Include(x => x.Budget)
                    .Include(x => x.ServiceType)
                    .Include(x => x.Worker)
+                   .Include(x => x.Vehicle)
                    .Include(x => x.ServiceImages)
-                   .Where(x => x.Budget.IdVehicle == idVehicle)
+                   .Where(x => x.IdVehicle == idVehicle)
                    .ToList();
 
             if (services != null)

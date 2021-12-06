@@ -108,26 +108,26 @@ export default class BudgetDetail extends Component {
 
 
 
-                <ScrollView>
+                {/* <ScrollView> */}
 
 
-                    {/* LISTA */}
+                {/* LISTA */}
 
-                    <View style={styles.mainBody}>
+                <View style={styles.mainBody}>
 
-                        <FlatList
-                            contentContainerStyle={styles.mainBodyContent}
-                            data={this.state.listServicesBudget}
-                            keyExtractor={item => item.id}
-                            renderItem={this.renderItem}
-                        />
+                    <FlatList
+                        contentContainerStyle={styles.mainBodyContent}
+                        data={this.state.listServicesBudget}
+                        keyExtractor={item => item.id}
+                        renderItem={this.renderItem}
+                    />
 
-                    </View>
+                </View>
 
-                    {/* FIM LISTA */}
+                {/* FIM LISTA */}
 
 
-                </ScrollView>
+                {/* </ScrollView> */}
 
 
             </View>
@@ -144,7 +144,7 @@ export default class BudgetDetail extends Component {
 
             <View style={styles.flatItemContainer}>
 
-                <Text style={styles.flatItemInfo}>Data Cadastro: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text>
+                {/* <Text style={styles.flatItemInfo}>Data Cadastro: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
                 <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
                 <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
                 <Text style={styles.flatItemInfo}>Valor Serviço: ${item.price}</Text>

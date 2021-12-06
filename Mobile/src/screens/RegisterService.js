@@ -57,11 +57,11 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdRequestVehicle = AsyncStorageLib.getItem('IdVehicleRequest')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
 
-            console.log(IdRequestVehicle)
+            console.log(IdVehicle)
 
-            const answer = await api.get('/Vehicles/VehicleId/' + IdRequestVehicle)
+            const answer = await api.get('/Vehicles/VehicleId/' + IdVehicle)
 
             this.setState({ Vehicle: answer.data })
 
@@ -99,9 +99,9 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdRequestVehicle = AsyncStorageLib.getItem('IdVehicleRequest')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
 
-            const answer = await api.get('/Budgets/Vehicle/' + IdRequestVehicle)
+            const answer = await api.get('/Budgets/Vehicle/' + IdVehicle)
 
             var dataBudgetVehicle = answer.data
 
@@ -118,7 +118,7 @@ export default class RegisterService extends Component {
 
                         idBudget: this.state.idBudget,
                         idServiceType: this.state.idServiceType,
-                        idVehicle: IdRequestVehicle,
+                        idVehicle: IdVehicle,
                         idBudget: this.state.idBudget,
                         serviceDescription: this.state.serviceDescription
 
@@ -146,6 +146,8 @@ export default class RegisterService extends Component {
                     })
 
                 }
+
+                alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
 
                 this.props.navigation.navigate("ServiceVehicle")
 

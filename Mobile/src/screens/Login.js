@@ -49,14 +49,10 @@ export default class Login extends Component {  // elaborar telas do funileiro
 
             this.props.navigation.navigate('Main')
 
-            const valueToken = await AsyncStorage.getItem('userToken')
 
+            if (token !== null) {
 
-            if (valueToken !== null) {
-
-                this.setState({ role: jwtDecode(valueToken).role })
-
-
+                this.setState({ role: jwtDecode(token).role })
             }
 
             if (this.state.role === "Administrador") {

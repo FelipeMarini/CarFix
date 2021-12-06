@@ -105,28 +105,28 @@ export default class BudgetView extends Component {
                 </Pressable>
 
 
-                <ScrollView>
+                {/* <ScrollView> */}
 
 
 
-                    {/* LISTA */}
+                {/* LISTA */}
 
-                    <View style={styles.mainBody}>
+                <View style={styles.mainBody}>
 
-                        <FlatList
-                            contentContainerStyle={styles.mainBodyContent}
-                            data={this.state.listBudgets}
-                            keyExtractor={item => item.id}
-                            renderItem={this.renderItem}
-                        />
+                    <FlatList
+                        contentContainerStyle={styles.mainBodyContent}
+                        data={this.state.listBudgets}
+                        keyExtractor={item => item.id}
+                        renderItem={this.renderItem}
+                    />
 
-                    </View>
+                </View>
 
-                    {/* FIM LISTA */}
+                {/* FIM LISTA */}
 
 
 
-                </ScrollView>
+                {/* </ScrollView> */}
 
 
             </View>
@@ -143,7 +143,7 @@ export default class BudgetView extends Component {
 
             <View style={styles.flatItemContainer}>
 
-                <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text>
+                {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
                 <Text style={styles.flatItemInfo}>Veículo: {item.vehicle.modelName}</Text>
                 <Text style={styles.flatItemInfo}>Ano: {item.vehicle.year}</Text>
                 <Text style={styles.flatItemInfo}>Placa: {item.vehicle.licensePlate}</Text>

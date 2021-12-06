@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
   iconUser: {
     width: 24,
     height: 24,
-    color: '#fff'
+    tintColor: '#fff'
   },
 
   iconVehicle: {
     width: 45,
     height: 45,
     marginTop: 5,
-    color: '#fff'
+    tintColor: '#fff'
   }
 
 

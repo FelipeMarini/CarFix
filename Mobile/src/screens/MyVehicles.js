@@ -28,7 +28,7 @@ export default class MyVehicles extends Component {
   }
 
 
-  GetListVehiclesByIdUser = async () => {
+  GetVehiclesUser = async () => {
 
     try {
 
@@ -55,13 +55,11 @@ export default class MyVehicles extends Component {
   }
 
 
-  GetIdVehicleService = (id) => {
+  GetIdVehicleService = async (id) => {
 
     try {
 
-      console.log(id)
-
-      this.setState(() => AsyncStorageLib.setItem('IdVehicleService', id))
+      await AsyncStorageLib.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("ServiceVehicle")
 
@@ -75,13 +73,13 @@ export default class MyVehicles extends Component {
 
   }
 
-  GetIdVehicleEdit = (id) => {
+  GetIdVehicleEdit = async (id) => {
 
     try {
 
-      console.log(id)
+      // console.log(id)
 
-      this.setState(() => AsyncStorageLib.setItem('IdVehicleService', id))
+      await AsyncStorageLib.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("EditVehicle")
 
@@ -96,13 +94,13 @@ export default class MyVehicles extends Component {
   }
 
 
-  GetIdVehicleRequest = (id) => {
+  GetIdVehicleRequest = async (id) => {
 
     try {
 
-      console.log(id)
+      // console.log(id)
 
-      this.setState(() => AsyncStorageLib.setItem('IdVehicleRequest', id))
+      await AsyncStorageLib.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("RegisterService")
 
@@ -138,7 +136,7 @@ export default class MyVehicles extends Component {
 
   componentDidMount = () => {
 
-    this.GetListVehiclesByIdUser()
+    this.GetVehiclesUser()
 
   }
 
@@ -163,26 +161,26 @@ export default class MyVehicles extends Component {
         </Pressable>
 
 
-        <ScrollView>
+        {/* <ScrollView>' */}
 
 
-          {/* LISTA */}
+        {/* LISTA */}
 
-          <View style={styles.mainBody}>
+        <View style={styles.mainBody}>
 
-            <FlatList
-              contentContainerStyle={styles.mainBodyContent}
-              data={this.state.listVehicles}
-              keyExtractor={item => item.id}
-              renderItem={this.renderItem}
-            />
+          <FlatList
+            contentContainerStyle={styles.mainBodyContent}
+            data={this.state.listVehicles}
+            keyExtractor={item => item.id}
+            renderItem={this.renderItem}
+          />
 
-          </View>
+        </View>
 
-          {/* FIM LISTA */}
+        {/* FIM LISTA */}
 
 
-        </ScrollView>
+        {/* </ScrollView> */}
 
 
       </View>
@@ -248,7 +246,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
-    marginTop: 15,
+    marginTop: 55,
     marginLeft: '5%',
     marginRight: '5%',
     textAlign: 'center'
@@ -322,12 +320,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#282f66',
     marginTop: 18,
-    // backgroundColor: 'lightpink'
+    backgroundColor: 'lightpink'
   },
 
   flatItemContainer: {
     flex: 1,
-    // backgroundColor: 'purple'
+    backgroundColor: 'lightcyan'
   },
 
   flatItemTitle: {

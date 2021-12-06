@@ -26,13 +26,13 @@ export default class EditVehicle extends Component {
     }
 
 
-    DeleteVehicle = () => {
+    DeleteVehicle = async () => {
 
         try {
 
-            const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
 
-            const answer = api.delete('/Vehicles/' + IdVehicle)
+            const answer = await api.delete('/Vehicles/' + IdVehicle)
 
             alert('Veículo excluído com sucesso')
 
@@ -61,15 +61,15 @@ export default class EditVehicle extends Component {
 
             console.log(this.state.idUserLogged)
 
-            const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
 
             if (this.state.idVehicle !== '' && this.state.model !== '' &&
                 this.state.brand !== '' && this.state.year !== ''
                 && this.state.color !== '' && this.state.plate !== '') {
 
-                const answer = await api.patch('/Vehicles', {
+                const answer = await api.patch('/Vehicles', { //patch ou put aqui?
                     id: IdVehicle,
-                    idUser: idToken,
+                    idUser: idUserLogged,
                     licensePlate: this.state.plate,
                     modelName: this.state.model,
                     brandName: this.state.brand,
@@ -94,9 +94,9 @@ export default class EditVehicle extends Component {
     }
 
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
 
-        const IdVehicle = AsyncStorageLib.getItem('IdVehicleService')
+        const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
 
         console.log(IdVehicle)
 
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 10,
+        marginTop: 50,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: 50,
-        fontFamily: "nunito-regular.ttf",
+        fontFamily: "Nunito",
         color: "#121212",
         borderWidth: 2,
         borderColor: "rgba(40,47,102,1)",
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 25
+        marginTop: 45
     },
 
     button2: {
