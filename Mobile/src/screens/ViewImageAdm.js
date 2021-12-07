@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, FlatList, Modal } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Text, View, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native'
 import api from "../services/api"
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
+
 
 
 export default class ViewImageAdm extends Component {
 
-    // fazer update da imagem?
-    // colocar mais informações na lista?
-
-    // ! fazer com que o usuário possa visualizar a imagem
 
 
     constructor(props) {
@@ -18,7 +15,6 @@ export default class ViewImageAdm extends Component {
 
         this.state = {
 
-            idDeleteImage: '',
             listImages: []
 
         }
@@ -29,19 +25,25 @@ export default class ViewImageAdm extends Component {
 
     GetImagesByService = async () => {
 
+
         try {
 
+            // const IdService = AsyncStorageLib.getItem('IdService')
             const IdService = localStorage.getItem('IdService')
 
             const answer = await api.get('/ServiceImages/Service/' + IdService)
 
             const dataImages = answer.data
 
-            console.log(dataImages)
-
             this.setState({ listImages: dataImages })
 
-            console.log(this.state.listImages)
+            var images = this.state.listImages.map(function (item) {
+
+                return { key: item.imagePath }
+
+            })
+
+            this.setState({ paths: images })
 
         }
 
@@ -55,18 +57,12 @@ export default class ViewImageAdm extends Component {
     }
 
 
-    ClearListImages = () => {
-
-        this.setState({ listImages: [] })
-
-    }
-
 
     Logout = async () => {
 
         try {
 
-            await AsyncStorage.removeItem('userToken')
+            await AsyncStorageLib.removeItem('userToken')
 
             this.props.navigation.navigate('Login')
 
@@ -81,37 +77,10 @@ export default class ViewImageAdm extends Component {
     }
 
 
-    DeleteImage = (id) => {
 
-        try {
+    componentDidMount = () => {
 
-            console.log(id)
-
-            const dataImages = this.state.listImages
-
-            let filterArray = dataImages.filter((val, i) => {
-
-                if (val.id !== id) {
-
-                    return val
-
-                }
-
-            })
-
-            console.log('filterArray', filterArray)
-
-            const answer = api.delete('/ServiceImages/' + id)
-
-            this.setState({ listImages: filterArray })
-
-        }
-
-        catch (error) {
-
-            console.log(error)
-
-        }
+        this.GetImagesByService()
 
     }
 
@@ -129,55 +98,48 @@ export default class ViewImageAdm extends Component {
                 <Text style={styles.title}>Imagens do Serviço</Text>
 
 
+                <Pressable
+                    style={styles.exitButton}
+                    onPress={() => this.props.navigation.navigate('HomeWorker')}
+                >
+                    <Image
+                        source={require('../../assets/images/back.png')}
+                        style={styles.arrow}
+                    />
+
+                    <Text style={styles.exitText}>Voltar</Text>
+                </Pressable>
+
+
+
                 <ScrollView>
 
+                    <View>
 
-                    <TouchableOpacity
-                        style={styles.button}
-                        activeOpacity={0.5}
-                        onPress={this.GetImagesByService}
-                    >
-                        <Text style={styles.textButton}>Mostrar Imagens</Text>
-                    </TouchableOpacity>
+                        {
+                            this.state.listImages.map((image) => {
 
+                                return (
 
-                    <TouchableOpacity
-                        style={styles.button}
-                        activeOpacity={0.5}
-                        onPress={this.ClearListImages}
-                    >
-                        <Text style={styles.textButton}>Minimizar Lista</Text>
-                    </TouchableOpacity>
+                                    <View
+                                        style={styles.containerImg}
+                                        key={image.id}
+                                    >
 
+                                        <Image
+                                            style={styles.img}
+                                            source={{ uri: 'https://localhost:5001/Images/' + image.imagePath }}
+                                        />
 
+                                    </View>
 
-                    {/* LISTA */}
+                                )
 
-                    <View style={styles.containerList}>
-
-                        <FlatList
-                            contentContainerStyle={styles.mainListContent}
-                            data={this.state.listImages}
-                            keyExtractor={item => item.id}
-                            renderItem={this.renderItem}
-                        />
+                            })
+                        }
 
                     </View>
 
-                    {/* FIM LISTA */}
-
-
-
-                    <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate("ServiceVehicle")}
-                        style={styles.exitButton}
-                    >
-                        <Image
-                            source={require('../../assets/images/back.png')}
-                            style={styles.exitImg}
-                        />
-                        <Text style={styles.exitTextButton}>Voltar</Text>
-                    </TouchableOpacity>
 
 
                 </ScrollView>
@@ -189,31 +151,6 @@ export default class ViewImageAdm extends Component {
         )
 
     }
-
-
-    renderItem = ({ item }) => (
-
-        <View style={styles.flatItemRow}>
-
-            <View style={styles.flatItemContainer}>
-
-                <Text style={styles.flatItemInfo}>{item.imagePath}</Text>
-
-                <TouchableOpacity
-                    style={styles.binButton}
-                    onPress={() => this.DeleteImage(item.id)}
-                >
-                    <Image
-                        source={require('../../assets/images/bin.png')}
-                        style={styles.binImg}
-                    />
-                </TouchableOpacity>
-
-            </View>
-
-        </View>
-
-    )
 
 
 }
@@ -229,93 +166,94 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        marginTop: 20,
         fontFamily: 'Nunito700',
-        fontSize: 32,
-        fontStyle: "normal",
-        fontWeight: "600",
-        color: "#282F66"
+        color: "rgba(40,47,102,1)",
+        fontSize: 34,
+        marginTop: 18,
+        marginLeft: '5%',
+        marginRight: '5%',
+        textAlign: 'center'
     },
 
     button: {
-        width: '80%',
-        height: 35,
+        width: '60%',
+        height: 40,
+        backgroundColor: '#282f66',
         borderRadius: 5,
-        backgroundColor: '#282F66',
-        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 25
     },
 
     textButton: {
         fontFamily: 'Nunito',
-        fontSize: 14,
-        fontWeight: "600",
-        color: '#fff'
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
     },
+
 
     exitButton: {
+        width: '50%',
+        height: 50,
         flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: '4%'
+        marginLeft: '20%',
+        marginTop: 15
     },
 
-    exitImg: {
-        width: '10%',
-        height: 15,
-        marginTop: '0.8%'
+    arrow: {
+        width: '22%',
+        height: 65
     },
 
-    exitTextButton: {
+    exitText: {
         fontFamily: 'Nunito700',
-        fontSize: 15,
-        fontWeight: "600",
-        color: '#000'
+        fontSize: 20,
+        color: '#000',
+        marginTop: 16
     },
 
 
 
     // LISTA
 
-    containerList: {
-        width: '80%',
+    mainBody: {
+        flex: 4,
+        // backgroundColor: 'lightblue'
+    },
+
+    mainBodyContent: {
         height: 'auto',
-        backgroundColor: '#f1f1f1',
-        borderRadius: 10,
-        marginTop: 15,
-        marginLeft: '10%',
-        marginRight: '10%'
+        paddingTop: 10,
+        paddingRight: 70,
+        paddingLeft: 70,
+        marginTop: 5,
+        marginBottom: 18,
+        // backgroundColor: 'lightgreen'
     },
-
-
-    mainListContent: {
-
-    },
-
 
     flatItemRow: {
+        width: 300,
+        height: 'auto',
+        paddingRight: 20,
+        paddingLeft: 20,
         borderWidth: 1,
-        borderColor: '#000',
-        marginTop: 10
+        borderColor: '#282f66',
+        marginTop: 50,
+        // backgroundColor: 'lightpink'
     },
 
     flatItemContainer: {
-        flex: 1
+        // backgroundColor: 'purple'
     },
 
-
-    flatItemInfo: {
-        lineHeight: 20
-    },
-
-    binButton: {
-        marginTop: 10
-    },
-
-    binImg: {
-        width: 16,
-        height: 16,
-        tintColor: '#000',
+    img: {
+        width: 150,
+        height: 150,
+        marginTop: 15
     }
 
 

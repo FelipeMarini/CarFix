@@ -96,7 +96,7 @@ namespace CarFix.Project.Migrations
                     ServiceStatus = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
                     IdUser = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IdServiceType = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IdBudget = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdBudget = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
@@ -107,7 +107,7 @@ namespace CarFix.Project.Migrations
                         column: x => x.IdBudget,
                         principalTable: "Budgets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Services_ServiceTypes_IdServiceType",
                         column: x => x.IdServiceType,

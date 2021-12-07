@@ -19,8 +19,5 @@ namespace CarFix.Project.Domains
         public virtual User? User { get; set; }
 
         public virtual Budget? Budget { get; set; }
-
-        public ICollection<Service>? Services { get; set; }
-    
     }
 }

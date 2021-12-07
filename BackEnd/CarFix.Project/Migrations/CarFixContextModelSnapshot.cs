@@ -60,7 +60,7 @@ namespace CarFix.Project.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime");
 
-                    b.Property<Guid>("IdBudget")
+                    b.Property<Guid?>("IdBudget")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("IdServiceType")
@@ -239,9 +239,7 @@ namespace CarFix.Project.Migrations
                 {
                     b.HasOne("CarFix.Project.Domains.Budget", "Budget")
                         .WithMany("Services")
-                        .HasForeignKey("IdBudget")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdBudget");
 
                     b.HasOne("CarFix.Project.Domains.ServiceType", "ServiceType")
                         .WithMany("Services")

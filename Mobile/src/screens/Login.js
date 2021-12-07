@@ -4,7 +4,7 @@ import api from '../services/api'
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from "@react-native-async-storage/async-storage"
 // import AppLoading from 'expo-app-loading'    //vou usar isso?
-// import Modal from 'react-native-modal'
+
 
 
 
@@ -118,31 +118,6 @@ export default class Login extends Component {  // elaborar telas do funileiro
                     <Text style={styles.textButton}>Entrar</Text>
                 </Pressable>
 
-
-                {/* <Pressable
-                    style={styles.button}
-                    onPress={() => this.setState({ visible: true })}
-                >
-                    <Text style={styles.textButton}>Abrir</Text>
-                </Pressable>
-
-                <Modal
-                    isVisible={this.state.visible}
-                    style={styles.modal}>
-
-                    <View style={styles.modalView}>
-
-                        <Text style={styles.modalText}>Hello!</Text>
-
-                        <Pressable
-                            style={styles.button}
-                            onPress={() => this.setState({ visible: false })}
-                        >
-                            <Text style={styles.textButton}>Fechar</Text>
-                        </Pressable>
-
-                    </View>
-                </Modal> */}
 
                 <Pressable
                     onPress={() => this.props.navigation.navigate("RecoverPassword")}

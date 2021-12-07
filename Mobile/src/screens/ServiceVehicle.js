@@ -32,7 +32,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            const IdCar = await localStorage.getItem('IdVehicle')
 
             // console.log(IdCar)
 
@@ -59,7 +60,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            const IdCar = await localStorage.getItem('IdVehicle')
 
             const answerBudget = await api.get('/Budgets/Vehicle/' + IdCar)
 
@@ -86,7 +88,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            const IdCar = await localStorage.getItem('IdVehicle')
 
             // console.log(IdCar)
 
@@ -107,7 +110,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            const IdCar = await localStorage.getItem('IdVehicle')
 
             console.log(IdCar)
 
@@ -139,7 +143,8 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            await AsyncStorageLib.setItem('IdService', id)
+            // await AsyncStorageLib.setItem('IdService', id)
+            await localStorage.setItem('IdService', id)
 
             this.props.navigation.navigate("Camera")
 
@@ -160,7 +165,8 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            await AsyncStorageLib.setItem('IdService', id)
+            // await AsyncStorageLib.setItem('IdService', id)
+            await localStorage.setItem('IdService', id)
 
             this.props.navigation.navigate("EditServiceImage")
 

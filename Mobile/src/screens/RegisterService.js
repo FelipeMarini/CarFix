@@ -57,7 +57,8 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            const IdVehicle = await localStorage.getItem('IdVehicle')
 
             console.log(IdVehicle)
 
@@ -99,7 +100,8 @@ export default class RegisterService extends Component {
 
         try {
 
-            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            const IdVehicle = await localStorage.getItem('IdVehicle')
 
             const answer = await api.get('/Budgets/Vehicle/' + IdVehicle)
 

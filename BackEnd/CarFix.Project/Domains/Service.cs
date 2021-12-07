@@ -13,12 +13,6 @@ namespace CarFix.Project.Domains
         public string? Observations { get; set; }
         public EnServiceStatus? ServiceStatus { get; set; }
 
-
-        // Compositions
-
-        public Guid? IdVehicle { get; set; }
-        public virtual Vehicle? Vehicle { get; set; }
-
         public Guid? IdUser { get; set; }
         public virtual User? Worker { get; set; }
 

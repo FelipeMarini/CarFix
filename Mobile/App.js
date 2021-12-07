@@ -197,29 +197,3 @@ export default class Stack extends Component {
 }
 
 
-
-
-{/* <FlatList
-    style={styles.listPics}
-    data={[1, 2, 3]}
-
-        renderItem={() => {
-            return (
-
-            <Text>Imagem.png</Text>
-
-            )
-        }}
-/> */}
-
-// let filterArray = dataVehicles.filter((val, i) => {
-
-//     if (val.id !== id) {
-
-//         return val
-
-//     }
-
-// })
-
-// console.log('filterArray', filterArray)

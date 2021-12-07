@@ -31,7 +31,8 @@ export default class BudgetDetail extends Component {
 
         try {
 
-            const idBudget = AsyncStorageLib.getItem('IdBudget')
+            // const idBudget = await AsyncStorageLib.getItem('IdBudget')
+            const idBudget = await localStorage.getItem('IdBudget')
 
             console.log(idBudget)
 
@@ -54,11 +55,12 @@ export default class BudgetDetail extends Component {
     }
 
 
-    AnswerService = (id) => {
+    AnswerService = async (id) => {
 
         try {
 
-            this.setState(() => AsyncStorageLib.setItem('IdService', id))
+            // await AsyncStorageLib.setItem('IdService', id)
+            await localStorage.setItem('IdService', id)
 
             this.props.navigation.navigate("AnswerService")
 

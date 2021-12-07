@@ -31,8 +31,8 @@ namespace CarFix.Project
             var config = new HttpConfiguration();
             config.Filters.Add(new RequireHttpsAttribute());
             //var connectionString = ConfigurationManager.ConnectionStrings["LocalConnectionString"].ConnectionString;
-            services.AddDbContext<CarFixContext>(options => options.UseSqlServer("Data Source = g19-database.cl3us3tplwnh.us-east-1.rds.amazonaws.com; Initial Catalog=CarFix; user=admin; pwd=Senai-132"));
-            // services.AddDbContext<CarFixContext>(options => options.UseSqlServer("Data Source = DESKTOP-7SJR3UU\\SQLEXPRESS; Initial Catalog=CarFix; user=sa; pwd=senai@132"));
+            //services.AddDbContext<CarFixContext>(options => options.UseSqlServer("Data Source = g19-database.cl3us3tplwnh.us-east-1.rds.amazonaws.com; Initial Catalog=CarFix; user=admin; pwd=Senai-132"));
+            services.AddDbContext<CarFixContext>(options => options.UseSqlServer("Data Source = DESKTOP-7SJR3UU\\SQLEXPRESS; Initial Catalog=CarFix; user=sa; pwd=senai@132;"));
 
             services.AddControllers()
                 .AddNewtonsoftJson(options => 

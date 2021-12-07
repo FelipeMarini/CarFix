@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarFix.Project.Migrations
 {
     [DbContext(typeof(CarFixContext))]
-    [Migration("20211130172631_CarFix")]
+    [Migration("20211206163745_CarFix")]
     partial class CarFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace CarFix.Project.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime");
 
-                    b.Property<Guid>("IdBudget")
+                    b.Property<Guid?>("IdBudget")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("IdServiceType")
@@ -241,9 +241,7 @@ namespace CarFix.Project.Migrations
                 {
                     b.HasOne("CarFix.Project.Domains.Budget", "Budget")
                         .WithMany("Services")
-                        .HasForeignKey("IdBudget")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdBudget");
 
                     b.HasOne("CarFix.Project.Domains.ServiceType", "ServiceType")
                         .WithMany("Services")

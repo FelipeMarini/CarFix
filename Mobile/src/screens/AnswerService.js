@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, TextInput, View, StyleSheet, Pressable, Image, AppRegistry } from 'react-native'
 import api from '../services/api'
 import AsyncStorageLib from "@react-native-async-storage/async-storage"
+import { Picker } from '@react-native-picker/picker'
 
 
 export default class AnswerService extends Component {
@@ -28,6 +29,9 @@ export default class AnswerService extends Component {
             price: '',
             observations: '',
 
+            idWorker: '',
+            listWorkers: []
+
         }
 
     }
@@ -37,7 +41,8 @@ export default class AnswerService extends Component {
 
         try {
 
-            const IdService = AsyncStorageLib.getItem('IdService')
+            // const IdService = await AsyncStorageLib.getItem('IdService')
+            const IdService = await localStorage.getItem('IdService')
 
             console.log(IdService)
 
@@ -67,7 +72,8 @@ export default class AnswerService extends Component {
 
         try {
 
-            const IdService = AsyncStorageLib.getItem('IdService')
+            // const IdService = await AsyncStorageLib.getItem('IdService')
+            const IdService = await localStorage.getItem('IdService')
 
             console.log(IdService)
 
@@ -85,8 +91,6 @@ export default class AnswerService extends Component {
 
                 alert('Serviço respondido com sucesso')
 
-                this.props.navigation.navigate('RegisterServiceType')
-
             }
 
         }
@@ -102,13 +106,70 @@ export default class AnswerService extends Component {
     }
 
 
+    GetWorkers = async () => {
+
+        try {
+
+            const answer = await api.get('/Users/Workers')
+
+            const dataWorkers = answer.data
+
+            this.setState({ idWorker: dataWorkers[0].id })  // ?
+
+            this.setState({ listWorkers: dataWorkers })
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
 
 
-    componentDidMount = () => {
+    AssignWorker = async () => {
+
+        try {
+
+            // const IdService = await AsyncStorageLib.getItem('IdService')
+            const IdService = await localStorage.getItem('IdService')
+
+            const answer = await api.post('/Services/AssignWorker', {
+
+                idService: IdService,
+                idWorker: this.state.idWorker
+
+            })
+
+            if (answer.status == 201) {
+
+                alert('Funileiro atribuído para o serviço')
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
+
+
+    componentDidMount = async () => {
 
         this.GetService()
 
-        const IdBudget = AsyncStorageLib.getItem('IdBudget')
+        this.GetWorkers()
+
+        // const IdBudget = await AsyncStorageLib.getItem('IdBudget')
+        const IdBudget = await localStorage.getItem('IdBudget')
 
         console.log(IdBudget)
 
@@ -153,6 +214,30 @@ export default class AnswerService extends Component {
                 ></TextInput>
 
 
+                <Picker
+                    style={styles.picker}
+                    selectedValue={this.state.idWorker}
+                    onValueChange={(itemValue) => this.setState({ idWorker: itemValue })}>
+
+                    {
+                        this.state.listWorkers.map((item, index) => {
+
+                            return <Picker.Item value={item.id} label={item.username} key={index} />
+
+                        })
+                    }
+                </Picker>
+
+
+                <Pressable
+                    style={styles.button}
+                    onPress={this.AssignWorker}
+                >
+
+                    <Text style={styles.textButton}>Atribuir Funileiro</Text>
+                </Pressable>
+
+
 
                 <Pressable
                     style={styles.button}
@@ -162,8 +247,6 @@ export default class AnswerService extends Component {
                     <Text style={styles.textButton}>Responder Serviço</Text>
                 </Pressable>
 
-
-                <Text style={styles.msgSucesso}>{this.state.msgConfirmacao}</Text>
 
 
                 <Pressable
@@ -284,10 +367,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    msgSucesso: {
-        marginTop: '5%'
-    },
-
     exitButton: {
         width: '50%',
         height: 50,
@@ -307,6 +386,14 @@ const styles = StyleSheet.create({
         color: '#000',
         marginTop: 16
     },
+
+    picker: {
+        width: '60%',
+        height: 40,
+        borderRadius: 5,
+        backgroundColor: '#f1f1f1',
+        marginTop: 12
+    }
 
 
 })

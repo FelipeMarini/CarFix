@@ -136,7 +136,7 @@ namespace CarFix.Project.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteUser(Guid id)
         {
             try

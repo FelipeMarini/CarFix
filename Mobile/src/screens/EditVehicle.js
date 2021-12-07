@@ -14,7 +14,6 @@ export default class EditVehicle extends Component {
 
         this.state = {
 
-            idUserLoogged: '',
             plate: '',
             model: '',
             brand: '',
@@ -57,11 +56,8 @@ export default class EditVehicle extends Component {
 
             var idToken = jwtDecode(valueToken).jti
 
-            this.setState({ idUserLogged: idToken })
-
-            console.log(this.state.idUserLogged)
-
-            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            const IdVehicle = await localStorage.getItem('IdVehicle')
 
             if (this.state.idVehicle !== '' && this.state.model !== '' &&
                 this.state.brand !== '' && this.state.year !== ''
@@ -69,7 +65,7 @@ export default class EditVehicle extends Component {
 
                 const answer = await api.patch('/Vehicles', { //patch ou put aqui?
                     id: IdVehicle,
-                    idUser: idUserLogged,
+                    idUser: idToken,
                     licensePlate: this.state.plate,
                     modelName: this.state.model,
                     brandName: this.state.brand,
@@ -96,7 +92,8 @@ export default class EditVehicle extends Component {
 
     componentDidMount = async () => {
 
-        const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+        // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+        const IdVehicle = await localStorage.getItem('IdVehicle')
 
         console.log(IdVehicle)
 

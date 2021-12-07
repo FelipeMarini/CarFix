@@ -30,7 +30,8 @@ export default class EditServiceImage extends Component {
 
         try {
 
-            const IdService = AsyncStorageLib.getItem('IdService')
+            // const IdService = AsyncStorageLib.getItem('IdService')
+            const IdService = localStorage.getItem('IdService')
 
             const answer = await api.get('/ServiceImages/Service/' + IdService)
 

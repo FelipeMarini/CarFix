@@ -59,7 +59,8 @@ export default class MyVehicles extends Component {
 
     try {
 
-      await AsyncStorageLib.setItem('IdVehicle', id)
+      // await AsyncStorageLib.setItem('IdVehicle', id)
+      await localStorage.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("ServiceVehicle")
 
@@ -79,7 +80,8 @@ export default class MyVehicles extends Component {
 
       // console.log(id)
 
-      await AsyncStorageLib.setItem('IdVehicle', id)
+      // await AsyncStorageLib.setItem('IdVehicle', id)
+      await localStorage.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("EditVehicle")
 
@@ -100,7 +102,8 @@ export default class MyVehicles extends Component {
 
       // console.log(id)
 
-      await AsyncStorageLib.setItem('IdVehicle', id)
+      // await AsyncStorageLib.setItem('IdVehicle', id)
+      await localStorage.setItem('IdVehicle', id)
 
       this.props.navigation.navigate("RegisterService")
 

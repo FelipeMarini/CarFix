@@ -59,25 +59,6 @@ namespace CarFix.Project.Controllers
             }
         }
 
-        
-        [HttpGet("Vehicle/{id}")]
-        public IActionResult GetServicesPerVehicle(Guid id)
-        {
-            try
-            {
-
-                return Ok(_unitOfWork.ServiceRepository.FindServicesPerVehicle(id));
-
-            }
-
-            catch (Exception error)
-            {
-
-                return BadRequest(error);
-
-            }
-        }
-
         [HttpGet]
         public IActionResult GetAllServices()
         {
@@ -106,6 +87,20 @@ namespace CarFix.Project.Controllers
             }
         }
 
+
+        [Route("Vehicle/{id}")]
+        [HttpGet]
+        public IActionResult GetAllServicesPerVehicle(Guid id)
+        {
+            try
+            {
+                return Ok(_unitOfWork.ServiceRepository.FindServicesPerVehicle(id));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+            }
+        }
 
         [HttpPost]
         public IActionResult RegisterService(ServiceBudgetDTO newServiceBudget)

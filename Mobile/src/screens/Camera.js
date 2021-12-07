@@ -26,7 +26,8 @@ export default class App extends Component {
 
         this.getPermissionAsync()
 
-        const IdService = AsyncStorageLib.getItem('IdService')
+        // const IdService = AsyncStorageLib.getItem('IdService')
+        const IdService = localStorage.getItem('IdService')
 
         console.log(IdService)
 
@@ -90,7 +91,8 @@ export default class App extends Component {
 
         if (this.camera) {
 
-            const IdService = AsyncStorageLib.getItem('IdService')
+            // const IdService = AsyncStorageLib.getItem('IdService')
+            const IdService = localStorage.getItem('IdService')
 
             console.log(IdService)
 
