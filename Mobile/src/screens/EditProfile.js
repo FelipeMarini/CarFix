@@ -68,7 +68,7 @@ export default class EditProfile extends Component {
         this.state.newUserName !== '' && this.state.newEmail !== ''
         && this.state.newPassword !== '' && this.state.newPhoneNumber !== '') {
 
-        const answer = await api.put('/Users', {
+        const answer = await api.patch('/Users', {
           id: this.state.idUserLogged,
           creationDate: this.state.newCreationDate,
           username: this.state.newUserName,

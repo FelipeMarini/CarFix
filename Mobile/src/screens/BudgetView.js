@@ -54,8 +54,8 @@ export default class BudgetView extends Component {
 
         try {
 
-            // await AsyncStorageLib.setItem('IdBudget', id)
-            await localStorage.setItem('IdBudget', id)
+            await AsyncStorageLib.setItem('IdBudget', id)
+            // await localStorage.setItem('IdBudget', id)
 
             console.log(id)
 

@@ -6,6 +6,7 @@ import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icon
 import api from '../services/api'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
+
 export default class App extends Component {
 
 
@@ -26,8 +27,8 @@ export default class App extends Component {
 
         this.getPermissionAsync()
 
-        // const IdService = AsyncStorageLib.getItem('IdService')
-        const IdService = localStorage.getItem('IdService')
+        const IdService = AsyncStorageLib.getItem('IdService')
+        // const IdService = localStorage.getItem('IdService')
 
         console.log(IdService)
 
@@ -51,6 +52,7 @@ export default class App extends Component {
 
         // Camera Permission
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
+
         this.setState({ hasPermission: status === 'granted' })
 
     }
@@ -91,16 +93,14 @@ export default class App extends Component {
 
         if (this.camera) {
 
-            // const IdService = AsyncStorageLib.getItem('IdService')
-            const IdService = localStorage.getItem('IdService')
-
-            console.log(IdService)
+            const IdService = AsyncStorageLib.getItem('IdService')
+            // const IdService = localStorage.getItem('IdService')
 
             let photo = await this.camera.takePictureAsync()
 
             console.log(photo)
 
-            var file = this.dataURLtoFile(photo.uri, "image.png")
+            var file = await this.dataURLtoFile(photo.uri, "image.png")
 
             console.log(file)
 
@@ -108,18 +108,16 @@ export default class App extends Component {
             data.append('IdService', IdService)
             data.append('FormFile', file)
 
-            const answer = api.post('/ServiceImages', data)
-
-            console.log(answer)
-            console.log(photo)
-            console.log(file)
             console.log(data)
+
+            const answer = await api.post('/ServiceImages', data)
 
             alert('Imagem enviada com sucesso')
 
             this.props.navigation.navigate("ServiceVehicle")
 
         }
+
     }
 
 
@@ -218,10 +216,13 @@ export default class App extends Component {
                                     backgroundColor: 'transparent'
                                 }}
                                 onPress={() => this.pickImage()}>
-                                <Ionicons
+
+                                {/* <Ionicons
                                     name="ios-photos"
                                     style={{ color: "#fff", fontSize: 40 }}
-                                />
+                                /> */}
+
+
                             </TouchableOpacity>
 
                             <TouchableOpacity

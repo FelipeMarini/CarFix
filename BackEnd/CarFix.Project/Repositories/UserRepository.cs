@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CarFix.Project.Contexts;
 using CarFix.Project.Domains;
+using CarFix.Project.DTO;
 using CarFix.Project.Interfaces;
 using CarFix.Project.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -76,10 +77,31 @@ namespace CarFix.Project.Repositories
             c_Context.Users.Add(newUser);
         }
 
-        public void Update(User user)
+        public void Update(UpdateUserDTO user)
         {
-            c_Context.Entry(user).State = EntityState.Modified;
-            user.Password = Password.Encrypt(user.Password);
+            User searchUser = c_Context.Users.FirstOrDefault(x => x.Id == user.UserId);
+            
+            if(user.Email != null)
+            {
+                searchUser.Email = user.Email;
+            }
+            if(user.Username != null)
+            {
+                searchUser.Username = user.Username;
+            }
+            if(user.Password != null)
+            {
+                user.Password = Password.Encrypt(user.Password);
+                searchUser.Password = user.Password;
+            }
+            if(user.UserType != null)
+            {
+                searchUser.UserType = (Enum.EnUserType)user.UserType;
+            }
+            if(user.PhoneNumber != null)
+            {
+                searchUser.PhoneNumber = user.PhoneNumber;
+            }
         }
     
     }

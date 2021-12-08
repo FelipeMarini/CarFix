@@ -41,8 +41,8 @@ export default class AnswerService extends Component {
 
         try {
 
-            // const IdService = await AsyncStorageLib.getItem('IdService')
-            const IdService = await localStorage.getItem('IdService')
+            const IdService = await AsyncStorageLib.getItem('IdService')
+            // const IdService = await localStorage.getItem('IdService')
 
             console.log(IdService)
 
@@ -72,8 +72,8 @@ export default class AnswerService extends Component {
 
         try {
 
-            // const IdService = await AsyncStorageLib.getItem('IdService')
-            const IdService = await localStorage.getItem('IdService')
+            const IdService = await AsyncStorageLib.getItem('IdService')
+            // const IdService = await localStorage.getItem('IdService')
 
             console.log(IdService)
 
@@ -90,6 +90,8 @@ export default class AnswerService extends Component {
             if (answer.status == 201) {
 
                 alert('Serviço respondido com sucesso')
+
+                this.props.navigation.navigate('BudgetView')
 
             }
 
@@ -133,8 +135,8 @@ export default class AnswerService extends Component {
 
         try {
 
-            // const IdService = await AsyncStorageLib.getItem('IdService')
-            const IdService = await localStorage.getItem('IdService')
+            const IdService = await AsyncStorageLib.getItem('IdService')
+            // const IdService = await localStorage.getItem('IdService')
 
             const answer = await api.post('/Services/AssignWorker', {
 
@@ -168,8 +170,8 @@ export default class AnswerService extends Component {
 
         this.GetWorkers()
 
-        // const IdBudget = await AsyncStorageLib.getItem('IdBudget')
-        const IdBudget = await localStorage.getItem('IdBudget')
+        const IdBudget = await AsyncStorageLib.getItem('IdBudget')
+        // const IdBudget = await localStorage.getItem('IdBudget')
 
         console.log(IdBudget)
 

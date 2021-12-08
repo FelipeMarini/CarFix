@@ -56,8 +56,8 @@ export default class EditVehicle extends Component {
 
             var idToken = jwtDecode(valueToken).jti
 
-            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
-            const IdVehicle = await localStorage.getItem('IdVehicle')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await localStorage.getItem('IdVehicle')
 
             if (this.state.idVehicle !== '' && this.state.model !== '' &&
                 this.state.brand !== '' && this.state.year !== ''
@@ -92,8 +92,8 @@ export default class EditVehicle extends Component {
 
     componentDidMount = async () => {
 
-        // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
-        const IdVehicle = await localStorage.getItem('IdVehicle')
+        const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+        // const IdVehicle = await localStorage.getItem('IdVehicle')
 
         console.log(IdVehicle)
 

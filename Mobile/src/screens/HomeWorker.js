@@ -4,9 +4,13 @@ import api from '../../src/services/api'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
 import Modal from 'react-native-modal'
+import { Picker } from '@react-native-picker/picker'
 
 
 export default class HomeWorker extends Component {
+
+
+    // desabilitar botão de alterar status se o picker não for alterado?
 
 
 
@@ -16,9 +20,15 @@ export default class HomeWorker extends Component {
 
         this.state = {
 
+            IdService: '',
             listServicesWorker: [],
             Vehicle: [],
-            visible: false
+
+            listStatus: ['Finalizado', 'Em Andamento', 'Pendente'],
+            status: '',
+
+            visibleVehicle: false,
+            visibleStatus: false
 
         }
 
@@ -37,7 +47,7 @@ export default class HomeWorker extends Component {
 
             console.log(this.state.Vehicle)
 
-            this.setState({ visible: true })
+            this.setState({ visibleVehicle: true })
 
         }
 
@@ -48,6 +58,111 @@ export default class HomeWorker extends Component {
         }
 
     }
+
+
+    ShowStatus = async (id, initialStatus) => {
+
+        try {
+
+            await this.setState({ IdService: id })
+
+            await this.setState({ status: initialStatus })
+
+            console.log(this.state.IdService)
+
+            console.log(this.state.status)
+
+            await this.setState({ visibleStatus: true })
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
+    AlterStatus = async () => {
+
+        try {
+
+            console.log(this.state.status)
+
+            var Status = ''
+            if (this.state.status == 0) { Status = 'Finalizado' }
+            if (this.state.status == 1) { Status = 'Em Andamento' }
+            if (this.state.status == 2) { Status = 'Pendente' }
+
+
+            if (this.state.status !== 'Finalizado' &&
+                this.state.status !== 'Em Andamento' &&
+                this.state.status !== 'Pendente') {
+
+                alert('Status do Serviço mantido para ' + Status)
+
+                this.setState({ visibleStatus: false })
+
+            }
+
+            if (this.state.status == 'Finalizado') {
+
+                const answer = api.patch('/Services/ServiceStatus', {
+
+                    idService: this.state.IdService,
+                    serviceStatus: 0
+
+                })
+
+                alert('Status do Serviço alterado para Finalizado ')
+
+                this.setState({ visibleStatus: false })
+
+            }
+
+            if (this.state.status == 'Em Andamento') {
+
+                const answer = api.patch('/Services/ServiceStatus', {
+
+                    idService: this.state.IdService,
+                    serviceStatus: 1
+
+                })
+
+                alert('Status do Serviço alterado para Em Andamento')
+
+                this.setState({ visibleStatus: false })
+
+            }
+
+            if (this.state.status == 'Pendente') {
+
+                const answer = api.patch('/Services/ServiceStatus', {
+
+                    idService: this.state.IdService,
+                    serviceStatus: 2
+
+                })
+
+                alert('Status do Serviço alterado para Pendente')
+
+                this.setState({ visibleStatus: false })
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
 
     GetServicesWorker = async () => {
 
@@ -80,8 +195,8 @@ export default class HomeWorker extends Component {
 
             console.log(id)
 
-            // await AsyncStorageLib.setItem('IdService', id)
-            await localStorage.setItem('IdService', id)
+            await AsyncStorageLib.setItem('IdService', id)
+            // await localStorage.setItem('IdService', id)
 
             this.props.navigation.navigate("ViewImageAdm")
 
@@ -131,6 +246,9 @@ export default class HomeWorker extends Component {
             <View style={styles.container}>
 
 
+                <Text style={styles.title}>Serviços</Text>
+
+
                 <Pressable
                     style={styles.exitButton}
                     onPress={this.Logout}
@@ -176,11 +294,86 @@ export default class HomeWorker extends Component {
 
             <View style={styles.flatItemContainer}>
 
-                <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text>
+                {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
                 <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
-                <Text style={styles.flatItemInfo}>Status Serviço: {item.serviceStatus}</Text>
+
+
+                <View>
+
+                    {item.serviceStatus == 0
+                        ?
+                        <Text style={styles.flatItemInfo}>Status: Finalizado</Text>
+                        :
+                        <Text style={styles.flatItemInfo}></Text>
+                    }
+
+                    {item.serviceStatus == 1
+                        ?
+                        <Text style={styles.flatItemInfo}>Status: Em Andamento</Text>
+                        :
+                        <Text style={styles.flatItemInfo}></Text>
+                    }
+
+                    {item.serviceStatus == 2
+                        ?
+                        <Text style={styles.flatItemInfo}>Status: Pendente</Text>
+                        :
+                        <Text style={styles.flatItemInfo}></Text>
+                    }
+
+                </View>
+
+
                 <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
                 <Text style={styles.flatItemInfo}>Observações: {item.observations}</Text>
+
+                <Pressable
+                    style={styles.buttonList}
+                    onPress={() => this.ShowStatus(item.id, item.serviceStatus)}
+                >
+                    <Text style={styles.listTextButton}>Alterar Status</Text>
+                </Pressable>
+
+                <Modal
+                    isVisible={this.state.visibleStatus}
+                    style={styles.modal}>
+
+                    <View style={styles.modalView}>
+
+                        <Picker
+                            style={styles.picker}
+                            selectedValue={this.state.status}
+                            onValueChange={(itemValue) => this.setState({ status: itemValue })}>
+                            {
+                                this.state.listStatus.map((item, index) => {
+
+                                    return <Picker.Item value={item} label={item} key={index} />
+
+                                })
+                            }
+                        </Picker>
+
+                        <Pressable
+                            style={styles.buttonStatus}
+                            onPress={this.AlterStatus}
+                        >
+                            <Text style={styles.textButtonStatus}>Alterar Status</Text>
+                        </Pressable>
+
+                        <Pressable
+                            style={styles.buttonClose1}
+                            onPress={() => this.setState({ visibleStatus: false })}
+                        >
+                            <Text style={styles.textButtonClose1}>Fechar</Text>
+                        </Pressable>
+
+
+                    </View>
+
+                </Modal>
+
+
+
 
                 <Pressable
                     style={styles.buttonList}
@@ -189,9 +382,8 @@ export default class HomeWorker extends Component {
                     <Text style={styles.listTextButton}>Ver Veículo</Text>
                 </Pressable>
 
-
                 <Modal
-                    isVisible={this.state.visible}
+                    isVisible={this.state.visibleVehicle}
                     style={styles.modal}>
 
                     <View style={styles.modalView}>
@@ -203,10 +395,10 @@ export default class HomeWorker extends Component {
                         <Text style={styles.modalText}><Text style={styles.modalItem}>Cor:</Text> {this.state.Vehicle.color}</Text>
 
                         <Pressable
-                            style={styles.buttonClose}
-                            onPress={() => this.setState({ visible: false })}
+                            style={styles.buttonClose2}
+                            onPress={() => this.setState({ visibleVehicle: false })}
                         >
-                            <Text style={styles.textButtonClose}>Fechar</Text>
+                            <Text style={styles.textButtonClose2}>Fechar</Text>
                         </Pressable>
 
                     </View>
@@ -277,26 +469,6 @@ const styles = StyleSheet.create({
         marginTop: 12
     },
 
-    buttonList: {
-        width: '70%',
-        marginLeft: '15%',
-        marginRight: '15%',
-        height: 35,
-        backgroundColor: '#282f66',
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 30
-    },
-
-    listTextButton: {
-        fontFamily: 'Nunito',
-        fontSize: 18,
-        fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
-    },
-
     exitButton: {
         width: '50%',
         height: 50,
@@ -320,6 +492,14 @@ const styles = StyleSheet.create({
 
 
     //MODAL
+
+    picker: {
+        width: '60%',
+        height: 40,
+        borderRadius: 5,
+        backgroundColor: '#f1f1f1',
+        marginTop: 12
+    },
 
     modal: {
         width: '80%',
@@ -370,7 +550,27 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
 
-    buttonClose: {
+    buttonClose1: {
+        width: '50%',
+        height: 35,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 45,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    textButtonClose1: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    buttonClose2: {
         width: '50%',
         height: 35,
         backgroundColor: '#282f66',
@@ -382,7 +582,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    textButtonClose: {
+    textButtonClose2: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    buttonStatus: {
+        width: '50%',
+        height: 35,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 35,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    textButtonStatus: {
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
@@ -394,6 +614,26 @@ const styles = StyleSheet.create({
 
 
     // LISTA
+
+    buttonList: {
+        width: '70%',
+        marginLeft: '15%',
+        marginRight: '15%',
+        height: 35,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30
+    },
+
+    listTextButton: {
+        fontFamily: 'Nunito',
+        fontSize: 18,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
 
     mainBody: {
         flex: 4,
@@ -413,7 +653,7 @@ const styles = StyleSheet.create({
     // cada linha da lista
     flatItemRow: {
         width: 300,
-        height: 350,
+        height: 400,
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',

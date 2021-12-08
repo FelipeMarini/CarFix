@@ -1,4 +1,5 @@
 ﻿using CarFix.Project.Domains;
+using CarFix.Project.DTO;
 using CarFix.Project.Enum;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace CarFix.Project.Interfaces
         // User FindWorkers(EnUserType userType);
         List<User> ListAllWorkers();
         void Register(User newUser);
-        void Update(User user);
+        void Update(UpdateUserDTO user);
         void Delete(Guid idUser);
     }
 }

@@ -23,6 +23,7 @@ import AnswerService from './src/screens/AnswerService'
 import ViewImageAdm from './src/screens/ViewImageAdm'
 import Whats from './src/screens/Whats'
 import Camera from './src/screens/Camera'
+import CameraX from './src/screens/CameraX'
 
 //verificar uniformidade das telas (fonte,botão)
 // fazer link do chatbot
@@ -159,6 +160,12 @@ export default class Stack extends Component {
                     <AuthStack.Screen
                         name='Camera'
                         component={Camera}
+                        options={{ headerShown: false }}
+                    />
+
+                    <AuthStack.Screen
+                        name='CameraX'
+                        component={CameraX}
                         options={{ headerShown: false }}
                     />
 

@@ -32,18 +32,12 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
-            const IdCar = await localStorage.getItem('IdVehicle')
-
-            // console.log(IdCar)
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await localStorage.getItem('IdVehicle')
 
             const answer = await api.get('/Vehicles/VehicleId/' + IdCar)
 
-            // console.log(answer.data)
-
             this.setState({ Vehicle: answer.data })
-
-            // console.log(this.state.Vehicle)
 
         }
 
@@ -60,8 +54,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
-            const IdCar = await localStorage.getItem('IdVehicle')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await localStorage.getItem('IdVehicle')
 
             const answerBudget = await api.get('/Budgets/Vehicle/' + IdCar)
 
@@ -88,8 +82,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
-            const IdCar = await localStorage.getItem('IdVehicle')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await localStorage.getItem('IdVehicle')
 
             // console.log(IdCar)
 
@@ -110,8 +104,8 @@ export default class ServiceVehicle extends Component {
 
         try {
 
-            // const IdCar = await AsyncStorageLib.getItem('IdVehicle')
-            const IdCar = await localStorage.getItem('IdVehicle')
+            const IdCar = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdCar = await localStorage.getItem('IdVehicle')
 
             console.log(IdCar)
 
@@ -143,10 +137,10 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            // await AsyncStorageLib.setItem('IdService', id)
-            await localStorage.setItem('IdService', id)
+            await AsyncStorageLib.setItem('IdService', id)
+            // await localStorage.setItem('IdService', id)
 
-            this.props.navigation.navigate("Camera")
+            this.props.navigation.navigate("CameraX")
 
         }
 
@@ -165,8 +159,8 @@ export default class ServiceVehicle extends Component {
 
             console.log(id)
 
-            // await AsyncStorageLib.setItem('IdService', id)
-            await localStorage.setItem('IdService', id)
+            await AsyncStorageLib.setItem('IdService', id)
+            // await localStorage.setItem('IdService', id)
 
             this.props.navigation.navigate("EditServiceImage")
 
@@ -319,7 +313,7 @@ export default class ServiceVehicle extends Component {
             <View style={styles.flatItemContainer}>
 
                 <Text style={styles.flatItemTitle}>Valor Serviço: ${item.price}</Text>
-                <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text>
+                {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
                 <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
 
 
@@ -339,7 +333,7 @@ export default class ServiceVehicle extends Component {
                     activeOpacity={0.5}
                     onPress={() => this.AddImage(item.id)}
                 >
-                    <Text style={styles.listTextButton}>Enviar Imagens</Text>
+                    <Text style={styles.listTextButton}>Enviar Imagem</Text>
                 </Pressable>
 
                 <Pressable

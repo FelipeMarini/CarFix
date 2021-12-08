@@ -57,8 +57,8 @@ export default class RegisterService extends Component {
 
         try {
 
-            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
-            const IdVehicle = await localStorage.getItem('IdVehicle')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await localStorage.getItem('IdVehicle')
 
             console.log(IdVehicle)
 
@@ -100,58 +100,34 @@ export default class RegisterService extends Component {
 
         try {
 
-            // const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
-            const IdVehicle = await localStorage.getItem('IdVehicle')
+            const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
+            // const IdVehicle = await localStorage.getItem('IdVehicle')
 
-            const answer = await api.get('/Budgets/Vehicle/' + IdVehicle)
+            console.log(IdVehicle)
 
-            var dataBudgetVehicle = answer.data
+            const answer = await api.get('/Services/Vehicle/' + IdVehicle)
 
-            // se já houver um orçamento cadastrado para o veículo, idBudget permanecerá o mesmo
-            if (dataBudgetVehicle.id !== null) {
+            var IdBudget = answer.data[0].idBudget
 
+            this.setState({ idBudget: IdBudget })
 
-                this.setState({ idBudget: dataBudgetVehicle.id })
+            console.log(this.state.idBudget)
 
+            if (this.state.serviceDescription !== '') {
 
-                if (this.state.serviceDescription !== '') {
+                const registerServiceWithIdBudget = await api.post('/Services', {
 
-                    const registerServiceWithIdBudget = await api.post('/Services', {
+                    idBudget: this.state.idBudget,
+                    idServiceType: this.state.idServiceType,
+                    idVehicle: IdVehicle,
+                    idBudget: this.state.idBudget,
+                    serviceDescription: this.state.serviceDescription
 
-                        idBudget: this.state.idBudget,
-                        idServiceType: this.state.idServiceType,
-                        idVehicle: IdVehicle,
-                        idBudget: this.state.idBudget,
-                        serviceDescription: this.state.serviceDescription
-
-                    })
-
-                    alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
-
-                    this.props.navigation.navigate("Meus Veículos")
-
-                }
-
-            }
-
-            else {
-
-                // nesse caso, como o carro não possuia nenhum orçamento antes, um idBudget será gerado
-                if (this.state.serviceDescription !== '') {
-
-                    const registerServiceWithoutIdBudget = await api.post('/Service', {
-
-                        idServiceType: this.state.idServiceType,
-                        idVehicle: IdRequestVehicle,
-                        serviceDescription: this.state.serviceDescription
-
-                    })
-
-                }
+                })
 
                 alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
 
-                this.props.navigation.navigate("ServiceVehicle")
+                this.props.navigation.navigate("Meus Veículos")
 
             }
 
