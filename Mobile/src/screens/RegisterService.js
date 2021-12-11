@@ -107,13 +107,15 @@ export default class RegisterService extends Component {
 
             const answer = await api.get('/Services/Vehicle/' + IdVehicle)
 
-            var IdBudget = answer.data[0].idBudget
+            if (answer.data[0] !== undefined) {
+                var IdBudget = answer.data[0].idBudget
+            }
 
             this.setState({ idBudget: IdBudget })
 
             console.log(this.state.idBudget)
 
-            if (this.state.serviceDescription !== '') {
+            if (this.state.serviceDescription !== '' && IdBudget != null) {
 
                 const registerServiceWithIdBudget = await api.post('/Services', {
 
@@ -121,6 +123,22 @@ export default class RegisterService extends Component {
                     idServiceType: this.state.idServiceType,
                     idVehicle: IdVehicle,
                     idBudget: this.state.idBudget,
+                    serviceDescription: this.state.serviceDescription
+
+                })
+
+                alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
+
+                this.props.navigation.navigate("Meus Veículos")
+
+            }
+
+            if (this.state.serviceDescription !== '' && IdBudget == null) {
+
+                const registerServiceWithoutIdBudget = await api.post('/Services', {
+
+                    idServiceType: this.state.idServiceType,
+                    idVehicle: IdVehicle,
                     serviceDescription: this.state.serviceDescription
 
                 })

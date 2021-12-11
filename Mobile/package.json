@@ -17,9 +17,11 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.24.0",
+    "buffer": "^6.0.3",
     "expo": "~43.0.2",
     "expo-camera": "^12.0.3",
     "expo-contacts": "~10.0.3",
+    "expo-file-system": "^13.0.3",
     "expo-font": "^10.0.3",
     "expo-image-picker": "^11.0.3",
     "expo-permissions": "^13.0.3",
@@ -30,6 +32,7 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-get-random-values": "^1.7.1",
     "react-native-image-picker": "^4.4.0",
     "react-native-modal": "^13.0.0",
     "react-native-paper": "^4.10.1",
@@ -37,7 +40,8 @@
     "react-native-screens": "~3.8.0",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
