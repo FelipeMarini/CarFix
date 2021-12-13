@@ -75,6 +75,28 @@ export default class BudgetDetail extends Component {
     }
 
 
+    ViewImages = async (id) => {
+
+        try {
+
+            console.log(id)
+
+            await AsyncStorageLib.setItem('IdService', id)
+            // await localStorage.setItem('IdService', id)
+
+            this.props.navigation.navigate("ViewImageAdm2")
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
 
     componentDidMount = () => {
 
@@ -93,7 +115,7 @@ export default class BudgetDetail extends Component {
             <View style={styles.container}>
 
 
-                <Text style={styles.title}>Serviços do Orçamento</Text>
+                <Text style={styles.title}>Serviços</Text>
 
 
                 <Pressable
@@ -142,26 +164,35 @@ export default class BudgetDetail extends Component {
 
     renderItem = ({ item }) => (
 
-        <View style={styles.flatItemRow}>
 
-            <View style={styles.flatItemContainer}>
+        <View style={styles.container}>
 
-                {/* <Text style={styles.flatItemInfo}>Data Cadastro: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
-                <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
-                <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
-                <Text style={styles.flatItemInfo}>Valor Serviço: ${item.price}</Text>
-                <Text style={styles.flatItemInfo}>Observações Funilaria: {item.observations}</Text>
-                {/* <Text style={styles.flatItemInfo}>Status Serviço: {item.serviceStatus}</Text>
-                <Text style={styles.flatItemInfo}>ID Funileiro: {item.worker.id}</Text> */}
-                {/* <Text style={styles.flatItemInfo}>Valor Total Orçamento: {item.budget.totalValue}</Text> */}
+            <View style={styles.flatItemRow}>
 
-                <Pressable
-                    style={styles.buttonList}
-                    activeOpacity={0.5}
-                    onPress={() => this.AnswerService(item.id)}
-                >
-                    <Text style={styles.listTextButton}>Responder Serviço</Text>
-                </Pressable>
+                <View style={styles.flatItemContainer}>
+
+                    <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
+                    <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
+                    <Text style={styles.flatItemInfo}>Valor Serviço: ${item.price}</Text>
+                    <Text style={styles.flatItemInfo}>Observações Funilaria: {item.observations}</Text>
+
+                    <Pressable
+                        style={styles.buttonList}
+                        activeOpacity={0.5}
+                        onPress={() => this.AnswerService(item.id)}
+                    >
+                        <Text style={styles.listTextButton}>Responder Serviço</Text>
+                    </Pressable>
+
+                    <Pressable
+                        style={styles.buttonList}
+                        activeOpacity={0.5}
+                        onPress={() => this.ViewImages(item.id)}
+                    >
+                        <Text style={styles.listTextButton}>Ver Imagens</Text>
+                    </Pressable>
+
+                </View>
 
             </View>
 
@@ -185,7 +216,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 18,
+        marginTop: 50,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -220,7 +251,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 30
+        marginTop: 25
     },
 
     listTextButton: {
@@ -273,13 +304,14 @@ const styles = StyleSheet.create({
     // cada linha da lista
     flatItemRow: {
         width: 300,
-        height: 340,
+        height: 320,
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#282f66',
-        marginTop: 18,
+        marginTop: 0,
+        marginBottom: 30
         // backgroundColor: 'lightpink'
     },
 

@@ -5,10 +5,12 @@ import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
+
 export default class MyVehicles extends Component {
 
 
   // conseguir atualizar a lista automaticamente quando cadastro um carro e volto para essa tela
+  // fazer um alert de confirmação para excluir o veículo
 
 
 
@@ -55,14 +57,27 @@ export default class MyVehicles extends Component {
   }
 
 
-  GetIdVehicleService = async (id) => {
+  DeleteVehicle = (id) => {  //fazer alert aqui
 
     try {
 
-      await AsyncStorageLib.setItem('IdVehicle', id)
-      // await localStorage.setItem('IdVehicle', id)
+      const dataVehicles = this.state.listVehicles
 
-      this.props.navigation.navigate("ServiceVehicle")
+      let filterArray = dataVehicles.filter((val, i) => {
+
+        if (val.id !== id) {
+
+          return val
+
+        }
+
+      })
+
+      console.log('filterArray', filterArray)
+
+      const answer = api.delete('/Vehicles/' + id)
+
+      this.setState({ listVehicles: filterArray })
 
     }
 
@@ -74,16 +89,15 @@ export default class MyVehicles extends Component {
 
   }
 
-  GetIdVehicleEdit = async (id) => {
+
+  GetIdVehicleService = async (id) => {
 
     try {
-
-      // console.log(id)
 
       await AsyncStorageLib.setItem('IdVehicle', id)
       // await localStorage.setItem('IdVehicle', id)
 
-      this.props.navigation.navigate("EditVehicle")
+      this.props.navigation.navigate("ServiceVehicle")
 
     }
 
@@ -144,6 +158,12 @@ export default class MyVehicles extends Component {
   }
 
 
+  componentDidUpdate = () => {  //uso isso para atualizar a lista dinamicamente?
+
+
+  }
+
+
 
   render() {
 
@@ -196,36 +216,40 @@ export default class MyVehicles extends Component {
 
   renderItem = ({ item }) => (
 
-    <View style={styles.flatItemRow}>
+    <View style={styles.container}>
 
-      <View style={styles.flatItemContainer}>
+      <View style={styles.flatItemRow}>
 
-        <Text style={styles.flatItemTitle}>Modelo: {item.modelName}</Text>
-        <Text style={styles.flatItemInfo}>Marca: {item.brandName}</Text>
-        <Text style={styles.flatItemInfo}>Ano: {item.year}</Text>
-        <Text style={styles.flatItemInfo}>Cor: {item.color}</Text>
-        <Text style={styles.flatItemInfo}>Placa: {item.licensePlate}</Text>
+        <View style={styles.flatItemContainer}>
 
-
-        <Pressable
-          style={styles.buttonList}
-          activeOpacity={0.5}
-          onPress={() => this.GetIdVehicleService(item.id)}
-        >
-          <Text style={styles.listTextButton}>Ver Orçamento</Text>
-        </Pressable>
+          <Text style={styles.flatItemTitle}>Modelo: {item.modelName}</Text>
+          <Text style={styles.flatItemInfo}>Marca: {item.brandName}</Text>
+          <Text style={styles.flatItemInfo}>Ano: {item.year}</Text>
+          <Text style={styles.flatItemInfo}>Cor: {item.color}</Text>
+          <Text style={styles.flatItemInfo}>Placa: {item.licensePlate}</Text>
 
 
-        <Pressable
-          style={styles.buttonList}
-          activeOpacity={0.5}
-          onPress={() => this.GetIdVehicleEdit(item.id)}
-        >
-          <Text style={styles.listTextButton}>Editar Veículo</Text>
-        </Pressable>
+          <Pressable
+            style={styles.buttonList}
+            activeOpacity={0.5}
+            onPress={() => this.GetIdVehicleService(item.id)}
+          >
+            <Text style={styles.listTextButton}>Ver Orçamento</Text>
+          </Pressable>
+
+
+          <Pressable
+            style={styles.buttonList}
+            activeOpacity={0.5}
+            onPress={() => this.DeleteVehicle(item.id)}
+          >
+            <Text style={styles.listTextButton}>Excluir Veículo</Text>
+          </Pressable>
+
+        </View>
+
 
       </View>
-
 
     </View>
 
@@ -249,7 +273,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
-    marginTop: 55,
+    marginTop: 70,
     marginLeft: '5%',
     marginRight: '5%',
     textAlign: 'center'
@@ -323,12 +347,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#282f66',
     marginTop: 18,
-    backgroundColor: 'lightpink'
+    marginBottom: 30
+    // backgroundColor: 'lightpink'
   },
 
   flatItemContainer: {
     flex: 1,
-    backgroundColor: 'lightcyan'
+    // backgroundColor: 'lightcyan'
   },
 
   flatItemTitle: {

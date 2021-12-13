@@ -88,9 +88,9 @@ export default class RegisterServiceType extends Component {
 
                 <Pressable
                     onPress={this.RegisterServiceType}
-                    style={styles.button}
+                    style={styles.button3}
                 >
-                    <Text style={styles.textButton}>Cadastrar Tipo Serviço</Text>
+                    <Text style={styles.textButton3}>Cadastrar Tipo Serviço</Text>
                 </Pressable>
 
 
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 25,
+        marginTop: 95,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -212,10 +212,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 80
+        marginTop: 30
     },
 
     textButton: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    button3: {
+        width: '70%',
+        height: 40,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 45
+    },
+
+    textButton3: {
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",

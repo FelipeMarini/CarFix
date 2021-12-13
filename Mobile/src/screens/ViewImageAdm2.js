@@ -5,7 +5,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
 
-export default class EditServiceImage extends Component {
+export default class ViewImageAdm2 extends Component {
 
 
     // fazer update da imagem?
@@ -85,45 +85,12 @@ export default class EditServiceImage extends Component {
     }
 
 
-    DeleteImage = (id) => {
-
-        try {
-
-            const dataImages = this.state.listImages
-
-            let filterArray = dataImages.filter((val, i) => {
-
-                if (val.id !== id) {
-
-                    return val
-
-                }
-
-            })
-
-            console.log('filterArray', filterArray)
-
-            const answer = api.delete('/ServiceImages/' + id)
-
-            this.setState({ listImages: filterArray })
-
-        }
-
-        catch (error) {
-
-            console.log(error)
-
-        }
-
-    }
-
 
     componentDidMount = () => {
 
         this.GetImagesByService()
 
     }
-
 
 
 
@@ -140,7 +107,7 @@ export default class EditServiceImage extends Component {
 
                 <Pressable
                     style={styles.exitButton}
-                    onPress={() => this.props.navigation.navigate('ServiceVehicle')}
+                    onPress={() => this.props.navigation.navigate('BudgetDetail')}
                 >
                     <Image
                         source={require('../../assets/images/back.png')}
@@ -170,16 +137,6 @@ export default class EditServiceImage extends Component {
                                             style={styles.img}
                                             source={{ uri: 'https://54.147.100.207/Images/' + image.imagePath }}
                                         />
-
-                                        <Pressable
-                                            style={styles.binButton}
-                                            onPress={() => this.DeleteImage(image.id)}
-                                        >
-                                            <Image
-                                                source={require('../../assets/images/bin.png')}
-                                                style={styles.binImg}
-                                            />
-                                        </Pressable>
 
                                     </View>
 
@@ -268,17 +225,6 @@ const styles = StyleSheet.create({
 
     containerImg: {
         marginTop: 30
-    },
-
-    binButton: {
-        marginTop: 10,
-        alignItems: 'center'
-    },
-
-    binImg: {
-        width: 25,
-        height: 25,
-        tintColor: '#000',
     },
 
     img: {

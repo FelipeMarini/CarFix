@@ -97,7 +97,8 @@ namespace CarFix.Project.Controllers
                     newUser.Password = newUserDTO.Password.ToString();
                     newUser.UserType = newUserDTO.UserType;
                     newUser.Username = newUserDTO.Username.ToString();
-                    newUser.PhoneNumber = newUserDTO.PhoneNumber.ToString();  // mudei para .ToString() pelo mobile
+                    newUser.PhoneNumber = newUserDTO.PhoneNumber.ToString(); 
+
 
                     _unitOfWork.UserRepository.Register(newUser);
                     _unitOfWork.Save();

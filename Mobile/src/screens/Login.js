@@ -4,7 +4,7 @@ import api from '../services/api'
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from "@react-native-async-storage/async-storage"
 // import AppLoading from 'expo-app-loading'    //vou usar isso?
-
+import * as Fonts from 'expo-font'
 
 
 
@@ -31,6 +31,22 @@ export default class Login extends Component {  // elaborar telas do funileiro
             visible: false
 
         }
+    }
+
+
+    GetFonts = () => Fonts.loadAsync({
+
+        'Nunito700': require('../../assets/fonts/nunito-700.ttf'),
+        'Nunito': require('../../assets/fonts/nunito-regular.ttf'),
+        'Roboto': require('../../assets/fonts/roboto-regular.ttf')
+
+    })
+
+
+    componentDidMount = () => {
+
+        this.GetFonts()
+
     }
 
 
@@ -152,14 +168,15 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "",
+        // fontFamily: "Nunito700",  //pq não reconhece a fonte aqui?
         color: "rgba(40,47,102,1)",
-        fontSize: 34,
-        textAlign: 'center'
+        fontSize: 32,
+        textAlign: 'center',
+        marginTop: 30
     },
 
     subtitle: {
-        fontFamily: "",
+        // fontFamily: "Nunito700", //pq não reconhece a fonte aqui?
         fontWeight: "500",
         color: "#121212",
         fontSize: 15,
@@ -177,7 +194,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: 50,
-        fontFamily: "",
+        // fontFamily: "Nunito",
         color: "#121212",
         borderWidth: 2,
         borderColor: "rgba(40,47,102,1)",
@@ -185,7 +202,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderStyle: "solid",
         paddingLeft: 20,
-        marginTop: 25
+        marginTop: 40
     },
 
     forgetPassBtn: {
@@ -195,7 +212,7 @@ const styles = StyleSheet.create({
     },
 
     esqueciMinhaSenha: {
-        fontFamily: "",
+        // fontFamily: "Roboto",
         fontSize: 18,
         fontWeight: "600",
         color: "rgba(40,47,102,1)",
@@ -203,7 +220,7 @@ const styles = StyleSheet.create({
     },
 
     criarUmaConta: {
-        fontFamily: "",
+        // fontFamily: "Roboto",
         fontSize: 18,
         fontWeight: "600",
         color: "rgba(40,47,102,1)",
@@ -226,11 +243,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 30
+        marginTop: 40
     },
 
     textButton: {
-        fontFamily: "",
+        // fontFamily: "Nunito",
         fontSize: 22,
         fontWeight: "400",
         color: '#fff',

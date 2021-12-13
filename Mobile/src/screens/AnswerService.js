@@ -189,14 +189,6 @@ export default class AnswerService extends Component {
                 <Text style={styles.title}>Responder Serviço</Text>
 
 
-                {/* como mostrar as imagem do serviço aqui? */}
-
-                <Text style={styles.subtitle}>Descrição: {this.state.description}</Text>
-
-                <Text style={styles.subtitle}>Tipo de Serviço: {this.state.type}</Text>
-
-
-
                 <Text style={styles.subtitle2}>Preço ($): </Text>
                 {/* não deixar colocar preço zero */}
                 <TextInput
@@ -288,7 +280,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 25,
+        marginTop: 50,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -296,7 +288,7 @@ const styles = StyleSheet.create({
 
     subtitle: {
         fontFamily: 'Nunito700',
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: "600",
         color: "#121212",
         textAlign: 'left',
@@ -325,7 +317,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 30
+        marginTop: 35
     },
 
     textButton: {
@@ -374,7 +366,7 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         marginLeft: '20%',
-        marginTop: 8
+        marginTop: 20
     },
 
     arrow: {
@@ -391,10 +383,10 @@ const styles = StyleSheet.create({
 
     picker: {
         width: '60%',
-        height: 40,
+        height: 30,
         borderRadius: 5,
         backgroundColor: '#f1f1f1',
-        marginTop: 12
+        marginTop: 25
     }
 
 

@@ -34,11 +34,11 @@ export default class CreateAccount extends Component {
         try {
 
             const answer = await api.post('/Users', {
-                Username: this.state.username,
-                Email: this.state.email,
-                Password: this.state.password,
-                UserType: this.state.userType,
-                PhoneNumber: this.state.phoneNumber
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                userType: this.state.userType,
+                phoneNumber: this.state.phoneNumber
             })
 
             this.setState({ msgConfirmacao: 'Conta criada com sucesso' })

@@ -4,14 +4,16 @@ import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import api from '../services/api'
-import { Buffer } from 'buffer'
-import { v4 as uuidv4 } from 'uuid';
-
-
+import { useNavigation } from '@react-navigation/native'
 
 
 
 export default function App() {
+
+
+    // fazer loader quando captura a imagem
+
+    // aprender a usar o navigation com o hooks
 
 
     const camRef = useRef(null)
@@ -49,7 +51,7 @@ export default function App() {
     }
 
 
-    const createFormData = (photo) => {
+    const createFormData = async (photo) => {
 
         const data = new FormData();
         const uriParts = photo.uri.split('.');
@@ -61,7 +63,11 @@ export default function App() {
             uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
         });
 
-        data.append('IdService', 'c0475ebb-8896-4fce-b26f-79c3aff06810')
+        const IdService = await AsyncStorageLib.getItem('IdService')
+        // const IdService = localStorage.getItem('IdService')  (é síncrono o local storage)
+        console.log(IdService)
+
+        data.append('IdService', IdService)
 
         return data;
     };
@@ -71,64 +77,42 @@ export default function App() {
 
         if (camRef) {
 
-            const photoAux = await camRef.current.takePictureAsync({ base64: true })
+            const photoAux = await camRef.current.takePictureAsync()
 
             setPhoto(photoAux)
 
-            // setCapturedPhoto(photo.uri)
+            console.log(photo)
 
-            const IdService = await AsyncStorageLib.getItem('IdService')
-            // const IdService = localStorage.getItem('IdService')  (é síncrono o local storage)
-
-            console.log(IdService)
-
-            const data = createFormData(photoAux)
-
-            const form = new FormData()
-
-
-
+            const data = await createFormData(photoAux)
 
             try {
+
                 await api.post('/ServiceImages', data, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
+
+                alert("Foto registrada com sucesso")
+
+                setOpen(true)
+
             }
+
             catch (error) {
-                console.log(error)
+
+                console.log(error.response)
+
             }
 
-
-
-
-
         }
 
     }
-
-
-    async function dataURLtoFile(dataurl, file) {
-
-        var arr = dataurl.split(','),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = Buffer.from((arr[1]), 'base64').toString(), n = bstr.length, u8arr = new Uint8Array(n)
-
-
-        while (n--) {
-
-            u8arr[n] = bstr.charCodeAt(n);
-
-        }
-
-        return new File([u8arr], file, { type: mime })
-    }
-
 
 
 
     return (
+
 
         <SafeAreaView style={styles.container}>
 

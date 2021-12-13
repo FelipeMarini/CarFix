@@ -246,7 +246,7 @@ export default class HomeWorker extends Component {
             <View style={styles.container}>
 
 
-                <Text style={styles.title}>Serviços</Text>
+                <Text style={styles.title}>Meus Serviços</Text>
 
 
                 <Pressable
@@ -290,134 +290,135 @@ export default class HomeWorker extends Component {
 
     renderItem = ({ item }) => (
 
-        <View style={styles.flatItemRow}>
 
-            <View style={styles.flatItemContainer}>
+        <View style={styles.container}>
 
-                {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
-                <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
+            <View style={styles.flatItemRow}>
 
+                <View style={styles.flatItemContainer}>
 
-                <View>
+                    <Text style={styles.flatItemInfo}>Descrição: {item.serviceDescription}</Text>
 
-                    {item.serviceStatus == 0
-                        ?
-                        <Text style={styles.flatItemInfo}>Status: Finalizado</Text>
-                        :
-                        <Text style={styles.flatItemInfo}></Text>
-                    }
+                    <View style={styles.containerStatus}>
 
-                    {item.serviceStatus == 1
-                        ?
-                        <Text style={styles.flatItemInfo}>Status: Em Andamento</Text>
-                        :
-                        <Text style={styles.flatItemInfo}></Text>
-                    }
+                        {item.serviceStatus == 0
+                            ?
+                            <Text style={styles.flatItemStatus}>Status: Finalizado</Text>
+                            :
+                            <Text></Text>
+                        }
 
-                    {item.serviceStatus == 2
-                        ?
-                        <Text style={styles.flatItemInfo}>Status: Pendente</Text>
-                        :
-                        <Text style={styles.flatItemInfo}></Text>
-                    }
+                        {item.serviceStatus == 1
+                            ?
+                            <Text style={styles.flatItemStatus}>Status: Em Andamento</Text>
+                            :
+                            <Text></Text>
+                        }
 
-                </View>
-
-
-                <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
-                <Text style={styles.flatItemInfo}>Observações: {item.observations}</Text>
-
-                <Pressable
-                    style={styles.buttonList}
-                    onPress={() => this.ShowStatus(item.id, item.serviceStatus)}
-                >
-                    <Text style={styles.listTextButton}>Alterar Status</Text>
-                </Pressable>
-
-                <Modal
-                    isVisible={this.state.visibleStatus}
-                    style={styles.modal}>
-
-                    <View style={styles.modalView}>
-
-                        <Picker
-                            style={styles.picker}
-                            selectedValue={this.state.status}
-                            onValueChange={(itemValue) => this.setState({ status: itemValue })}>
-                            {
-                                this.state.listStatus.map((item, index) => {
-
-                                    return <Picker.Item value={item} label={item} key={index} />
-
-                                })
-                            }
-                        </Picker>
-
-                        <Pressable
-                            style={styles.buttonStatus}
-                            onPress={this.AlterStatus}
-                        >
-                            <Text style={styles.textButtonStatus}>Alterar Status</Text>
-                        </Pressable>
-
-                        <Pressable
-                            style={styles.buttonClose1}
-                            onPress={() => this.setState({ visibleStatus: false })}
-                        >
-                            <Text style={styles.textButtonClose1}>Fechar</Text>
-                        </Pressable>
-
+                        {item.serviceStatus == 2
+                            ?
+                            <Text style={styles.flatItemStatus}>Status: Pendente</Text>
+                            :
+                            <Text style={styles.flatItemInfo}></Text>
+                        }
 
                     </View>
 
-                </Modal>
+
+                    <Text style={styles.flatItemInfo}>Tipo Serviço: {item.serviceType.typeName}</Text>
+                    <Text style={styles.flatItemInfo}>Observações: {item.observations}</Text>
+
+                    <Pressable
+                        style={styles.buttonList}
+                        onPress={() => this.ShowStatus(item.id, item.serviceStatus)}
+                    >
+                        <Text style={styles.listTextButton}>Alterar Status</Text>
+                    </Pressable>
+
+                    <Modal
+                        isVisible={this.state.visibleStatus}
+                        style={styles.modal}>
+
+                        <View style={styles.modalView}>
+
+                            <Picker
+                                style={styles.picker}
+                                selectedValue={this.state.status}
+                                onValueChange={(itemValue) => this.setState({ status: itemValue })}>
+                                {
+                                    this.state.listStatus.map((item, index) => {
+
+                                        return <Picker.Item value={item} label={item} key={index} />
+
+                                    })
+                                }
+                            </Picker>
+
+                            <Pressable
+                                style={styles.buttonStatus}
+                                onPress={this.AlterStatus}
+                            >
+                                <Text style={styles.textButtonStatus}>Alterar Status</Text>
+                            </Pressable>
+
+                            <Pressable
+                                style={styles.buttonClose1}
+                                onPress={() => this.setState({ visibleStatus: false })}
+                            >
+                                <Text style={styles.textButtonClose1}>Fechar</Text>
+                            </Pressable>
 
 
+                        </View>
+
+                    </Modal>
 
 
-                <Pressable
-                    style={styles.buttonList}
-                    onPress={() => this.ShowVehicle(item.budget.idVehicle)}
-                >
-                    <Text style={styles.listTextButton}>Ver Veículo</Text>
-                </Pressable>
+                    <Pressable
+                        style={styles.buttonList}
+                        onPress={() => this.ShowVehicle(item.budget.idVehicle)}
+                    >
+                        <Text style={styles.listTextButton}>Ver Veículo</Text>
+                    </Pressable>
 
-                <Modal
-                    isVisible={this.state.visibleVehicle}
-                    style={styles.modal}>
+                    <Modal
+                        isVisible={this.state.visibleVehicle}
+                        style={styles.modal}>
 
-                    <View style={styles.modalView}>
+                        <View style={styles.modalView}>
 
-                        <Text style={styles.modalTitle}><Text style={styles.modalTitleItem}>Modelo:</Text> {this.state.Vehicle.modelName}</Text>
-                        <Text style={styles.modalText}><Text style={styles.modalItem}>Marca:</Text> {this.state.Vehicle.brandName}</Text>
-                        <Text style={styles.modalText}><Text style={styles.modalItem}>Placa:</Text> {this.state.Vehicle.licensePlate}</Text>
-                        <Text style={styles.modalText}><Text style={styles.modalItem}>Ano:</Text> {this.state.Vehicle.year}</Text>
-                        <Text style={styles.modalText}><Text style={styles.modalItem}>Cor:</Text> {this.state.Vehicle.color}</Text>
+                            <Text style={styles.modalTitle}><Text style={styles.modalTitleItem}>Modelo:</Text> {this.state.Vehicle.modelName}</Text>
+                            <Text style={styles.modalText}><Text style={styles.modalItem}>Marca:</Text> {this.state.Vehicle.brandName}</Text>
+                            <Text style={styles.modalText}><Text style={styles.modalItem}>Placa:</Text> {this.state.Vehicle.licensePlate}</Text>
+                            <Text style={styles.modalText}><Text style={styles.modalItem}>Ano:</Text> {this.state.Vehicle.year}</Text>
+                            <Text style={styles.modalText}><Text style={styles.modalItem}>Cor:</Text> {this.state.Vehicle.color}</Text>
 
-                        <Pressable
-                            style={styles.buttonClose2}
-                            onPress={() => this.setState({ visibleVehicle: false })}
-                        >
-                            <Text style={styles.textButtonClose2}>Fechar</Text>
-                        </Pressable>
+                            <Pressable
+                                style={styles.buttonClose2}
+                                onPress={() => this.setState({ visibleVehicle: false })}
+                            >
+                                <Text style={styles.textButtonClose2}>Fechar</Text>
+                            </Pressable>
 
-                    </View>
+                        </View>
 
-                </Modal>
+                    </Modal>
 
 
-                {/* <Text style={styles.flatItemInfo}>Imagens do Serviço:
+                    {/* <Text style={styles.flatItemInfo}>Imagens do Serviço:
                     {item.serviceImages.map((img) => { img.imagePath })}
                 </Text> */}
 
-                <Pressable
-                    style={styles.buttonList}
-                    activeOpacity={0.5}
-                    onPress={() => this.ViewImages(item.id)}
-                >
-                    <Text style={styles.listTextButton}>Ver Imagens</Text>
-                </Pressable>
+                    <Pressable
+                        style={styles.buttonList}
+                        activeOpacity={0.5}
+                        onPress={() => this.ViewImages(item.id)}
+                    >
+                        <Text style={styles.listTextButton}>Ver Imagens</Text>
+                    </Pressable>
 
+
+                </View>
 
             </View>
 
@@ -441,7 +442,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 18,
+        marginTop: 40,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -610,7 +611,9 @@ const styles = StyleSheet.create({
         marginBottom: '1%'
     },
 
-
+    containerStatus: {
+        height: 60
+    },
 
 
     // LISTA
@@ -624,7 +627,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 30
+        marginTop: 28
     },
 
     listTextButton: {
@@ -659,7 +662,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#282f66',
-        marginTop: 18,
+        marginTop: 10,
+        marginBottom: 30
         // backgroundColor: 'lightpink'
     },
 
@@ -684,7 +688,17 @@ const styles = StyleSheet.create({
         color: '#000',
         lineHeight: 28,
         textAlign: 'justify',
-        paddingTop: 5,
+        marginTop: 8
+        // backgroundColor: 'lightgray'
+    },
+
+    flatItemStatus: {
+        fontFamily: 'Roboto',
+        fontSize: 16,
+        fontWeight: "500",
+        color: '#000',
+        lineHeight: 28,
+        textAlign: 'justify',
         // backgroundColor: 'lightgray'
     }
 

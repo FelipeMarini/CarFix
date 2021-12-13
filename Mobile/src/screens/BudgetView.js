@@ -140,23 +140,27 @@ export default class BudgetView extends Component {
 
     renderItem = ({ item }) => (
 
-        <View style={styles.flatItemRow}>
+        <View style={styles.container}>
 
-            <View style={styles.flatItemContainer}>
+            <View style={styles.flatItemRow}>
 
-                {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
-                <Text style={styles.flatItemInfo}>Veículo: {item.vehicle.modelName}</Text>
-                <Text style={styles.flatItemInfo}>Ano: {item.vehicle.year}</Text>
-                <Text style={styles.flatItemInfo}>Placa: {item.vehicle.licensePlate}</Text>
-                <Text style={styles.flatItemInfo}>Valor Atual Orçamento: ${item.totalValue}</Text>
+                <View style={styles.flatItemContainer}>
 
-                <Pressable
-                    style={styles.buttonList}
-                    activeOpacity={0.5}
-                    onPress={() => this.GetIdBudget(item.id)}
-                >
-                    <Text style={styles.listTextButton}>Ver Serviços</Text>
-                </Pressable>
+                    {/* <Text style={styles.flatItemInfo}>Data Solicitação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.creationDate))}</Text> */}
+                    <Text style={styles.flatItemInfo}>Veículo: {item.vehicle.modelName}</Text>
+                    <Text style={styles.flatItemInfo}>Ano: {item.vehicle.year}</Text>
+                    <Text style={styles.flatItemInfo}>Placa: {item.vehicle.licensePlate}</Text>
+                    <Text style={styles.flatItemInfo}>Valor Atual Orçamento: ${item.totalValue}</Text>
+
+                    <Pressable
+                        style={styles.buttonList}
+                        activeOpacity={0.5}
+                        onPress={() => this.GetIdBudget(item.id)}
+                    >
+                        <Text style={styles.listTextButton}>Ver Serviços</Text>
+                    </Pressable>
+
+                </View>
 
             </View>
 
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 18,
+        marginTop: 45,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -268,13 +272,14 @@ const styles = StyleSheet.create({
     // cada linha da lista
     flatItemRow: {
         width: 300,
-        height: 280,
+        height: 240,
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#282f66',
-        marginTop: 18,
+        marginTop: 8,
+        marginBottom: 25
         // backgroundColor: 'lightpink'
     },
 

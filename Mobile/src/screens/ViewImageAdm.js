@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native'
+import { Text, View, StyleSheet, Pressable, Image, ScrollView } from 'react-native'
 import api from "../services/api"
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
@@ -8,6 +8,10 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 export default class ViewImageAdm extends Component {
 
 
+    // fazer update da imagem?
+    // colocar mais informações na lista?
+    // ! fazer com que o usuário possa visualizar a imagem
+
 
     constructor(props) {
 
@@ -15,8 +19,8 @@ export default class ViewImageAdm extends Component {
 
         this.state = {
 
+            idDeleteImage: '',
             listImages: []
-
         }
 
     }
@@ -25,17 +29,24 @@ export default class ViewImageAdm extends Component {
 
     GetImagesByService = async () => {
 
-
         try {
 
-            const IdService = AsyncStorageLib.getItem('IdService')
+            // const é considerado como "object" na requisição sem toString()
+
+            const IdService = (await AsyncStorageLib.getItem('IdService')).toString()
             // const IdService = localStorage.getItem('IdService')
+
+            console.log(IdService)
 
             const answer = await api.get('/ServiceImages/Service/' + IdService)
 
             const dataImages = answer.data
 
+            console.log(dataImages)
+
             this.setState({ listImages: dataImages })
+
+            console.log(this.state.listImages)
 
             var images = this.state.listImages.map(function (item) {
 
@@ -43,19 +54,16 @@ export default class ViewImageAdm extends Component {
 
             })
 
-            this.setState({ paths: images })
-
         }
 
         catch (error) {
 
-            console.log(error)
+            console.log(error.response)
 
         }
 
 
     }
-
 
 
     Logout = async () => {
@@ -83,7 +91,6 @@ export default class ViewImageAdm extends Component {
         this.GetImagesByService()
 
     }
-
 
 
 
@@ -128,7 +135,7 @@ export default class ViewImageAdm extends Component {
 
                                         <Image
                                             style={styles.img}
-                                            source={{ uri: 'https://localhost:5001/Images/' + image.imagePath }}
+                                            source={{ uri: 'https://54.147.100.207/Images/' + image.imagePath }}
                                         />
 
                                     </View>
@@ -169,7 +176,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 18,
+        marginTop: 60,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -201,7 +208,7 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         marginLeft: '20%',
-        marginTop: 15
+        marginTop: 25
     },
 
     arrow: {
@@ -216,43 +223,13 @@ const styles = StyleSheet.create({
         marginTop: 16
     },
 
-
-
-    // LISTA
-
-    mainBody: {
-        flex: 4,
-        // backgroundColor: 'lightblue'
-    },
-
-    mainBodyContent: {
-        height: 'auto',
-        paddingTop: 10,
-        paddingRight: 70,
-        paddingLeft: 70,
-        marginTop: 5,
-        marginBottom: 18,
-        // backgroundColor: 'lightgreen'
-    },
-
-    flatItemRow: {
-        width: 300,
-        height: 'auto',
-        paddingRight: 20,
-        paddingLeft: 20,
-        borderWidth: 1,
-        borderColor: '#282f66',
-        marginTop: 50,
-        // backgroundColor: 'lightpink'
-    },
-
-    flatItemContainer: {
-        // backgroundColor: 'purple'
+    containerImg: {
+        marginTop: 30
     },
 
     img: {
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
         marginTop: 15
     }
 

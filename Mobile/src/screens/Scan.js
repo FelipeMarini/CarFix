@@ -41,7 +41,7 @@ export default class Scan extends Component {   // terminar
 
                     <Pressable
                         style={styles.exitButton}
-                        onPress={() => this.props.navigation.navigate('Login')}
+                        onPress={() => this.props.navigation.navigate('Meus Veículos')}
                     >
 
                         <Image
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         width: '80%',
         marginLeft: '10%',
         marginRight: '10%',
-        marginTop: 70,
+        marginTop: 100,
         textAlign: 'justify',
         lineHeight: 30
     },

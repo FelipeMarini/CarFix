@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 15,
+        marginTop: 45,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -201,11 +201,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         fontWeight: "600",
         color: "#121212",
-        fontSize: 14,
-        textAlign: 'justify',
+        fontSize: 16,
+        textAlign: 'center',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 10
+        marginTop: 20
     },
 
     input: {
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 30
+        marginTop: 40
     },
 
     textButton: {

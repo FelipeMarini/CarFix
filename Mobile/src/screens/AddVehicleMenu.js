@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center',
-        marginTop: 60
+        marginTop: 100
     },
 
     subtitle: {

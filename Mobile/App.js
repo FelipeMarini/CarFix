@@ -9,7 +9,6 @@ import CreateAccount from './src/screens/CreateAccount'
 import Main from './src/screens/Main'
 import EditProfile from './src/screens/EditProfile'
 import EditServiceImage from './src/screens/EditServiceImage'
-import EditVehicle from './src/screens/EditVehicle'
 import AddVehicleMenu from './src/screens/AddVehicleMenu'
 import AddVehicleManual from './src/screens/AddVehicleManual'
 import Scan from './src/screens/Scan'
@@ -21,6 +20,7 @@ import BudgetDetail from './src/screens/BudgetDetail'
 import HomeWorker from './src/screens/HomeWorker'
 import AnswerService from './src/screens/AnswerService'
 import ViewImageAdm from './src/screens/ViewImageAdm'
+import ViewImageAdm2 from './src/screens/ViewImageAdm2'
 import Whats from './src/screens/Whats'
 import Camera from './src/screens/Camera'
 import CameraX from './src/screens/CameraX'
@@ -29,6 +29,7 @@ import CameraX from './src/screens/CameraX'
 // fazer link do chatbot
 // fazer componente uniforme de "sair" e "voltar" para manter o padrão
 // tentar amarrar um dado veículo em apenas um idBudget (apenas um orçamento por veículo)
+
 
 
 const AuthStack = createStackNavigator()
@@ -51,10 +52,7 @@ export default class Stack extends Component {
 
     componentDidMount = () => {
 
-
-
         this.GetFonts()
-
 
     }
 
@@ -188,10 +186,11 @@ export default class Stack extends Component {
                     />
 
                     <AuthStack.Screen
-                        name='EditVehicle'
-                        component={EditVehicle}
+                        name='ViewImageAdm2'
+                        component={ViewImageAdm2}
                         options={{ headerShown: false }}
                     />
+
 
                 </AuthStack.Navigator>
 

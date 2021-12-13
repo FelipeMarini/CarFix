@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, Pressable, TextInput } from "react-nativ
 import { Picker } from '@react-native-picker/picker'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import api from '../../src/services/api'
+import Modal from 'react-native-modal'
 // import { style } from "dom-helpers"
 
 
@@ -23,7 +24,25 @@ export default class RegisterService extends Component {
             listServiceTypes: [],
             listVehiclesUser: [],
             serviceDescription: '',
-            idBudget: ''
+            idBudget: '',
+            visible: false
+
+        }
+
+    }
+
+
+    ShowVehicle = async (id) => {
+
+        try {
+
+            this.setState({ visible: true })
+
+        }
+
+        catch (error) {
+
+            console.log(error)
 
         }
 
@@ -183,13 +202,44 @@ export default class RegisterService extends Component {
                 <Text style={styles.title}>Solicitar Serviço</Text>
 
 
-                <Text style={styles.subtitle}>Veículo: {this.state.Vehicle.modelName}</Text>
+                {/* <Text style={styles.subtitle}>Veículo: {this.state.Vehicle.modelName}</Text>
 
                 <Text style={styles.subtitle}>Marca: {this.state.Vehicle.brandName}</Text>
 
                 <Text style={styles.subtitle}>Ano: {this.state.Vehicle.year}</Text>
 
-                <Text style={styles.subtitle}>Cor: {this.state.Vehicle.color}</Text>
+                <Text style={styles.subtitle}>Cor: {this.state.Vehicle.color}</Text> */}
+
+                <Pressable
+                    style={styles.button2}
+                    onPress={() => this.ShowVehicle()}
+                >
+                    <Text style={styles.textButton2}>Ver Veículo</Text>
+                </Pressable>
+
+
+                <Modal
+                    isVisible={this.state.visible}
+                    style={styles.modal}>
+
+                    <View style={styles.modalView}>
+
+                        <Text style={styles.modalText}><Text style={styles.modalItem}>Marca:</Text> {this.state.Vehicle.brandName}</Text>
+                        <Text style={styles.modalText}><Text style={styles.modalItem}>Modelo:</Text> {this.state.Vehicle.modelName}</Text>
+                        <Text style={styles.modalText}><Text style={styles.modalItem}>Placa:</Text> {this.state.Vehicle.licensePlate}</Text>
+                        <Text style={styles.modalText}><Text style={styles.modalItem}>Ano:</Text> {this.state.Vehicle.year}</Text>
+                        <Text style={styles.modalText}><Text style={styles.modalItem}>Cor:</Text> {this.state.Vehicle.color}</Text>
+
+                        <Pressable
+                            style={styles.buttonClose}
+                            onPress={() => this.setState({ visible: false })}
+                        >
+                            <Text style={styles.textButtonClose}>Fechar</Text>
+                        </Pressable>
+
+                    </View>
+
+                </Modal>
 
 
                 <Pressable
@@ -265,7 +315,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito700',
         color: "rgba(40,47,102,1)",
         fontSize: 34,
-        marginTop: 18,
+        marginTop: 55,
         marginLeft: '5%',
         marginRight: '5%',
         textAlign: 'center'
@@ -291,7 +341,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 10
+        marginTop: 30
     },
 
     description: {
@@ -302,7 +352,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 15
+        marginTop: 25
     },
 
     select: {
@@ -329,10 +379,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 25
+        marginTop: 38
     },
 
     textButton: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    button2: {
+        width: '60%',
+        height: 40,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 35
+    },
+
+    textButton2: {
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
@@ -354,7 +424,7 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         marginLeft: '20%',
-        marginTop: 5
+        marginTop: 20
     },
 
     arrow: {
@@ -367,6 +437,77 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#000',
         marginTop: 16
+    },
+
+    // MODAL
+
+    modal: {
+        width: '80%',
+        marginRight: '10%',
+        marginLeft: '10%',
+        // backgroundColor: 'lightgreen'
+    },
+
+    modalView: {
+        width: '100%',
+        height: '50%',
+        borderWidth: 3,
+        borderColor: '#282f66',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f1f1f1',
+    },
+
+    modalTitle: {
+        fontFamily: 'Nunito700',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000',
+        marginTop: 10
+    },
+
+    modalItem: {
+        fontFamily: 'Nunito',
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#282f66',
+        marginTop: 10
+    },
+
+    modalTitleItem: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000',
+        marginTop: 10
+    },
+
+    modalText: {
+        fontFamily: 'Nunito',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#000',
+        marginTop: 15
+    },
+
+    buttonClose: {
+        width: '50%',
+        height: 35,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    textButtonClose: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
     },
 
 

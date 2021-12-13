@@ -73,7 +73,7 @@ export default class EditProfile extends Component {
           creationDate: this.state.newCreationDate,
           username: this.state.newUserName,
           email: this.state.newEmail,
-          userType: this.state.newUserType,
+          // userType: this.state.newUserType,
           password: this.state.newPassword,
           phoneNumber: this.state.newPhoneNumber
         })
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
-    marginTop: 25,
+    marginTop: 60,
     marginLeft: '5%',
     marginRight: '5%',
     textAlign: 'center'
