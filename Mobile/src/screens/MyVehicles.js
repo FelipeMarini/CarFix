@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native'
+import { Text, View, StyleSheet, Pressable,TextInput, FlatList } from 'react-native'
 import api from "../services/api"
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import Modal from 'react-native-modal'
 
 
 
@@ -23,7 +24,16 @@ export default class MyVehicles extends Component {
       idUserLogged: '',
       idDeleteVehicle: '',
       idVehicleService: '',
-      listVehicles: []
+      listVehicles: [],
+      
+      model: '',
+      brand: '',
+      plate: '',
+      year: '',
+      color: '',
+      
+      visible: false,
+      statusPost: ''
 
     }
 
@@ -57,7 +67,7 @@ export default class MyVehicles extends Component {
   }
 
 
-  DeleteVehicle = (id) => {  //fazer alert aqui
+  DeleteVehicle = (id) => {  //fazer alert aqui!
 
     try {
 
@@ -109,23 +119,68 @@ export default class MyVehicles extends Component {
 
   }
 
-
-  GetIdVehicleRequest = async (id) => {
+  
+  ShowModal = async () => {
 
     try {
 
-      // console.log(id)
-
-      await AsyncStorageLib.setItem('IdVehicle', id)
-      // await localStorage.setItem('IdVehicle', id)
-
-      this.props.navigation.navigate("RegisterService")
+      this.setState({visible: true})
 
     }
 
     catch (error) {
 
       console.log(error)
+
+    }
+
+  }
+
+
+  RegisterVehicle = async () => {
+
+    try {
+
+        if (this.state.idUserLogged !== '' && this.state.model !== '' &&
+            this.state.brand !== '' && this.state.year !== ''
+            && this.state.color !== '' && this.state.plate !== '') {
+
+            const answer = await api.post('/Vehicles', {
+                licensePlate: this.state.plate,
+                modelName: this.state.model,
+                brandName: this.state.brand,
+                year: this.state.year,
+                color: this.state.color,
+                idUser: this.state.idUserLogged
+            })
+
+            await this.setState({status: answer.status})
+
+        }
+
+        if (this.state.status == 201) {
+          
+          await alert('Veículo cadastrado com sucesso')
+
+          const answer = await api.get('/Vehicles/User/' + this.state.idUserLogged)
+          
+          const list = answer.data
+
+          this.setState({listVehicles: list})
+
+          console.log(this.state.listVehicles)
+
+          await this.setState({visible: false})
+
+        }
+
+        
+
+    }
+
+    catch (error) {
+
+        console.log(error)
 
     }
 
@@ -158,12 +213,7 @@ export default class MyVehicles extends Component {
   }
 
 
-  componentDidUpdate = () => {  //uso isso para atualizar a lista dinamicamente?
-
-
-  }
-
-
+  
 
   render() {
 
@@ -178,13 +228,76 @@ export default class MyVehicles extends Component {
 
         <Pressable
           style={styles.button}
-          onPress={() => this.props.navigation.navigate("AddVehicleMenu")}
+          onPress={() => this.ShowModal()}
         >
           <Text style={styles.textButton}>Cadastrar Veículo</Text>
         </Pressable>
 
 
-        {/* <ScrollView>' */}
+        <Modal
+          isVisible={this.state.visible}
+          style={styles.modal}>
+
+          <View style={styles.modalView}>
+
+          <Text style={styles.title1}>Adicionar Veículo</Text>
+
+            <TextInput
+                placeholder="Modelo"
+                keyboardType="default"
+                placeholderTextColor="rgba(0,0,0,1)"
+                style={styles.input}
+                onChangeText={model => this.setState({ model })}
+            ></TextInput>
+
+            <TextInput
+                placeholder="Marca"
+                placeholderTextColor="rgba(0,0,0,1)"
+                style={styles.input}
+                onChangeText={brand => this.setState({ brand })}
+            ></TextInput>
+
+            <TextInput
+                placeholder="Ano"
+                placeholderTextColor="rgba(0,0,0,1)"
+                style={styles.input}
+                onChangeText={year => this.setState({ year })}
+            ></TextInput>
+
+            <TextInput
+                placeholder="Cor"
+                placeholderTextColor="rgba(0,0,0,1)"
+                style={styles.input}
+                onChangeText={color => this.setState({ color })}
+            ></TextInput>
+
+            <TextInput
+                placeholder="Placa"
+                secureTextEntry={false}
+                placeholderTextColor="rgba(0,0,0,1)"
+                disableFullscreenUI={true}
+                keyboardType="name-phone-pad"
+                style={styles.input}
+                onChangeText={plate => this.setState({ plate })}
+            ></TextInput>
+
+            <Pressable
+                onPress={this.RegisterVehicle}
+                style={styles.button}
+            >
+                <Text style={styles.textButton}>Salvar Veículo</Text>
+            </Pressable>
+
+            <Pressable
+              style={styles.buttonClose}
+              onPress={() => this.setState({ visible: false })}
+            >
+              <Text style={styles.textButtonClose}>Fechar</Text>
+             </Pressable>
+
+          </View>
+
+        </Modal>
 
 
         {/* LISTA */}
@@ -194,6 +307,7 @@ export default class MyVehicles extends Component {
           <FlatList
             contentContainerStyle={styles.mainBodyContent}
             data={this.state.listVehicles}
+            extraData={this.state.listVehicles}
             keyExtractor={item => item.id}
             renderItem={this.renderItem}
           />
@@ -202,8 +316,6 @@ export default class MyVehicles extends Component {
 
         {/* FIM LISTA */}
 
-
-        {/* </ScrollView> */}
 
 
       </View>
@@ -273,10 +385,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito700',
     color: "rgba(40,47,102,1)",
     fontSize: 34,
-    marginTop: 70,
+    marginTop: 50,
     marginLeft: '5%',
     marginRight: '5%',
     textAlign: 'center'
+  },
+
+  subtitle: {
+    fontFamily: 'Nunito700',
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#121212",
+    textAlign: 'justify',
+    marginLeft: '15%',
+    marginRight: '15%',
+    marginTop: 12
   },
 
   button: {
@@ -374,7 +497,82 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     paddingTop: 5,
     // backgroundColor: 'lightgray'
-  }
+  },
+
+
+
+  // MODAL
+
+  title1: {
+    fontFamily: 'Nunito700',
+    color: "rgba(40,47,102,1)",
+    fontSize: 28,
+    marginTop: 10,
+    marginLeft: '5%',
+    marginRight: '5%',
+    textAlign: 'center'
+  },
+
+  subtitle1: {
+    fontFamily: 'Nunito700',
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#121212",
+    textAlign: 'justify',
+    marginLeft: '15%',
+    marginRight: '15%',
+    marginTop: 12
+  },
+
+  input: {
+    width: '80%',
+    height: 50,
+    fontFamily: 'Nunito',
+    color: "#121212",
+    borderWidth: 2,
+    borderColor: "rgba(40,47,102,1)",
+    backgroundColor: "#F5F7F9",
+    borderRadius: 5,
+    borderStyle: "solid",
+    paddingLeft: 20,
+    marginTop: 22
+  },
+
+  modal: {
+    width: '80%',
+    marginRight: '10%',
+    marginLeft: '10%',
+    // backgroundColor: 'lightgreen'
+  },
+
+  modalView: {
+    width: '100%',
+    height: '100%',
+    borderWidth: 3,
+    borderColor: '#282f66',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f1f1f1',
+  },
+
+  buttonClose: {
+    width: '50%',
+    height: 35,
+    backgroundColor: '#282f66',
+    borderRadius: 5,
+    marginTop: 35,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  textButtonClose: {
+    fontFamily: 'Nunito',
+    fontSize: 20,
+    fontWeight: "400",
+    color: '#fff',
+    marginBottom: '1%'
+  },
+
 
 
 })

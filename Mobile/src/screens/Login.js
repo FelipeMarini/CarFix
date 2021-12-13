@@ -19,6 +19,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
     // testar para ver se a "borda laranja" do input some no dispositivo ao invés de web
     // testar no cel e com o banco na nuvem da AWS
 
+
     constructor(props) {
 
         super(props)
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     forgetPassBtn: {
         width: '50%',
         height: 35,
-        marginTop: 50
+        marginTop: 30
     },
 
     esqueciMinhaSenha: {

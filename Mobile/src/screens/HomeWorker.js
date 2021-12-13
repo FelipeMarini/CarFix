@@ -13,7 +13,6 @@ export default class HomeWorker extends Component {
     // desabilitar botão de alterar status se o picker não for alterado?
 
 
-
     constructor(props) {
 
         super(props)
