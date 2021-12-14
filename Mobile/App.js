@@ -24,12 +24,13 @@ import ViewImageAdm2 from './src/screens/ViewImageAdm2'
 import Whats from './src/screens/Whats'
 import Camera from './src/screens/Camera'
 import CameraX from './src/screens/CameraX'
+import Defect from './src/screens/Defect'
 
 //verificar uniformidade das telas (fonte,botão)
 // fazer link do chatbot
 // fazer componente uniforme de "sair" e "voltar" para manter o padrão
 // tentar amarrar um dado veículo em apenas um idBudget (apenas um orçamento por veículo)
-
+// fazer validação de inputs de acordo com o dado
 
 
 const AuthStack = createStackNavigator()
@@ -188,6 +189,12 @@ export default class Stack extends Component {
                     <AuthStack.Screen
                         name='ViewImageAdm2'
                         component={ViewImageAdm2}
+                        options={{ headerShown: false }}
+                    />
+
+                    <AuthStack.Screen
+                        name='Defect'
+                        component={Defect}
                         options={{ headerShown: false }}
                     />
 

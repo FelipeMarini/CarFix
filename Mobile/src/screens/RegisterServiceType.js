@@ -14,8 +14,7 @@ export default class RegisterServiceType extends Component {
 
         this.state = {
 
-            serviceTypeTitle: '',
-            msgConfirmacao: ''
+            serviceTypeTitle: ''
 
         }
 
@@ -26,13 +25,23 @@ export default class RegisterServiceType extends Component {
 
         try {
 
-            const answer = await api.post('/ServiceTypes', {
+            if (this.state.serviceTypeTitle == '') {
 
-                typeName: this.state.serviceTypeTitle
+                alert('Campo vazio, por favor insira um tipo de serviço')
 
-            })
+            }
 
-            this.setState({ msgConfirmacao: 'Tipo de serviço criado com sucesso' })
+            if (this.state.serviceTypeTitle !== '') {
+
+                const answer = await api.post('/ServiceTypes', {
+
+                    typeName: this.state.serviceTypeTitle
+
+                })
+
+                alert('Tipo de serviço cadastrado com sucesso')
+
+            }
 
         }
 

@@ -6,9 +6,9 @@ import { StyleSheet, Button, Linking, View, Text, Pressable, Image } from 'react
 export default class App extends Component {
 
 
-  handleWhatsAppPress = () => {
+  handleWhatsAppPress = async () => {
 
-    Linking.openURL("https://api.whatsapp.com/send?phone=5511977137983")
+    await Linking.openURL("https://api.whatsapp.com/send?phone=5511977137983")
 
   }
 
@@ -28,7 +28,7 @@ export default class App extends Component {
               style={styles.button}
               color="#00E676"
               title="WhatsApp"
-              onPress={() => this.handleWhatsAppPress}
+              onPress={() => this.handleWhatsAppPress()}
             />
 
           </View>

@@ -14,6 +14,8 @@ export default class BudgetView extends Component {
     // o orçamento será o total do preço dos serviços determinados em AnswerService
     // fazer filtros de pesquisa para os orçamentos e serviços (de acordo com o status)
 
+    // fazer formato correto de data de solicitação do orçamento
+
     constructor(props) {
 
         super(props)
@@ -38,6 +40,35 @@ export default class BudgetView extends Component {
             this.setState({ listBudgets: answer.data })
 
             console.log(this.state.listBudgets)
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
+    UpdateList = async () => {
+
+        try {
+
+            const answer = await api.get('/Budgets')
+
+            console.log(answer.data)
+
+            this.setState({ listBudgets: answer.data })
+
+            console.log(this.state.listBudgets)
+
+            if (answer.status == 200) {
+
+                alert('Lista de orçamentos atualizada')
+
+            }
 
         }
 
@@ -94,6 +125,14 @@ export default class BudgetView extends Component {
 
 
                 <Pressable
+                    style={styles.button}
+                    onPress={() => this.UpdateList()}
+                >
+                    <Text style={styles.textButton}>Atualizar Orçamentos</Text>
+                </Pressable>
+
+
+                <Pressable
                     style={styles.exitButton}
                     onPress={() => this.props.navigation.navigate('RegisterServiceType')}
                 >
@@ -104,10 +143,6 @@ export default class BudgetView extends Component {
 
                     <Text style={styles.exitText}>Voltar</Text>
                 </Pressable>
-
-
-                {/* <ScrollView> */}
-
 
 
                 {/* LISTA */}
@@ -124,10 +159,6 @@ export default class BudgetView extends Component {
                 </View>
 
                 {/* FIM LISTA */}
-
-
-
-                {/* </ScrollView> */}
 
 
             </View>
@@ -157,7 +188,7 @@ export default class BudgetView extends Component {
                         activeOpacity={0.5}
                         onPress={() => this.GetIdBudget(item.id)}
                     >
-                        <Text style={styles.listTextButton}>Ver Serviços</Text>
+                        <Text style={styles.listTextButton}>Ver Serviço</Text>
                     </Pressable>
 
                 </View>

@@ -34,6 +34,37 @@ export default class HomeWorker extends Component {
     }
 
 
+    UpdateList = async () => {
+
+        try {
+
+            const valueToken = await AsyncStorageLib.getItem('userToken')
+
+            var IdWorker = jwtDecode(valueToken).jti
+
+            const answer = await api.get('/Services/Worker/' + IdWorker)
+
+            const dataServicesWorker = answer.data
+
+            this.setState({ listServicesWorker: dataServicesWorker })
+
+            if (answer.status == 200) {
+
+                alert('Lista de serviços atualizada')
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
     ShowVehicle = async (id) => {
 
         try {
@@ -249,6 +280,14 @@ export default class HomeWorker extends Component {
 
 
                 <Pressable
+                    style={styles.button}
+                    onPress={() => this.UpdateList()}
+                >
+                    <Text style={styles.textButton}>Atualizar Serviços</Text>
+                </Pressable>
+
+
+                <Pressable
                     style={styles.exitButton}
                     onPress={this.Logout}
                 >
@@ -269,6 +308,7 @@ export default class HomeWorker extends Component {
                     <FlatList
                         contentContainerStyle={styles.mainBodyContent}
                         data={this.state.listServicesWorker}
+                        extraData={this.state.listServicesWorker}
                         keyExtractor={item => item.id}
                         renderItem={this.renderItem}
                     />
@@ -404,10 +444,6 @@ export default class HomeWorker extends Component {
                     </Modal>
 
 
-                    {/* <Text style={styles.flatItemInfo}>Imagens do Serviço:
-                    {item.serviceImages.map((img) => { img.imagePath })}
-                </Text> */}
-
                     <Pressable
                         style={styles.buttonList}
                         activeOpacity={0.5}
@@ -487,6 +523,26 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#000',
         marginTop: 16
+    },
+
+    button: {
+        width: '60%',
+        height: 40,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 25
+    },
+
+    textButton: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
     },
 
 

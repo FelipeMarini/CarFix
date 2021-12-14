@@ -5,6 +5,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 
 
+
 export default class EditServiceImage extends Component {
 
 
@@ -73,6 +74,25 @@ export default class EditServiceImage extends Component {
             await AsyncStorageLib.removeItem('userToken')
 
             this.props.navigation.navigate('Login')
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    SendToOCR = async (id) => {
+
+        try {
+
+            await AsyncStorageLib.setItem('IdImage', id)
+            // await localStorage.setItem('IdImage', id)
+
+            this.props.navigation.navigate("Defect")
 
         }
 
@@ -181,6 +201,17 @@ export default class EditServiceImage extends Component {
                                             />
                                         </Pressable>
 
+                                        <Pressable
+                                            style={styles.button2}
+                                            onPress={() => this.SendToOCR(image.id)}
+                                        >
+                                            <Text
+                                                style={styles.textButton2}
+                                            >
+                                                Analisar Imagem
+                                            </Text>
+                                        </Pressable>
+
                                     </View>
 
                                 )
@@ -240,6 +271,46 @@ const styles = StyleSheet.create({
     textButton: {
         fontFamily: 'Nunito',
         fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    button: {
+        width: '60%',
+        height: 40,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 25
+    },
+
+    textButton: {
+        fontFamily: 'Nunito',
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#fff',
+        marginBottom: '1%'
+    },
+
+    button2: {
+        width: '70%',
+        height: 40,
+        backgroundColor: '#282f66',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowOffset: { width: 0, height: 3 },
+        shadowColor: '#f1f1f1',
+        marginTop: 25
+    },
+
+    textButton2: {
+        fontFamily: 'Nunito',
+        fontSize: 18,
         fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'

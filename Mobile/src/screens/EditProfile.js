@@ -7,6 +7,7 @@ import jwtDecode from 'jwt-decode'
 
 export default class EditProfile extends Component {
 
+
   // fazer lógica de confirmar senha
 
   constructor(props) {
@@ -22,7 +23,7 @@ export default class EditProfile extends Component {
       newPassword: '',
       newUserType: 2,
       newPhoneNumber: '',
-      msgConfirmacao: ''
+      status: ''
 
     }
 
@@ -59,6 +60,25 @@ export default class EditProfile extends Component {
   }
 
 
+  Logout = async () => {
+
+    try {
+
+      await AsyncStorageLib.removeItem('userToken')
+
+      this.props.navigation.navigate('Login')
+
+    }
+
+    catch (error) {
+
+      console.log(error)
+
+    }
+
+  }
+
+
 
   AlterProfile = async () => {
 
@@ -78,7 +98,15 @@ export default class EditProfile extends Component {
           phoneNumber: this.state.newPhoneNumber
         })
 
-        this.setState({ msgConfirmacao: 'Informações alteradas com sucesso' })
+        this.setState({ status: answer.status })
+
+      }
+
+      if (this.state.status == 204) {
+
+        await alert('Informações alteradas com sucesso, por gentileza faça login novamente com suas novas credenciais')
+
+        await this.Logout()
 
       }
 
@@ -265,10 +293,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: '1%'
   },
-
-  msgSucesso: {
-    marginTop: '5%'
-  }
 
 
 })

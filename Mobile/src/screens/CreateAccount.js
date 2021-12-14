@@ -23,7 +23,6 @@ export default class CreateAccount extends Component {
             // passwordRepeat: '',
             userType: 2,        //sempre um usuário (2) que fará um cadastro
             phoneNumber: '',
-            msgConfirmacao: ''
         }
 
     }
@@ -41,7 +40,13 @@ export default class CreateAccount extends Component {
                 phoneNumber: this.state.phoneNumber
             })
 
-            this.setState({ msgConfirmacao: 'Conta criada com sucesso' })
+            if (answer.status == 201) {
+
+                alert('Cadastro feito com sucesso')
+
+                this.props.navigation.navigate('Login')
+
+            }
 
         }
 
@@ -140,9 +145,6 @@ export default class CreateAccount extends Component {
                 >
                     <Text style={styles.textButton}>Criar Conta</Text>
                 </Pressable>
-
-
-                <Text style={styles.msgSucesso}>{this.state.msgConfirmacao}</Text>
 
 
                 <Pressable

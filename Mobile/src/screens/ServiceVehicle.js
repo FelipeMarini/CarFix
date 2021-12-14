@@ -310,10 +310,6 @@ export default class ServiceVehicle extends Component {
                 </Pressable>
 
 
-
-
-
-
                 {/* LISTA */}
 
                 <View style={styles.mainBody}>
@@ -432,7 +428,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 30
+        marginTop: 32
     },
 
     textButton: {
@@ -472,7 +468,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 20
+        marginTop: 25
     },
 
     textButton3: {

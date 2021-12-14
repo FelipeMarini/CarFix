@@ -25,7 +25,9 @@ export default class RegisterService extends Component {
             listVehiclesUser: [],
             serviceDescription: '',
             idBudget: '',
-            visible: false
+            visible: false,
+            visibleDescription: false,
+            visibleDescription2: false
 
         }
 
@@ -37,6 +39,38 @@ export default class RegisterService extends Component {
         try {
 
             this.setState({ visible: true })
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    ShowDescription = async (id) => {
+
+        try {
+
+            this.setState({ visibleDescription: true })
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    ShowModal = async (id) => {
+
+        try {
+
+            this.setState({ visibleDescription2: true })
 
         }
 
@@ -103,6 +137,34 @@ export default class RegisterService extends Component {
             await AsyncStorageLib.removeItem('userToken')
 
             this.props.navigation.navigate('Login')
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+    PutDescription = async () => {
+
+        try {
+
+            if (this.state.serviceDescription !== '') {
+
+                alert('Descrição inserida com sucesso')
+
+                await this.setState({ visibleDescription: false })
+
+            }
+
+            else {
+
+                this.setState({ visibleDescription: false })
+
+            }
 
         }
 
@@ -273,16 +335,76 @@ export default class RegisterService extends Component {
                     }
                 </Picker>
 
-                <Text style={styles.description}>Descreva brevemente o serviço que gostaria para seu veículo:</Text>
 
-                <TextInput
-                    style={styles.inputDescription}
-                    multiline={true}
-                    onChangeText={serviceDescription => this.setState({ serviceDescription })}
+                <Pressable
+                    style={styles.button2}
+                    onPress={() => this.ShowDescription()}
+                >
+                    <Text style={styles.textButton2}>Inserir Descrição</Text>
+                </Pressable>
+
+
+                <Modal
+                    isVisible={this.state.visibleDescription}
+                    style={styles.modal2}
                 >
 
-                </TextInput>
+                    <View style={styles.modalView2}>
 
+                        <Text style={styles.description}>Descreva brevemente o serviço que gostaria para seu veículo:</Text>
+
+                        <TextInput
+                            style={styles.inputDescription}
+                            multiline={true}
+                            onChangeText={serviceDescription => this.setState({ serviceDescription })}
+                        >
+                        </TextInput>
+
+                        <Pressable
+                            style={styles.buttonClose}
+                            onPress={() => this.PutDescription()}
+                        >
+                            <Text style={styles.textButtonClose}>Fechar</Text>
+                        </Pressable>
+
+                    </View>
+
+                </Modal>
+
+
+                <Pressable
+                    style={styles.button2}
+                    onPress={() => this.ShowModal()}
+                >
+                    <Text style={styles.textButton2}>Ver Descrição</Text>
+                </Pressable>
+
+
+                <Modal
+                    isVisible={this.state.visibleDescription2}
+                    style={styles.modal2}
+                >
+
+                    <View style={styles.modalView2}>
+
+                        <Text style={styles.description}>Descrição do Serviço:</Text>
+
+                        <TextInput
+                            style={styles.inputDescription}
+                        >
+                            {this.state.serviceDescription}
+                        </TextInput>
+
+                        <Pressable
+                            style={styles.buttonClose}
+                            onPress={() => this.setState({ visibleDescription2: false })}
+                        >
+                            <Text style={styles.textButtonClose}>Fechar</Text>
+                        </Pressable>
+
+                    </View>
+
+                </Modal>
 
 
                 <Pressable
@@ -341,7 +463,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 30
+        marginTop: 50
     },
 
     description: {
@@ -352,7 +474,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 25
+        marginTop: 5
     },
 
     select: {
@@ -363,11 +485,11 @@ const styles = StyleSheet.create({
 
     inputDescription: {
         width: '80%',
-        height: 100,
+        height: 140,
         borderColor: 'black',
         borderWidth: 1,
         textAlign: 'center',
-        marginTop: 5
+        marginTop: 15
     },
 
     button: {
@@ -379,7 +501,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 38
+        marginTop: 40
     },
 
     textButton: {
@@ -399,7 +521,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 35
+        marginTop: 40
     },
 
     textButton2: {
@@ -451,6 +573,23 @@ const styles = StyleSheet.create({
     modalView: {
         width: '100%',
         height: '50%',
+        borderWidth: 3,
+        borderColor: '#282f66',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f1f1f1',
+    },
+
+    modal2: {
+        width: '80%',
+        marginRight: '10%',
+        marginLeft: '10%',
+        // backgroundColor: 'lightgreen'
+    },
+
+    modalView2: {
+        width: '100%',
+        height: '80%',
         borderWidth: 3,
         borderColor: '#282f66',
         alignItems: 'center',

@@ -5795,20 +5795,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\38715360830\\.nuget\\packages\\": {}
+    "C:\\Users\\Felipe\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\38715360830\\Desktop\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
+      "projectUniqueName": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
       "projectName": "CarFix.Project",
-      "projectPath": "C:\\Users\\38715360830\\Desktop\\CarFix\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
-      "packagesPath": "C:\\Users\\38715360830\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\38715360830\\Desktop\\CarFix\\BackEnd\\CarFix.Project\\obj\\",
+      "projectPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\CarFix.Project.csproj",
+      "packagesPath": "C:\\Users\\Felipe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Felipe\\OneDrive\\Área de Trabalho\\CarFixX\\BackEnd\\CarFix.Project\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\38715360830\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -5908,7 +5913,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   },

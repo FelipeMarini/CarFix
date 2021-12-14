@@ -26,7 +26,6 @@ export default class BudgetDetail extends Component {
     }
 
 
-
     GetServicesPerBudget = async () => {
 
         try {
@@ -43,6 +42,40 @@ export default class BudgetDetail extends Component {
             this.setState({ listServicesBudget: answer.data })
 
             console.log(this.state.listServicesBudget)
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
+
+
+    UpdateList = async () => {
+
+        try {
+
+            const idBudget = await AsyncStorageLib.getItem('IdBudget')
+            // const idBudget = await localStorage.getItem('IdBudget')
+
+            console.log(idBudget)
+
+            const answer = await api.get('/Services/Budget/' + idBudget)
+
+            console.log(answer.data)
+
+            this.setState({ listServicesBudget: answer.data })
+
+            console.log(this.state.listServicesBudget)
+
+            if (answer.status == 200) {
+
+                alert('Lista de serviços atualizada')
+
+            }
 
         }
 
@@ -131,10 +164,6 @@ export default class BudgetDetail extends Component {
                 </Pressable>
 
 
-
-                {/* <ScrollView> */}
-
-
                 {/* LISTA */}
 
                 <View style={styles.mainBody}>
@@ -142,6 +171,7 @@ export default class BudgetDetail extends Component {
                     <FlatList
                         contentContainerStyle={styles.mainBodyContent}
                         data={this.state.listServicesBudget}
+                        extraData={this.state.listServicesBudget}
                         keyExtractor={item => item.id}
                         renderItem={this.renderItem}
                     />
@@ -149,9 +179,6 @@ export default class BudgetDetail extends Component {
                 </View>
 
                 {/* FIM LISTA */}
-
-
-                {/* </ScrollView> */}
 
 
             </View>
@@ -304,7 +331,7 @@ const styles = StyleSheet.create({
     // cada linha da lista
     flatItemRow: {
         width: 300,
-        height: 320,
+        height: 340,
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',

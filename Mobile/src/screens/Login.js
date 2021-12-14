@@ -20,6 +20,9 @@ export default class Login extends Component {  // elaborar telas do funileiro
     // testar no cel e com o banco na nuvem da AWS
 
 
+    // fazer verificação de login
+
+
     constructor(props) {
 
         super(props)
@@ -65,7 +68,6 @@ export default class Login extends Component {  // elaborar telas do funileiro
             await AsyncStorageLib.setItem('userToken', token)
 
             this.props.navigation.navigate('Main')
-
 
             if (token !== null) {
 
@@ -209,7 +211,7 @@ const styles = StyleSheet.create({
     forgetPassBtn: {
         width: '50%',
         height: 35,
-        marginTop: 30
+        marginTop: 50
     },
 
     esqueciMinhaSenha: {
