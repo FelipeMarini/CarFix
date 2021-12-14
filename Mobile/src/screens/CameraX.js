@@ -4,7 +4,6 @@ import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import api from '../services/api'
-import { useNavigation } from '@react-navigation/native'
 
 
 

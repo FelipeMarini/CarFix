@@ -4892,6 +4892,11 @@ react-native-modal@^13.0.0:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"
 
+react-native-openalpr@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-openalpr/-/react-native-openalpr-2.2.0.tgz#c8da6210ea04d298f5562b8825a83510d522d7d4"
+  integrity sha512-sCwo3p7x7MvQ6jn/OOMa/jP+12W2D+Z5b/g5UwYGsqNzh35/+tm7YYeMtgXaH5czl6k+F0dpjSf1ZDEXyir1aQ==
+
 react-native-paper@^4.10.1:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-4.10.1.tgz#aafbc83747a503c8b4cce634aa20a7eb4be8c1d2"

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text, TextInput, Pressable } from "react-native"
+import { StyleSheet, View, Text, TextInput, Pressable, ActivityIndicator } from "react-native"
 import api from '../services/api'
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from "@react-native-async-storage/async-storage"
@@ -11,14 +11,13 @@ import * as Fonts from 'expo-font'
 export default class Login extends Component {  // elaborar telas do funileiro
 
 
-    //integrar com whats para agendar visita depois de receber o orçamento do funileiro
+    // integrar com whats para agendar visita depois de receber o orçamento do funileiro
     // fazer método de recuperar senha e confirmar senha
     // aprender métodos de curtidas e contagem (Instadev)
     // fazer a lógica "isLoading" para desabilitar os botões quando faltar algum campo para ser preenchido
     // para deletar um usuário vou ter que deletar os veículos dele antes
     // testar para ver se a "borda laranja" do input some no dispositivo ao invés de web
     // testar no cel e com o banco na nuvem da AWS
-
 
     // fazer verificação de login
 
@@ -32,12 +31,15 @@ export default class Login extends Component {  // elaborar telas do funileiro
             email: '',
             password: '',
             role: '',
-            visible: false
+            visible: false,
+            isLoading: false
 
         }
+
     }
 
 
+    //fontes não reconhecem aqui, porque?
     GetFonts = () => Fonts.loadAsync({
 
         'Nunito700': require('../../assets/fonts/nunito-700.ttf'),
@@ -56,6 +58,9 @@ export default class Login extends Component {  // elaborar telas do funileiro
 
     RealizeLogin = async () => {
 
+
+        this.setState({ isLoading: true })
+
         try {
 
             const answer = await api.post('/Login', {
@@ -66,6 +71,10 @@ export default class Login extends Component {  // elaborar telas do funileiro
             const token = answer.data.token
 
             await AsyncStorageLib.setItem('userToken', token)
+
+
+            await this.setState({ isLoading: false })
+
 
             this.props.navigation.navigate('Main')
 
@@ -97,7 +106,6 @@ export default class Login extends Component {  // elaborar telas do funileiro
         }
 
     }
-
 
 
     render() {
@@ -138,6 +146,15 @@ export default class Login extends Component {  // elaborar telas do funileiro
                 </Pressable>
 
 
+                <ActivityIndicator
+                    style={styles.spinner}
+                    size={'large'}
+                    color={'#282f66'}
+                    animating={this.state.isLoading}
+                >
+                </ActivityIndicator>
+
+
                 <Pressable
                     onPress={() => this.props.navigation.navigate("RecoverPassword")}
                     style={styles.forgetPassBtn}
@@ -151,8 +168,6 @@ export default class Login extends Component {  // elaborar telas do funileiro
                 >
                     <Text style={styles.esqueciMinhaSenha}>Criar Conta</Text>
                 </Pressable>
-
-
 
             </View>
 
@@ -211,7 +226,7 @@ const styles = StyleSheet.create({
     forgetPassBtn: {
         width: '50%',
         height: 35,
-        marginTop: 50
+        marginTop: 30
     },
 
     esqueciMinhaSenha: {
@@ -234,7 +249,7 @@ const styles = StyleSheet.create({
     newAccountBTN: {
         width: '50%',
         height: 35,
-        marginTop: 11
+        marginTop: 10
     },
 
     button: {
@@ -253,13 +268,16 @@ const styles = StyleSheet.create({
         // fontFamily: "Nunito",
         fontSize: 22,
         fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
+        color: '#fff'
     },
 
     modalView: {
         backgroundColor: 'lightgreen',
         height: 100
+    },
+
+    spinner: {
+        marginTop: 15
     }
 
 

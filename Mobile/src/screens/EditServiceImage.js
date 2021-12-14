@@ -174,6 +174,7 @@ export default class EditServiceImage extends Component {
 
                 <ScrollView>
 
+
                     <View>
 
                         {
@@ -202,11 +203,11 @@ export default class EditServiceImage extends Component {
                                         </Pressable>
 
                                         <Pressable
-                                            style={styles.button2}
+                                            style={styles.button}
                                             onPress={() => this.SendToOCR(image.id)}
                                         >
                                             <Text
-                                                style={styles.textButton2}
+                                                style={styles.textButton}
                                             >
                                                 Analisar Imagem
                                             </Text>
@@ -220,7 +221,6 @@ export default class EditServiceImage extends Component {
                         }
 
                     </View>
-
 
 
                 </ScrollView>
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: '60%',
+        width: '65%',
         height: 40,
         backgroundColor: '#282f66',
         borderRadius: 5,
@@ -269,53 +269,12 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'Nunito',
-        fontSize: 20,
-        fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
-    },
-
-    button: {
-        width: '60%',
-        height: 40,
-        backgroundColor: '#282f66',
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowOffset: { width: 0, height: 3 },
-        shadowColor: '#f1f1f1',
-        marginTop: 25
-    },
-
-    textButton: {
-        fontFamily: 'Nunito',
-        fontSize: 20,
-        fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
-    },
-
-    button2: {
-        width: '70%',
-        height: 40,
-        backgroundColor: '#282f66',
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowOffset: { width: 0, height: 3 },
-        shadowColor: '#f1f1f1',
-        marginTop: 25
-    },
-
-    textButton2: {
         fontFamily: 'Nunito',
         fontSize: 18,
         fontWeight: "400",
         color: '#fff',
         marginBottom: '1%'
     },
-
 
     exitButton: {
         width: '50%',
@@ -338,7 +297,16 @@ const styles = StyleSheet.create({
     },
 
     containerImg: {
-        marginTop: 30
+        width: '90%',
+        height: 400,
+        marginTop: 30,
+        marginLeft: '5%',
+        marginRight: '5%',
+        borderWidth: 2,
+        borderColor: '#282f66',
+        borderRadius: 10,
+        alignItems: 'center',
+        marginBottom: 40
     },
 
     binButton: {

@@ -36,6 +36,7 @@
     "react-native-get-random-values": "^1.7.1",
     "react-native-image-picker": "^4.4.0",
     "react-native-modal": "^13.0.0",
+    "react-native-openalpr": "^2.2.0",
     "react-native-paper": "^4.10.1",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.3.2",

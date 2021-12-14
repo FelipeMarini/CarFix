@@ -23,19 +23,10 @@ export default class Scan extends Component {   // terminar
 
                     <Pressable
                         style={styles.button}
-                        onPress={() => this.props.navigation.navigate('Camera')}
+                        onPress={() => this.props.navigation.navigate('PlateScan')}
                     >
                         <Text style={styles.textButton}>
-                            Câmera
-                        </Text>
-                    </Pressable>
-
-                    <Pressable
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('AddVehicleManual')}
-                    >
-                        <Text style={styles.textButton}>
-                            Adicionar sem Scan
+                            Escanear Placa
                         </Text>
                     </Pressable>
 

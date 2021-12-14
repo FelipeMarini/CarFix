@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Pressable,TextInput, FlatList } from 'react-native'
+import { Text, View, StyleSheet, Pressable, TextInput, FlatList } from 'react-native'
 import api from "../services/api"
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
@@ -25,13 +25,13 @@ export default class MyVehicles extends Component {
       idDeleteVehicle: '',
       idVehicleService: '',
       listVehicles: [],
-      
+
       model: '',
       brand: '',
       plate: '',
       year: '',
       color: '',
-      
+
       visible: false,
       statusPost: ''
 
@@ -119,12 +119,12 @@ export default class MyVehicles extends Component {
 
   }
 
-  
+
   ShowModal = async () => {
 
     try {
 
-      this.setState({visible: true})
+      this.setState({ visible: true })
 
     }
 
@@ -141,46 +141,46 @@ export default class MyVehicles extends Component {
 
     try {
 
-        if (this.state.idUserLogged !== '' && this.state.model !== '' &&
-            this.state.brand !== '' && this.state.year !== ''
-            && this.state.color !== '' && this.state.plate !== '') {
+      if (this.state.idUserLogged !== '' && this.state.model !== '' &&
+        this.state.brand !== '' && this.state.year !== ''
+        && this.state.color !== '' && this.state.plate !== '') {
 
-            const answer = await api.post('/Vehicles', {
-                licensePlate: this.state.plate,
-                modelName: this.state.model,
-                brandName: this.state.brand,
-                year: this.state.year,
-                color: this.state.color,
-                idUser: this.state.idUserLogged
-            })
+        const answer = await api.post('/Vehicles', {
+          licensePlate: this.state.plate,
+          modelName: this.state.model,
+          brandName: this.state.brand,
+          year: this.state.year,
+          color: this.state.color,
+          idUser: this.state.idUserLogged
+        })
 
-            await this.setState({status: answer.status})
+        await this.setState({ status: answer.status })
 
-        }
+      }
 
-        if (this.state.status == 201) {
-          
-          await alert('Veículo cadastrado com sucesso')
+      if (this.state.status == 201) {
 
-          const answer = await api.get('/Vehicles/User/' + this.state.idUserLogged)
-          
-          const list = answer.data
+        await alert('Veículo cadastrado com sucesso')
 
-          this.setState({listVehicles: list})
+        const answer = await api.get('/Vehicles/User/' + this.state.idUserLogged)
 
-          console.log(this.state.listVehicles)
+        const list = answer.data
 
-          await this.setState({visible: false})
+        this.setState({ listVehicles: list })
 
-        }
+        console.log(this.state.listVehicles)
 
-        
+        await this.setState({ visible: false })
+
+      }
+
+
 
     }
 
     catch (error) {
 
-        console.log(error)
+      console.log(error)
 
     }
 
@@ -213,7 +213,7 @@ export default class MyVehicles extends Component {
   }
 
 
-  
+
 
   render() {
 
@@ -228,11 +228,17 @@ export default class MyVehicles extends Component {
 
         <Pressable
           style={styles.button}
+          onPress={() => this.props.navigation.navigate('Scan')}
+        >
+          <Text style={styles.textButton}>Escanear Placa</Text>
+        </Pressable>
+
+        <Pressable
+          style={styles.button}
           onPress={() => this.ShowModal()}
         >
           <Text style={styles.textButton}>Cadastrar Veículo</Text>
         </Pressable>
-
 
         <Modal
           isVisible={this.state.visible}
@@ -240,52 +246,52 @@ export default class MyVehicles extends Component {
 
           <View style={styles.modalView}>
 
-          <Text style={styles.title1}>Adicionar Veículo</Text>
+            <Text style={styles.title1}>Adicionar Veículo</Text>
 
             <TextInput
-                placeholder="Modelo"
-                keyboardType="default"
-                placeholderTextColor="rgba(0,0,0,1)"
-                style={styles.input}
-                onChangeText={model => this.setState({ model })}
+              placeholder="Modelo"
+              keyboardType="default"
+              placeholderTextColor="rgba(0,0,0,1)"
+              style={styles.input}
+              onChangeText={model => this.setState({ model })}
             ></TextInput>
 
             <TextInput
-                placeholder="Marca"
-                placeholderTextColor="rgba(0,0,0,1)"
-                style={styles.input}
-                onChangeText={brand => this.setState({ brand })}
+              placeholder="Marca"
+              placeholderTextColor="rgba(0,0,0,1)"
+              style={styles.input}
+              onChangeText={brand => this.setState({ brand })}
             ></TextInput>
 
             <TextInput
-                placeholder="Ano"
-                placeholderTextColor="rgba(0,0,0,1)"
-                style={styles.input}
-                onChangeText={year => this.setState({ year })}
+              placeholder="Ano"
+              placeholderTextColor="rgba(0,0,0,1)"
+              style={styles.input}
+              onChangeText={year => this.setState({ year })}
             ></TextInput>
 
             <TextInput
-                placeholder="Cor"
-                placeholderTextColor="rgba(0,0,0,1)"
-                style={styles.input}
-                onChangeText={color => this.setState({ color })}
+              placeholder="Cor"
+              placeholderTextColor="rgba(0,0,0,1)"
+              style={styles.input}
+              onChangeText={color => this.setState({ color })}
             ></TextInput>
 
             <TextInput
-                placeholder="Placa"
-                secureTextEntry={false}
-                placeholderTextColor="rgba(0,0,0,1)"
-                disableFullscreenUI={true}
-                keyboardType="name-phone-pad"
-                style={styles.input}
-                onChangeText={plate => this.setState({ plate })}
+              placeholder="Placa"
+              secureTextEntry={false}
+              placeholderTextColor="rgba(0,0,0,1)"
+              disableFullscreenUI={true}
+              keyboardType="name-phone-pad"
+              style={styles.input}
+              onChangeText={plate => this.setState({ plate })}
             ></TextInput>
 
             <Pressable
-                onPress={this.RegisterVehicle}
-                style={styles.button}
+              onPress={this.RegisterVehicle}
+              style={styles.button}
             >
-                <Text style={styles.textButton}>Salvar Veículo</Text>
+              <Text style={styles.textButton}>Salvar Veículo</Text>
             </Pressable>
 
             <Pressable
@@ -293,7 +299,7 @@ export default class MyVehicles extends Component {
               onPress={() => this.setState({ visible: false })}
             >
               <Text style={styles.textButtonClose}>Fechar</Text>
-             </Pressable>
+            </Pressable>
 
           </View>
 
