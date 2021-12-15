@@ -12,7 +12,7 @@ import EditServiceImage from './src/screens/EditServiceImage'
 import AddVehicleMenu from './src/screens/AddVehicleMenu'
 import AddVehicleManual from './src/screens/AddVehicleManual'
 import Scan from './src/screens/Scan'
-// import PlateScan from './src/screens/PlateScan'
+import PlateScan from './src/screens/PlateScan'
 import ServiceVehicle from './src/screens/ServiceVehicle'
 import RegisterServiceType from './src/screens/RegisterServiceType'
 import RegisterService from './src/screens/RegisterService'
@@ -199,11 +199,11 @@ export default class Stack extends Component {
                         options={{ headerShown: false }}
                     />
 
-                    {/* <AuthStack.Screen
+                    <AuthStack.Screen
                         name='PlateScan'
                         component={PlateScan}
                         options={{ headerShown: false }}
-                    /> */}
+                    />
 
                 </AuthStack.Navigator>
 

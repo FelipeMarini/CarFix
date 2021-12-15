@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Modal, Image } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Modal, Image, ActivityIndicator } from 'react-native'
 import { Camera } from 'expo-camera'
 import { FontAwesome } from '@expo/vector-icons'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
@@ -26,6 +26,8 @@ export default function App() {
     const [open, setOpen] = useState(false)
 
     const [photo, setPhoto] = useState(null)
+
+    const [load, setLoad] = useState(false)
 
 
 
@@ -76,6 +78,8 @@ export default function App() {
 
         if (camRef) {
 
+            setLoad(true)
+
             const photoAux = await camRef.current.takePictureAsync()
 
             setPhoto(photoAux)
@@ -86,11 +90,15 @@ export default function App() {
 
             try {
 
-                await api.post('/ServiceImages', data, {
+                const answer = await api.post('/ServiceImages', data, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
+
+                if (answer.status == 201) {
+                    setLoad(false)
+                }
 
                 alert("Foto registrada com sucesso")
 
@@ -138,6 +146,14 @@ export default function App() {
                         <FontAwesome name="exchange" size={23} color="red"></FontAwesome>
 
                     </TouchableOpacity>
+
+                    <ActivityIndicator
+                        style={styles.spinner}
+                        size={'large'}
+                        color={'#fff'}
+                        animating={load}
+                    >
+                    </ActivityIndicator>
 
 
                     <TouchableOpacity
@@ -252,6 +268,10 @@ const styles = StyleSheet.create({
     imgPhoto: {
         width: '100%',
         height: 400
+    },
+
+    spinner: {
+        left: 100
     }
 
 

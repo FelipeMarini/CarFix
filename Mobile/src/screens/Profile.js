@@ -1,11 +1,12 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text, Pressable, Image } from "react-native"
+import { StyleSheet, View, Text, Pressable, Image, ActivityIndicator } from "react-native"
 import api from '../services/api'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
 
 
 export default class Profile extends Component {
+
 
 
   constructor(props) {
@@ -18,7 +19,8 @@ export default class Profile extends Component {
       dataProfile: [],
       username: '',
       email: '',
-      phoneNumber: ''
+      phoneNumber: '',
+      isLoadingProfile: false
 
     }
 
@@ -64,6 +66,8 @@ export default class Profile extends Component {
 
       this.props.navigation.navigate('Login')
 
+      this.setState({ isLoadingProfile: false })
+
     }
 
     catch (error) {
@@ -75,10 +79,22 @@ export default class Profile extends Component {
   }
 
 
-
   componentDidMount = (event) => {
 
     this.GetMyProfile()
+
+    this.setState({ isLoadingProfile: false })
+
+  }
+
+
+  EditProfile = async () => {
+
+    await this.setState({ isLoadingProfile: true })
+
+    await this.props.navigation.navigate('EditProfile')
+
+    await this.setState({ isLoadingProfile: false })
 
   }
 
@@ -103,11 +119,19 @@ export default class Profile extends Component {
 
         <Pressable
           style={styles.button}
-          onPress={() => this.props.navigation.navigate("EditProfile")}
+          onPress={() => this.EditProfile()}
         >
           <Text style={styles.textButton}>Alterar Informações</Text>
         </Pressable>
 
+
+        <ActivityIndicator
+          style={styles.spinner}
+          size={'large'}
+          color={'#282f66'}
+          animating={this.state.isLoadingProfile}
+        >
+        </ActivityIndicator>
 
 
         <Pressable
@@ -203,6 +227,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: '#fff',
     marginBottom: '1%'
+  },
+
+  spinner: {
+
   }
 
 

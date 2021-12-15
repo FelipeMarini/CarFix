@@ -32,7 +32,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
             password: '',
             role: '',
             visible: false,
-            isLoading: false
+            isLoadingLogin: false
 
         }
 
@@ -56,10 +56,17 @@ export default class Login extends Component {  // elaborar telas do funileiro
     }
 
 
+    CreateAccount = async () => {
+
+        await this.props.navigation.navigate('CreateAccount')
+
+    }
+
+
     RealizeLogin = async () => {
 
 
-        this.setState({ isLoading: true })
+        this.setState({ isLoadingLogin: true })
 
         try {
 
@@ -73,7 +80,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
             await AsyncStorageLib.setItem('userToken', token)
 
 
-            await this.setState({ isLoading: false })
+            await this.setState({ isLoadingLogin: false })
 
 
             this.props.navigation.navigate('Main')
@@ -103,9 +110,12 @@ export default class Login extends Component {  // elaborar telas do funileiro
         catch (error) {
 
             console.log(error)
+
+            this.setState({ isLoadingLogin: false })
         }
 
     }
+
 
 
     render() {
@@ -150,7 +160,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
                     style={styles.spinner}
                     size={'large'}
                     color={'#282f66'}
-                    animating={this.state.isLoading}
+                    animating={this.state.isLoadingLogin}
                 >
                 </ActivityIndicator>
 
@@ -163,7 +173,7 @@ export default class Login extends Component {  // elaborar telas do funileiro
                 </Pressable>
 
                 <Pressable
-                    onPress={() => this.props.navigation.navigate("CreateAccount")}
+                    onPress={() => this.CreateAccount()}
                     style={styles.forgetPassBtn}
                 >
                     <Text style={styles.esqueciMinhaSenha}>Criar Conta</Text>

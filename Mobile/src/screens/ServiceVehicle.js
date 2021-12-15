@@ -435,8 +435,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
+        color: '#fff'
     },
 
     button2: {
@@ -455,8 +454,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
+        color: '#fff'
     },
 
     button3: {
@@ -475,8 +473,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito',
         fontSize: 20,
         fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
+        color: '#fff'
     },
 
     buttonList: {

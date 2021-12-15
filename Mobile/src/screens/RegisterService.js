@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text, Image, Pressable, TextInput } from "react-native"
+import { StyleSheet, View, Text, Image, Pressable, TextInput, ActivityIndicator } from "react-native"
 import { Picker } from '@react-native-picker/picker'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import api from '../../src/services/api'
@@ -27,18 +27,19 @@ export default class RegisterService extends Component {
             idBudget: '',
             visible: false,
             visibleDescription: false,
-            visibleDescription2: false
+            visibleDescription2: false,
+            isLoadingService: false
 
         }
 
     }
 
 
-    ShowVehicle = async (id) => {
+    ShowVehicle = async () => {
 
         try {
 
-            this.setState({ visible: true })
+            await this.setState({ visible: true })
 
         }
 
@@ -50,11 +51,11 @@ export default class RegisterService extends Component {
 
     }
 
-    ShowDescription = async (id) => {
+    ShowDescription = async () => {
 
         try {
 
-            this.setState({ visibleDescription: true })
+            await this.setState({ visibleDescription: true })
 
         }
 
@@ -66,11 +67,11 @@ export default class RegisterService extends Component {
 
     }
 
-    ShowModal = async (id) => {
+    ShowModal = async () => {
 
         try {
 
-            this.setState({ visibleDescription2: true })
+            await this.setState({ visibleDescription2: true })
 
         }
 
@@ -130,24 +131,6 @@ export default class RegisterService extends Component {
     }
 
 
-    Logout = async () => {
-
-        try {
-
-            await AsyncStorageLib.removeItem('userToken')
-
-            this.props.navigation.navigate('Login')
-
-        }
-
-        catch (error) {
-
-            console.log(error)
-
-        }
-
-    }
-
     PutDescription = async () => {
 
         try {
@@ -179,6 +162,8 @@ export default class RegisterService extends Component {
 
     RegisterService = async () => {
 
+        this.setState({ isLoadingService: true })
+
         try {
 
             const IdVehicle = await AsyncStorageLib.getItem('IdVehicle')
@@ -198,7 +183,7 @@ export default class RegisterService extends Component {
 
             if (this.state.serviceDescription !== '' && IdBudget != null) {
 
-                const registerServiceWithIdBudget = await api.post('/Services', {
+                const register = await api.post('/Services', {
 
                     idBudget: this.state.idBudget,
                     idServiceType: this.state.idServiceType,
@@ -208,15 +193,20 @@ export default class RegisterService extends Component {
 
                 })
 
-                alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
+                if (register.status == 201) {
+                    await this.setState({ isLoading: false })
 
-                this.props.navigation.navigate("Meus Veículos")
+                    await alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
+
+                    await this.props.navigation.navigate("Meus Veículos")
+                }
+
 
             }
 
             if (this.state.serviceDescription !== '' && IdBudget == null) {
 
-                const registerServiceWithoutIdBudget = await api.post('/Services', {
+                const register = await api.post('/Services', {
 
                     idServiceType: this.state.idServiceType,
                     idVehicle: IdVehicle,
@@ -224,11 +214,19 @@ export default class RegisterService extends Component {
 
                 })
 
-                alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
+                if (register.status == 201) {
 
-                this.props.navigation.navigate("Meus Veículos")
+                    await this.setState({ isLoading: false })
+
+                    await alert('Seu serviço foi solicitado e será respondido em breve, adicione imagens para nos auxiliar no orçamento')
+
+                    await this.props.navigation.navigate("Meus Veículos")
+                }
+
 
             }
+
+            await this.setState({ isLoadingService: false })
 
         }
 
@@ -415,6 +413,14 @@ export default class RegisterService extends Component {
                     <Text style={styles.textButton}>Registrar Serviço</Text>
                 </Pressable>
 
+                <ActivityIndicator
+                    style={styles.spinner}
+                    size={'large'}
+                    color={'#282f66'}
+                    animating={this.state.isLoadingService}
+                >
+                </ActivityIndicator>
+
 
             </View>
 
@@ -463,7 +469,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         marginLeft: '15%',
         marginRight: '15%',
-        marginTop: 50
+        marginTop: 20
     },
 
     description: {
@@ -521,7 +527,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 3 },
         shadowColor: '#f1f1f1',
-        marginTop: 40
+        marginTop: 32
     },
 
     textButton2: {
@@ -648,6 +654,10 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginBottom: '1%'
     },
+
+    spinner: {
+        marginTop: 8
+    }
 
 
 })

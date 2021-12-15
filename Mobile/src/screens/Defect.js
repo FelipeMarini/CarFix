@@ -97,6 +97,9 @@ export default class Defect extends Component {
             case 'car_light_damage':
                 return 'Danos leves';
 
+            case 'side_mirror_drop_off':
+                return 'Retrovisor danificado';
+
             default:
                 break;
         }

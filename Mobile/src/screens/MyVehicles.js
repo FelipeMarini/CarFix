@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Pressable, TextInput, FlatList } from 'react-native'
+import { Text, View, StyleSheet, Pressable, TextInput, FlatList, ActivityIndicator } from 'react-native'
 import api from "../services/api"
 import jwtDecode from 'jwt-decode'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
@@ -33,7 +33,9 @@ export default class MyVehicles extends Component {
       color: '',
 
       visible: false,
-      statusPost: ''
+      statusPost: '',
+      isLoadingRegister: false,
+      isLoadingDelete: false
 
     }
 
@@ -67,7 +69,9 @@ export default class MyVehicles extends Component {
   }
 
 
-  DeleteVehicle = (id) => {  //fazer alert aqui!
+  DeleteVehicle = async (id) => {  //fazer alert aqui!
+
+    this.setState({ isLoadingDelete: true })
 
     try {
 
@@ -85,15 +89,22 @@ export default class MyVehicles extends Component {
 
       console.log('filterArray', filterArray)
 
-      const answer = api.delete('/Vehicles/' + id)
+      const answer = await api.delete('/Vehicles/' + id)
 
       this.setState({ listVehicles: filterArray })
+
+      if (answer.status == 204) {
+        await this.setState({ isLoadingDelete: false })
+        alert('Veículo deletado com sucesso')
+      }
 
     }
 
     catch (error) {
 
       console.log(error)
+
+      this.setState({ isLoadingDelete: false })
 
     }
 
@@ -109,6 +120,8 @@ export default class MyVehicles extends Component {
 
       this.props.navigation.navigate("ServiceVehicle")
 
+      this.setState({ isLoading: false })
+
     }
 
     catch (error) {
@@ -122,9 +135,10 @@ export default class MyVehicles extends Component {
 
   ShowModal = async () => {
 
+
     try {
 
-      this.setState({ visible: true })
+      await this.setState({ visible: true })
 
     }
 
@@ -138,6 +152,8 @@ export default class MyVehicles extends Component {
 
 
   RegisterVehicle = async () => {
+
+    this.setState({ isLoadingRegister: true })
 
     try {
 
@@ -160,8 +176,6 @@ export default class MyVehicles extends Component {
 
       if (this.state.status == 201) {
 
-        await alert('Veículo cadastrado com sucesso')
-
         const answer = await api.get('/Vehicles/User/' + this.state.idUserLogged)
 
         const list = answer.data
@@ -170,36 +184,22 @@ export default class MyVehicles extends Component {
 
         console.log(this.state.listVehicles)
 
+        alert('Veículo cadastrado com sucesso')
+
+        this.setState({ isLoadingRegister: false })
+
         await this.setState({ visible: false })
 
       }
 
-
-
-    }
-
-    catch (error) {
-
-      console.log(error)
-
-    }
-
-  }
-
-
-  Logout = async () => {
-
-    try {
-
-      await AsyncStorage.removeItem('userToken')
-
-      this.props.navigation.navigate('Login')
+      await this.setState({ isLoadingRegister: false })
 
     }
 
     catch (error) {
 
       console.log(error)
+
 
     }
 
@@ -212,6 +212,12 @@ export default class MyVehicles extends Component {
 
   }
 
+
+  Scan = async () => {
+
+    await this.props.navigation.navigate('Scan')
+
+  }
 
 
 
@@ -228,7 +234,7 @@ export default class MyVehicles extends Component {
 
         <Pressable
           style={styles.button}
-          onPress={() => this.props.navigation.navigate('Scan')}
+          onPress={() => this.Scan()}
         >
           <Text style={styles.textButton}>Escanear Placa</Text>
         </Pressable>
@@ -293,6 +299,14 @@ export default class MyVehicles extends Component {
             >
               <Text style={styles.textButton}>Salvar Veículo</Text>
             </Pressable>
+
+            <ActivityIndicator
+              style={styles.spinner}
+              size={'small'}
+              color={'#282f66'}
+              animating={this.state.isLoadingRegister}
+            >
+            </ActivityIndicator>
 
             <Pressable
               style={styles.buttonClose}
@@ -363,6 +377,14 @@ export default class MyVehicles extends Component {
           >
             <Text style={styles.listTextButton}>Excluir Veículo</Text>
           </Pressable>
+
+          <ActivityIndicator
+            style={styles.spinner}
+            size={'large'}
+            color={'#282f66'}
+            animating={this.state.isLoadingDelete}
+          >
+          </ActivityIndicator>
 
         </View>
 
@@ -566,7 +588,7 @@ const styles = StyleSheet.create({
     height: 35,
     backgroundColor: '#282f66',
     borderRadius: 5,
-    marginTop: 35,
+    marginTop: 20,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -578,6 +600,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: '1%'
   },
+
+  spinner: {
+    marginTop: 5
+  }
 
 
 

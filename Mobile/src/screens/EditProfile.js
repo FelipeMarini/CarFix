@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text, TextInput, Pressable, Image } from "react-native"
+import { StyleSheet, View, Text, TextInput, Pressable, Image, ActivityIndicator } from "react-native"
 import api from '../services/api'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import jwtDecode from 'jwt-decode'
@@ -23,7 +23,8 @@ export default class EditProfile extends Component {
       newPassword: '',
       newUserType: 2,
       newPhoneNumber: '',
-      status: ''
+      status: '',
+      isLoading: false
 
     }
 
@@ -82,6 +83,8 @@ export default class EditProfile extends Component {
 
   AlterProfile = async () => {
 
+    await this.setState({ isLoading: true })
+
     try {
 
       if (this.state.idUserLogged !== '' && this.state.newCreationDate !== '' &&
@@ -106,9 +109,13 @@ export default class EditProfile extends Component {
 
         await alert('Informações alteradas com sucesso, por gentileza faça login novamente com suas novas credenciais')
 
+        await this.setState({ isLoading: false })
+
         await this.Logout()
 
       }
+
+      await this.setState({ isLoading: false })
 
     }
 
@@ -186,7 +193,13 @@ export default class EditProfile extends Component {
         </Pressable>
 
 
-        <Text style={styles.msgSucesso}>{this.state.msgConfirmacao}</Text>
+        <ActivityIndicator
+          style={styles.spinner}
+          size={'large'}
+          color={'#282f66'}
+          animating={this.state.isLoading}
+        >
+        </ActivityIndicator>
 
 
         <Pressable
@@ -293,6 +306,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: '1%'
   },
+
+  spinner: {
+
+  }
 
 
 })

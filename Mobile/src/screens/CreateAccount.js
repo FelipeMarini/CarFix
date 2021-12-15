@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, TextInput, Pressable, Image } from "react-native"
+import { StyleSheet, View, Text, TextInput, Pressable, Image, ActivityIndicator } from "react-native"
 import api from "../services/api"
 
 
@@ -23,12 +23,16 @@ export default class CreateAccount extends Component {
             // passwordRepeat: '',
             userType: 2,        //sempre um usuário (2) que fará um cadastro
             phoneNumber: '',
+            isLoading: false
+
         }
 
     }
 
 
     RegisterUser = async () => {  // dava erro sem async/await e definir const 'answer' no axios
+
+        await this.setState({ isLoading: true })
 
         try {
 
@@ -42,9 +46,11 @@ export default class CreateAccount extends Component {
 
             if (answer.status == 201) {
 
-                alert('Cadastro feito com sucesso')
+                await this.setState({ isLoading: false })
 
-                this.props.navigation.navigate('Login')
+                await alert('Cadastro feito com sucesso')
+
+                await this.props.navigation.navigate('Login')
 
             }
 
@@ -53,6 +59,8 @@ export default class CreateAccount extends Component {
         catch (error) {
 
             console.log(error)
+
+            this.setState({ isLoading: false })
 
         }
 
@@ -145,6 +153,15 @@ export default class CreateAccount extends Component {
                 >
                     <Text style={styles.textButton}>Criar Conta</Text>
                 </Pressable>
+
+
+                <ActivityIndicator
+                    style={styles.spinner}
+                    size={'large'}
+                    color={'#282f66'}
+                    animating={this.state.isLoading}
+                >
+                </ActivityIndicator>
 
 
                 <Pressable
@@ -253,8 +270,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito',
         fontSize: 22,
         fontWeight: "400",
-        color: '#fff',
-        marginBottom: '1%'
+        color: '#fff'
+    },
+
+    spinner: {
+        marginTop: 10
     }
 
 
